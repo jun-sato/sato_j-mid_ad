@@ -1,0 +1,107 @@
+[
+  {
+    "clinical_object": {
+      "name": "Imaging_observation",
+      "tokens": [
+        "小",
+        "嚢胞"
+      ],
+      "mention": "小嚢胞",
+      "start_idx": 7,
+      "end_idx": 8,
+      "sui": "OBJ002760",
+      "certainty_scale": 4
+    },
+    "modifiers": [
+      {
+        "name": "Anatomical_entity",
+        "tokens": [
+          "肝"
+        ],
+        "mention": "肝",
+        "start_idx": 0,
+        "end_idx": 0,
+        "sui": null,
+        "certainty_scale": null
+      },
+      {
+        "name": "Anatomical_entity",
+        "tokens": [
+          "S",
+          "７",
+          "／",
+          "８"
+        ],
+        "mention": "S７／８",
+        "start_idx": 2,
+        "end_idx": 5,
+        "sui": null,
+        "certainty_scale": null
+      }
+    ]
+  },
+  {
+    "clinical_object": {
+      "name": "Imaging_observation",
+      "tokens": [
+        "胆石"
+      ],
+      "mention": "胆石",
+      "start_idx": 20,
+      "end_idx": 20,
+      "sui": "OBJ004923",
+      "certainty_scale": 4
+    },
+    "modifiers": [
+      {
+        "name": "Anatomical_entity",
+        "tokens": [
+          "胆嚢"
+        ],
+        "mention": "胆嚢",
+        "start_idx": 18,
+        "end_idx": 18,
+        "sui": null,
+        "certainty_scale": null
+      }
+    ]
+  },
+  {
+    "clinical_object": {
+      "name": "Imaging_observation",
+      "tokens": [
+        "嚢胞"
+      ],
+      "mention": "嚢胞",
+      "start_idx": 48,
+      "end_idx": 48,
+      "sui": "OBJ002511",
+      "certainty_scale": 4
+    },
+    "modifiers": [
+      {
+        "name": "Anatomical_entity",
+        "tokens": [
+          "腎"
+        ],
+        "mention": "腎",
+        "start_idx": 43,
+        "end_idx": 43,
+        "sui": null,
+        "certainty_scale": null
+      },
+      {
+        "name": "Anatomical_entity",
+        "tokens": [
+          "両",
+          "腎"
+        ],
+        "mention": "両腎",
+        "start_idx": 45,
+        "end_idx": 46,
+        "sui": null,
+        "certainty_scale": null
+      }
+    ]
+  }
+]
