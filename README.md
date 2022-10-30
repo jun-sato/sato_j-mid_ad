@@ -33,7 +33,7 @@ CT画像はAI学習には大きすぎる。512☓512☓300の画像はどのGPU�
  
 # Installation
  
-Requirementで列挙したライブラリなどのインストール方法を説明する
+Requirementで列挙したライブラリなどのインストール方法を説明する  
  nnUNetの学習方法は[公式github](https://github.com/MIC-DKFZ/nnUNet)を参照する。
 
 ```bash
@@ -58,7 +58,7 @@ dataset
  |        |---jmid_0000000_0000.nii.gz  
  |        |---jmid_0000001_0000.nii.gz  
  |
-
+```
  
  
 # Usage
@@ -72,8 +72,8 @@ dataset
 * コード実行の手順を記載。どうしたら目的の成果(モデルの学習や成果物の保存など)が得られるか。
  
 ## crop_dataset.py
+セグメンテーションされた臓器のうち、特定の臓器を指定する。予測する臓器の周囲だけを抽出してくる。
 ```bash
-##セグメンテーションされた臓器のうち、特定の臓器を指定する。予測する臓器の周囲だけを抽出してくる。
 python crop_dataset.py --maskdir ../data/pred_1/ --imagedir ../data/renamed_1/ --save_maskdir ../data/liver_pred_1 --save_imagedir ../data/liver_1 --num_threads 20
 ```
 
