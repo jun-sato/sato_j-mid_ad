@@ -14,6 +14,7 @@ import scipy.ndimage as ndi
 from skimage import morphology
 from scipy import signal
 from multiprocessing import Pool
+from functools import partial
 
 ## セグメンテーションしたあと、特定の臓器に焦点を当てて、それ以外の空間をcropするコード。
 ## 新たにimage,maskそれぞれで保存する。
@@ -32,7 +33,7 @@ def crop_img_and_dilatedmask(img,mask,dilated_array):
     return img[z_dn:z_up,y_dn:y_up,x_dn:x_up], mask[z_dn:z_up,y_dn:y_up,x_dn:x_up], dilated_array[z_dn:z_up,y_dn:y_up,x_dn:x_up]
 
 
-def focus_organs(mask_path,organ_index:list):
+def focus_organs(organ_index:list,mask_path):
     ####organ_index
     ''' "0": "background",
         "1": "right lung",
@@ -57,51 +58,53 @@ def focus_organs(mask_path,organ_index:list):
         "20": "prostate"
         if you want to focus on left and right lungs, organ_index=[1,2]
     '''
-
-    default_img_path = image_dir + os.path.basename(mask_path).split('.')[0] + '_0000.nii.gz'
-    default_mask_path = image_dir.replace('imagesTr','labelsTr') + os.path.basename(mask_path).split('.')[0] + '.nii.gz'
-    pred_img = sitk.ReadImage(mask_path)
-    default_img = sitk.ReadImage(default_img_path)
-    default_mask = sitk.ReadImage(default_mask_path)
-    
-    new_spacing = default_img.GetSpacing()
-    new_origin = default_img.GetOrigin()
-    new_direction = default_img.GetDirection()
-
-    default_array = sitk.GetArrayFromImage(default_img)   
-    default_mask = sitk.GetArrayFromImage(default_mask) 
-    pred_array = sitk.GetArrayFromImage(pred_img)
-
-    #pred_array = (pred_array==1) | (pred_array==2)
-    if len(organ_index) ==1:
-        pred_array = pred_array==organ_index
-    elif len(organ_index) == 2:
-        pred_array = (pred_array==organ_index[0]) | (pred_array==organ_index0[1])
-    else:
-        raise ValueError("target organs is less than two!")
+    try:
+        default_img_path = image_dir + os.path.basename(mask_path).split('.')[0] + '_0000.nii.gz'
+        default_mask_path = mask_dir + os.path.basename(mask_path).split('.')[0] + '.nii.gz'
+        pred_img = sitk.ReadImage(mask_path)
+        default_img = sitk.ReadImage(default_img_path)
+        default_mask = sitk.ReadImage(default_mask_path)
         
-    ## morphology変換でdilation
-    dilated_array = morphology.binary_dilation(pred_array, morphology.ball(radius=15))
-    
-    default_array,default_mask,dilated_array = crop_img_and_dilatedmask(default_array,default_mask,dilated_array)
+        new_spacing = default_img.GetSpacing()
+        new_origin = default_img.GetOrigin()
+        new_direction = default_img.GetDirection()
 
-    default_array = default_array * dilated_array
-    default_mask = default_mask * dilated_array
+        default_array = sitk.GetArrayFromImage(default_img)   
+        default_mask = sitk.GetArrayFromImage(default_mask) 
+        pred_array = sitk.GetArrayFromImage(pred_img)
 
-    ## img_preprocessed　肺野のみを抽出した画像。
-    img_preprocessed = sitk.GetImageFromArray(default_array)
-    img_preprocessed.SetSpacing(new_spacing)
-    img_preprocessed.SetOrigin(new_origin)
-    img_preprocessed.SetDirection(new_direction)
+        #pred_array = (pred_array==1) | (pred_array==2)
+        if len(organ_index) ==1:
+            pred_array = pred_array==organ_index
+        elif len(organ_index) == 2:
+            pred_array = (pred_array==organ_index[0]) | (pred_array==organ_index[1])
+        else:
+            raise ValueError("target organs is less than two!")
+            
+        ## morphology変換でdilation
+        dilated_array = morphology.binary_dilation(pred_array, morphology.ball(radius=1))
 
-    ## delated_arrayを保存
-    mask_preprocessed = sitk.GetImageFromArray(default_mask)
-    mask_preprocessed.SetSpacing(new_spacing)
-    mask_preprocessed.SetOrigin(new_origin)
-    mask_preprocessed.SetDirection(new_direction)
+        default_array,default_mask,dilated_array = crop_img_and_dilatedmask(default_array,default_mask,dilated_array)
 
-    sitk.WriteImage(img_preprocessed,f'{save_imagedir}/{os.path.basename(default_img_path)}')
-    sitk.WriteImage(mask_preprocessed,f'{save_maskdir}/{os.path.basename(mask_path)}')
+        default_array = default_array * dilated_array
+        default_mask = default_mask * dilated_array
+
+        ## img_preprocessed　肺野のみを抽出した画像。
+        img_preprocessed = sitk.GetImageFromArray(default_array)
+        img_preprocessed.SetSpacing(new_spacing)
+        img_preprocessed.SetOrigin(new_origin)
+        img_preprocessed.SetDirection(new_direction)
+
+        ## delated_arrayを保存
+        mask_preprocessed = sitk.GetImageFromArray(default_mask)
+        mask_preprocessed.SetSpacing(new_spacing)
+        mask_preprocessed.SetOrigin(new_origin)
+        mask_preprocessed.SetDirection(new_direction)
+
+        sitk.WriteImage(img_preprocessed,f'{save_imagedir}/{os.path.basename(default_img_path)}')
+        sitk.WriteImage(mask_preprocessed,f'{save_maskdir}/{os.path.basename(mask_path)}')
+    except Exception as e:
+        print(e,mask_path)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='In order to remove unnecessary background, crop images based on segmenation labels.')
@@ -116,22 +119,25 @@ if __name__ == '__main__':
                         help='output folder of the cropped images , (default: models)')
     parser.add_argument('--num_threads', default=20, type=int,
                         help='number of threds to process , (default: 20)')
-
+    parser.add_argument('--organ_id', default=8, type=int,
+                        help='organ label identifier. see focus_organ function.')
 
     args = parser.parse_args()
     print(args)
 
     image_prediction_dir = args.maskdir
     image_dir = args.imagedir
+    mask_dir = args.maskdir
     save_maskdir = args.save_maskdir
     save_imagedir = args.save_imagedir
+    organ_id = args.organ_id
     os.makedirs(save_maskdir,exist_ok=True)
     os.makedirs(save_imagedir,exist_ok=True)
 
     p = Pool(args.num_threads) # プロセス数を設定
 
     lung_seg_predict_lists = glob.glob(os.path.join(image_prediction_dir,'*nii.gz'))
-    result = p.map(focus_organs, lung_seg_predict_lists)
+    result = p.map(partial(focus_organs,[organ_id]), lung_seg_predict_lists)
 
     print('finish processing..')
 
