@@ -20,17 +20,16 @@ from torch.utils.data import default_collate
 from monai.visualize.img2tensorboard import plot_2d_or_3d_image
 
 import monai
+from monai.losses import FocalLoss
 from monai.apps import download_and_extract
 from monai.config import print_config
 from monai.data import DataLoader, ImageDataset, PersistentDataset, pad_list_data_collate, ThreadBuffer,Dataset,decollate_batch
+
 from monai.transforms import (
-    EnsureChannelFirst,
-    Compose,
-    RandRotate90,
-    Resized,
-    ScaleIntensity,
-)
-from monai.transforms import (
+    OneOf,
+    RandAdjustContrastd,
+    RandScaleIntensityd,
+    RandGaussianNoised,
     EnsureChannelFirstd,
     AsDiscrete,
     Activations,
@@ -39,30 +38,37 @@ from monai.transforms import (
     LoadImaged,
     Orientationd,
     RandCropByPosNegLabeld,
+    RandRotated,
     ScaleIntensityRanged,
     Spacingd,
+    SpatialPadd,
+    Resized
 )
 from monai.utils import get_torch_version_tuple, set_determinism
 from monai.metrics import ROCAUCMetric
+#from loss import LabelSmoothingCrossEntropy
 
-
-def get_transforms():
+def get_transforms(spatial_size):
     # Define transforms
     train_transforms = Compose(
             [
                 LoadImaged(keys=["image"]),
                 EnsureChannelFirstd(keys=["image"]),
                 Orientationd(keys=["image"], axcodes="RAS"),
+                #OneOf([RandAdjustContrastd(keys=["image"],prob=0.3,gamma=(0.75,1.5)),
+                #        RandScaleIntensityd(keys=["image"], factors = [-0.2,0.2], prob=0.3),
+                #        RandGaussianNoised(keys=["image"], prob=0.2, mean=0.0, std=0.1)]),
                 ScaleIntensityRanged(
                     keys=["image"],
-                    a_min=-400,
-                    a_max=2000,
-                    b_min=-2.0,
-                    b_max=2.0,
+                    a_min=-200,
+                    a_max=400,
+                    b_min=-1.0,
+                    b_max=1.0,
                     clip=True,
                 ),
-                #Resized(keys=["image"], spatial_size=(96, 96, 48)),
-                #RandRotate90d(keys=["img"], prob=0.8, spatial_axes=[0, 2]),
+                RandRotated(keys=['image'],range_x =np.pi*0.5,range_y=np.pi*0.5, prob=0.3),
+                #SpatialPadd(keys=["image"],spatial_size=(256, 256, 64)),
+                Resized(keys=["image"], spatial_size=spatial_size),
             ]
         )
 
@@ -73,18 +79,23 @@ def get_transforms():
                 Orientationd(keys=["image"], axcodes="RAS"),
                 ScaleIntensityRanged(
                     keys=["image"],
-                    a_min=-400,
-                    a_max=2000,
-                    b_min=-2.0,
-                    b_max=2.0,
+                    a_min=-200,
+                    a_max=400,
+                    b_min=-1.0,
+                    b_max=1.0,
                     clip=True,
                 ),
-                #Resized(keys=["image"], spatial_size=(96, 96, 48)),
+                #SpatialPadd(keys=["image"],spatial_size=(256, 256, 64)),
+                Resized(keys=["image"], spatial_size=spatial_size),
             ]
         )
     return train_transforms,val_transforms
 
-def main(organ,num_epochs,num_classes,datadir,batch_size,amp=True,use_buffer=True,metric_learning=False):
+
+
+
+
+def main(organ,num_epochs,num_classes,datadir,batch_size,num_train_imgs,num_val_imgs,save_model_name,amp=True,use_buffer=True,metric_learning=False):
     pin_memory = torch.cuda.is_available()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -92,48 +103,27 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,amp=True,use_buffer=Tru
     print_config()
     data_df = pd.read_csv(os.path.join(datadir,organ+'_dataset.csv'))
     filenames = data_df['file']
-    images = [os.path.join(datadir,organ+'_img',p) for p in data_df['file']]
+    images = [os.path.join(datadir,organ+'_square_img',p) for p in data_df['file']]
     print(images[0])
-    #images = glob.glob(f'{datadir}/{organ}/*.nii.gz')
-    #random.shuffle(images)
-    #print(random.shuffleimages)
-    #labels = np.array([1 if 'pancreas' in os.path.basename(p) else 0 for p in images])
-    #print(f'{len(images)} images found.')
-    # 2 binary labels for gender classification: man or woman
-    #labels = np.array([1]*10+[0]*(len(data_df['abnormal'])-10))#.astype(int)
     labels = data_df['abnormal'].astype(int)
     print(len(labels),'num of abnormal label is ',labels.sum())
     #le = LabelEncoder()
     #encoded_data = le.fit_transform(data)
-    num = 14000
-    train_files = [{"image": img, "label": label,'filename':filename} for img, label,filename in zip(images[:num], labels[:num],filenames[:num])]
-    val_files = [{"image": img, "label": label, 'filename':filename} for img, label,filename in zip(images[num:], labels[num:],filenames[num:])]
+    train_files = [{"image": img, "label": label,'filename':filename} for img, label,filename in zip(images[:num_train_imgs], labels[:num_train_imgs],filenames[:num_train_imgs])]
+    val_files = [{"image": img, "label": label, 'filename':filename} for img, label,filename in zip(images[num_train_imgs:num_train_imgs+num_val_imgs], labels[num_train_imgs:num_train_imgs+num_val_imgs],filenames[num_train_imgs:num_train_imgs+num_val_imgs])]
     # Represent labels in one-hot format for binary classifier training,
     # BCEWithLogitsLoss requires target to have same shape as input
     #labels = torch.nn.functional.one_hot(torch.as_tensor(labels)).float()
     post_pred = Compose([Activations(softmax=True)])
     post_label = Compose([AsDiscrete(to_onehot=2)])
-    # data_dicts = [
-    #     {"image": image_name, "label": label_name}
-    #     for image_name, label_name in zip(images, labels)
-    # ]
 
-    # ##cacheする場所を設定する
-    # persistent_cache = pathlib.Path(os.getcwd(), "persistent_cache")
-    # persistent_cache.mkdir(parents=True, exist_ok=True)
-
-    # # Define nifti dataset, data loader
-    # check_ds = PersistentDataset(
-    #     data=data_dicts[:10], transform=train_transforms, cache_dir=persistent_cache
-    # )
-    # check_loader = DataLoader(check_ds, batch_size=4, num_workers=2, pin_memory=pin_memory,collate_fn=pad_list_data_collate,)
-
-    # batch= monai.utils.misc.first(check_loader)
-    # im,label = batch['image'],batch['label']
-    # print(type(im), im.shape, label, label.shape)
     num_gpu = torch.cuda.device_count()
     # create a training data loader
-    train_transforms, val_transforms = get_transforms()
+    if organ=='Liver':
+        input_size = (320,320,64)
+    else:
+        input_size = (256,256,64)
+    train_transforms, val_transforms = get_transforms(input_size)
     # train_ds = PersistentDataset(
     #     data=data_dicts[:20000], transform=train_transforms, cache_dir=persistent_cache
     # )
@@ -156,16 +146,23 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,amp=True,use_buffer=Tru
         loss_function = losses.ArcFaceLoss(num_classes, 128, margin=28.6, scale=64,weight_regularizer=regularizer, distance=distance).to(device)
 
     else:
-        model = monai.networks.nets.resnet18(spatial_dims=3,n_input_channels=1,num_classes=num_classes).to(device)
-        loss_function = torch.nn.CrossEntropyLoss().to(device)
+        #model = monai.networks.nets.resnet18(spatial_dims=3,n_input_channels=1,num_classes=num_classes).to(device)
+        #model = monai.networks.nets.EfficientNetBN("efficientnet-b1", pretrained=False,
+        #            progress=False, spatial_dims=3, in_channels=1, num_classes=num_classes,
+        #            norm=('batch', {'eps': 0.001, 'momentum': 0.01}), adv_prop=False).to(device)
+        model = monai.networks.nets.seresnext50(spatial_dims=3,in_channels=1,num_classes=num_classes).to(device)
 
     model = torch.nn.DataParallel(model, device_ids=list(range(num_gpu)))
 
-    loss_function = torch.nn.CrossEntropyLoss()
+    #loss_function = FocalLoss(to_onehot_y=True,reduction='mean', gamma=2).to(device)
+    loss_function = torch.nn.CrossEntropyLoss().to(device)
+    #loss_function = LabelSmoothingCrossEntropy().to(device)
     # loss_function = torch.nn.BCEWithLogitsLoss()  # also works with this data
-    
 
-    optimizer = torch.optim.Adam(model.parameters(), 1e-4)
+
+    #optimizer = torch.optim.Adam(model.parameters(), 1e-4)
+    optimizer = torch.optim.SGD(model.parameters(), lr=1e-2, momentum=0.9, weight_decay=1e-5) # lr is min lr
+    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=int(num_train_imgs/batch_size)*num_epochs, eta_min=0.0001)
     auc_metric = ROCAUCMetric()
     ###to do : cosine annealingを追加する。
     scaler = torch.cuda.amp.GradScaler() if amp else None
@@ -208,6 +205,7 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,amp=True,use_buffer=Tru
                 loss.backward()
                 optimizer.step()
             epoch_loss += loss.item()
+            scheduler.step()
             print(
                    f"{step}/{len(train_ds) // train_loader.batch_size},"
                    f" train_loss: {loss.item():.4f}"
@@ -215,13 +213,7 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,amp=True,use_buffer=Tru
             )
             epoch_len = len(train_ds) // train_loader.batch_size
 
-            # outputs = model(inputs)
-            # loss = loss_function(outputs, labels)
-            # loss.backward()
-            # optimizer.step()
-            # epoch_loss += loss.item()
-            # epoch_len = len(train_ds) // train_loader.batch_size
-            # print(f"{step}/{epoch_len}, train_loss: {loss.item():.4f}")
+
             writer.add_scalar("train_loss", loss.item(), epoch_len * epoch + step)
 
         epoch_loss /= step
@@ -257,16 +249,15 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,amp=True,use_buffer=Tru
             auc_metric.reset()
             del y_pred_act, y_onehot
 
-
             if acc_metric > best_metric:
                 best_metric = acc_metric
+                best_auc = auc_result
                 best_metric_epoch = epoch + 1
-                torch.save(model.state_dict(), "best_metric_model_classification3d_dict.pth")
+                torch.save(model.state_dict(), save_model_name)
                 print("saved new best metric model")
 
-
-            print("current epoch: {} current accuracy: {:.4f} current AUC: {:.4f} best accuracy: {:.4f} at epoch {}".format(
-                        epoch + 1, acc_metric, auc_result, best_metric, best_metric_epoch))
+            print("current epoch: {} current accuracy: {:.4f} current AUC: {:.4f} best accuracy: {:.4f} at epoch {} then AUC: {:.4f}".format(
+                        epoch + 1, acc_metric, auc_result, best_metric, best_metric_epoch, best_auc))
             writer.add_scalar("val_accuracy", acc_metric, epoch + 1)
 
     print(f"Training completed, best_metric: {best_metric:.4f} at epoch: {best_metric_epoch}")
@@ -286,9 +277,15 @@ if __name__ == '__main__':
                         help='number of target classes.')
     parser.add_argument('--batch_size', default=8, type=int,
                         help='number of batch size to train.')
+    parser.add_argument('--num_train_imgs', default=13000, type=int,
+                        help='number of images for training.')
+    parser.add_argument('--num_val_imgs', default=13000, type=int,
+                        help='number of images for validation.')
     parser.add_argument('--datadir', default="/mnt/hdd/jmid/data/",
                         help='path to the data directory.')
-    
+    parser.add_argument('--save_model_name', default="weights/best_metric_model_classification3d_dict.pth",
+                        help='save_model_name.')
+
 
     args = parser.parse_args()
     print(args)
@@ -296,7 +293,10 @@ if __name__ == '__main__':
     organ = args.organ
     num_epochs = args.num_epochs
     num_classes = args.num_classes
-    datadir = args.datadir 
+    datadir = args.datadir
     batch_size = args.batch_size
-    
-    main(organ,num_epochs,num_classes,datadir,batch_size,amp=True,use_buffer=True,metric_learning=False)
+    num_train_imgs = args.num_train_imgs
+    num_val_imgs = args.num_val_imgs
+    save_model_name = args.save_model_name
+
+    main(organ,num_epochs,num_classes,datadir,batch_size,num_train_imgs,num_val_imgs,save_model_name,amp=True,use_buffer=True,metric_learning=False)
