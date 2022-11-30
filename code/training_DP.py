@@ -14,6 +14,7 @@ import pathlib
 import glob
 import random
 from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
 #from pytorch_metric_learning import losses, distances, regularizers
 
 from torch.utils.data import default_collate
@@ -92,10 +93,7 @@ def get_transforms(spatial_size):
     return train_transforms,val_transforms
 
 
-
-
-
-def main(organ,num_epochs,num_classes,datadir,batch_size,num_train_imgs,num_val_imgs,save_model_name,amp=True,use_buffer=True,metric_learning=False):
+def main(organ,num_epochs,num_classes,datadir,batch_size,num_train_imgs,num_val_imgs,save_model_name,seed=0,amp=True,use_buffer=True,metric_learning=False):
     pin_memory = torch.cuda.is_available()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -109,8 +107,11 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,num_train_imgs,num_val_
     print(len(labels),'num of abnormal label is ',labels.sum())
     #le = LabelEncoder()
     #encoded_data = le.fit_transform(data)
-    train_files = [{"image": img, "label": label,'filename':filename} for img, label,filename in zip(images[:num_train_imgs], labels[:num_train_imgs],filenames[:num_train_imgs])]
-    val_files = [{"image": img, "label": label, 'filename':filename} for img, label,filename in zip(images[num_train_imgs:num_train_imgs+num_val_imgs], labels[num_train_imgs:num_train_imgs+num_val_imgs],filenames[num_train_imgs:num_train_imgs+num_val_imgs])]
+    images_train, images_test, labels_train, labels_test, file_train, file_test = train_test_split(images, labels,filenames, shuffle=True, stratify=labels,random_state=seed,train_size=num_train_imgs)
+    images_val, images_test, labels_val, labels_test, file_val, file_test = train_test_split(images_test, labels_test,file_test, shuffle=True, stratify=labels_test,random_state=seed,train_size=num_val_imgs)
+    train_files = [{"image": img, "label": label,'filename':filename} for img, label,filename in zip(images_train, labels_train,file_train)]
+    val_files = [{"image": img, "label": label, 'filename':filename} for img, label,filename in zip(images_val, labels_val,file_val)]
+    test_files = [{"image": img, "label": label, 'filename':filename} for img, label,filename in zip(images_test, labels_test,file_test)]
     # Represent labels in one-hot format for binary classifier training,
     # BCEWithLogitsLoss requires target to have same shape as input
     #labels = torch.nn.functional.one_hot(torch.as_tensor(labels)).float()
@@ -119,7 +120,7 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,num_train_imgs,num_val_
 
     num_gpu = torch.cuda.device_count()
     # create a training data loader
-    if organ=='Liver':
+    if organ=='liver':
         input_size = (320,320,64)
     else:
         input_size = (256,256,64)
@@ -175,7 +176,7 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,num_train_imgs,num_val_
     metric_values = []
     writer = SummaryWriter()
     max_epochs = num_epochs
-    set_determinism(seed=0)
+    set_determinism(seed=seed)
 
     for epoch in range(max_epochs):
         print("-" * 10)
@@ -231,11 +232,6 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,num_train_imgs,num_val_
 
             for val_data in val_loader:
                 val_images, val_labels = val_data['image'].to(device), val_data['label'].to(device)
-                # if amp:
-                #     with torch.cuda.amp.autocast():
-                #         y_pred = torch.cat([y_pred, model(val_images)], dim=0)
-                #         y = torch.cat([y, val_labels], dim=0)
-                # else:
                 with torch.no_grad():
                     y_pred = torch.cat([y_pred, model(val_images)], dim=0)
                     y = torch.cat([y, val_labels], dim=0)
@@ -281,6 +277,8 @@ if __name__ == '__main__':
                         help='number of images for training.')
     parser.add_argument('--num_val_imgs', default=13000, type=int,
                         help='number of images for validation.')
+    parser.add_argument('--seed', default=0, type=int,
+                        help='random_seed.')
     parser.add_argument('--datadir', default="/mnt/hdd/jmid/data/",
                         help='path to the data directory.')
     parser.add_argument('--save_model_name', default="weights/best_metric_model_classification3d_dict.pth",
@@ -297,6 +295,7 @@ if __name__ == '__main__':
     batch_size = args.batch_size
     num_train_imgs = args.num_train_imgs
     num_val_imgs = args.num_val_imgs
+    seed = args.seed
     save_model_name = args.save_model_name
 
-    main(organ,num_epochs,num_classes,datadir,batch_size,num_train_imgs,num_val_imgs,save_model_name,amp=True,use_buffer=True,metric_learning=False)
+    main(organ,num_epochs,num_classes,datadir,batch_size,num_train_imgs,num_val_imgs,save_model_name,seed,amp=True,use_buffer=True,metric_learning=False)

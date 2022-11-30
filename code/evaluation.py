@@ -17,7 +17,12 @@ import numpy as np
 import torch
 import glob
 import pandas as pd
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, roc_curve
+from sklearn import metrics
+from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
+import seaborn as sns
+
 
 import monai
 from monai.data import DataLoader, CSVSaver,ImageDataset, PersistentDataset, pad_list_data_collate, ThreadBuffer,Dataset,decollate_batch
@@ -38,11 +43,39 @@ from monai.transforms import (
 from monai.metrics import ROCAUCMetric
 import torch.nn.functional as F
 
-def main(datadir,organ,weight_path,amp=True):
+
+def plot_auc(fpr, tpr,organ,dataset = 'validation'):
+    fig = plt.figure(figsize=(10,10))
+    ax = fig.add_subplot(111)
+    ax.plot(fpr, tpr, marker='o', label=organ)    
+    ax.legend()
+    ax.grid()
+    ax.set_xlabel('FPR: False Positive Rete', fontsize = 13)
+    ax.set_ylabel('TPR: True Positive Rete', fontsize = 13)
+    fig.savefig(f'{outputdir}/{organ}_ROC_curve_{dataset}.jpg')
+    plt.close()
+
+def plot_confusion_matrix(target,y_pred_cutoff,organ,dataset = 'validation'):
+    fig = plt.figure(figsize=(10,7))
+    ax = fig.add_subplot(111)
+    cm = confusion_matrix(target, y_pred_cutoff)
+    sns.heatmap(cm, annot=True,fmt = '.4g', cmap='Blues', ax=ax)
+    ax.set_title('cutoff (Youden index)')
+    #ax.ticklabel_format(style='plain')
+    fig.savefig(f'{outputdir}/{organ}_confsion_matrix_{dataset}.jpg')
+    plt.close()
+    return cm
+
+def main(datadir,organ,weight_path,outputdir,num_train_imgs,num_val_imgs,seed,amp=True):
     monai.config.print_config()
     logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
+    if organ=='liver':
+        input_size = (320,320,64)
+    else:
+        input_size = (256,256,64)
 
+    print('input size is ',input_size)
     # Define transforms for image
     val_transforms = Compose(
             [
@@ -57,10 +90,10 @@ def main(datadir,organ,weight_path,amp=True):
                     b_max=1.0,
                     clip=True,
                 ),
-                Resized(keys=["image"], spatial_size=(256, 256, 64)),
+                #SpatialPadd(keys=["image"],spatial_size=(256, 256, 64)),
+                Resized(keys=["image"], spatial_size=input_size),
             ]
         )
-
     data_df = pd.read_csv(os.path.join(datadir,organ+'_dataset.csv'))
     filenames = data_df['file']
     images = [os.path.join(datadir,organ+'_square_img',p) for p in data_df['file']]
@@ -68,9 +101,13 @@ def main(datadir,organ,weight_path,amp=True):
     labels = data_df['abnormal'].astype(int)
     #le = LabelEncoder()
     #encoded_data = le.fit_transform(data)
-    num = 8000
     #train_files = [{"image": img, "label": label,'filename':filename} for img, label,filename in zip(images[:num], labels[:num],filenames[:num])]
-    val_files = [{"image": img, "label": label, 'filename':filename} for img, label,filename in zip(images[num:], labels[num:],filenames[num:])]
+    images_train, images_test, labels_train, labels_test, file_train, file_test = train_test_split(images, labels,filenames, shuffle=True, stratify=labels,random_state=seed,train_size=num_train_imgs)
+    images_val, images_test, labels_val, labels_test, file_val, file_test = train_test_split(images_test, labels_test,file_test, shuffle=True, stratify=labels_test,random_state=seed,train_size=num_val_imgs)
+    train_files = [{"image": img, "label": label,'filename':filename} for img, label,filename in zip(images_train, labels_train,file_train)]
+    val_files = [{"image": img, "label": label, 'filename':filename} for img, label,filename in zip(images_val, labels_val,file_val)]
+    test_files = [{"image": img, "label": label, 'filename':filename} for img, label,filename in zip(images_test, labels_test,file_test)]
+    
     # Represent labels in one-hot format for binary classifier training,
     # BCEWithLogitsLoss requires target to have same shape as input
     #labels = torch.nn.functional.one_hot(torch.as_tensor(labels)).float()
@@ -80,15 +117,19 @@ def main(datadir,organ,weight_path,amp=True):
     val_ds = Dataset(data=val_files, transform=val_transforms)
     #val_ds = ImageDataset(image_files=images[-10:], labels=labels[-10:], transform=val_transforms)
     val_loader = DataLoader(val_ds, batch_size=2, num_workers=2, pin_memory=True, collate_fn=pad_list_data_collate,)
+    test_ds = Dataset(data=test_files, transform=val_transforms)
+    test_loader = DataLoader(test_ds, batch_size=2, num_workers=2, pin_memory=True, collate_fn=pad_list_data_collate,)
+
     auc_metric = ROCAUCMetric()
+    cutoff_criterions = list()
 
     # Create DenseNet121
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = monai.networks.nets.seresnext50(spatial_dims=3,in_channels=1,num_classes=2).to(device)
     #model = monai.networks.nets.resnet18(spatial_dims=3,n_input_channels=1,num_classes=2).to(device)
     # model = monai.networks.nets.EfficientNetBN("efficientnet-b1", pretrained=False, 
-    #          progress=False, spatial_dims=3, in_channels=1, num_classes=2,
-    #          norm=('batch', {'eps': 0.001, 'momentum': 0.01}), adv_prop=False).to(device)
+    #         progress=False, spatial_dims=3, in_channels=1, num_classes=2,
+    #         norm=('batch', {'eps': 0.001, 'momentum': 0.01}), adv_prop=False).to(device)
     num_gpu = torch.cuda.device_count()
     model = torch.nn.DataParallel(model, device_ids=list(range(num_gpu)))
 
@@ -97,7 +138,7 @@ def main(datadir,organ,weight_path,amp=True):
     with torch.no_grad():
         num_correct = 0.0
         metric_count = 0
-        saver = CSVSaver(output_dir="./output_eval")
+        #saver = CSVSaver(output_dir="./output_eval")
 
         y_pred = torch.tensor([], dtype=torch.float32, device=device)
         y = torch.tensor([], dtype=torch.long, device=device)
@@ -110,22 +151,68 @@ def main(datadir,organ,weight_path,amp=True):
                 y_pred = torch.cat([y_pred, tmp], dim=0)
                 ##print(y_pred>0.5,y_pred.argmax(dim=1))
                 y = torch.cat([y, val_labels], dim=0)
-            saver.save_batch(tmp, val_data["image"].meta)
-            
+            #saver.save_batch(tmp, val_data["image"].meta)
+    
+    ##metrics計算
+    acc_value = torch.eq(y_pred.argmax(dim=1), y)
+    acc_metric = acc_value.sum().item() / len(acc_value)
+    pred =F.softmax(y_pred)[:,1].to('cpu').detach().numpy().copy()
+    target = y.to('cpu').detach().numpy().copy()
+    fpr, tpr, thres = roc_curve(target, pred)
+    auc = metrics.auc(fpr, tpr)
+    sng = 1 - fpr
+    # Youden indexを用いたカットオフ基準
+    Youden_index_candidates = tpr-fpr
+    index = np.where(Youden_index_candidates==max(Youden_index_candidates))[0][0]
+    cutoff = thres[index]
+    print(f'{organ}, auc:{auc} ,cutoff : {cutoff}')
+    ## plot auc curve
+    plot_auc(fpr, tpr,organ,dataset = 'validation')
 
-        acc_value = torch.eq(y_pred.argmax(dim=1), y)
-        acc_metric = acc_value.sum().item() / len(acc_value)
-        y_onehot = [post_label(i) for i in decollate_batch(y, detach=False)]
-        y_pred_act = [post_pred(i) for i in decollate_batch(y_pred)]
-        auc_metric(y_pred_act, y_onehot)
-        auc_result = auc_metric.aggregate()
-        auc_metric.reset()
-        pred =y_pred.argmax(dim=1).to('cpu').detach().numpy().copy()
-        target = y.to('cpu').detach().numpy().copy()
-        print(confusion_matrix(target,pred))
-        del y_pred_act, y_onehot
-        print('confusion matrix : ',confusion_matrix(target,pred),'AUC : ',auc_metric,auc_result,'accuracy : ',acc_metric )
-        saver.finalize()
+    # Youden indexによるカットオフ値による分類
+    y_pred_cutoff = pred >= cutoff
+    # 混同行列をヒートマップで可視化
+    cm = plot_confusion_matrix(target,y_pred_cutoff,organ,dataset = 'validation')
+
+    print('confusion matrix : \n',confusion_matrix(target,y_pred.argmax(dim=1).to('cpu').detach().numpy().copy()),
+            '\n youden index : \n ',cm, '\n AUC : ',auc ,'accuracy : ',acc_metric )
+    #saver.finalize()
+    with torch.no_grad():
+        num_correct = 0.0
+        metric_count = 0
+        #saver = CSVSaver(output_dir="./output_eval")
+        y_pred = torch.tensor([], dtype=torch.float32, device=device)
+        y = torch.tensor([], dtype=torch.long, device=device)
+        for test_data in test_loader:
+            test_images, test_labels = test_data['image'].to(device), test_data['label'].to(device)
+            with torch.no_grad():
+                tmp = model(test_images)
+                y_pred = torch.cat([y_pred, tmp], dim=0)
+                ##print(y_pred>0.5,y_pred.argmax(dim=1))
+                y = torch.cat([y, test_labels], dim=0)
+            #saver.save_batch(tmp, val_data["image"].meta)
+    
+    acc_value = torch.eq(y_pred.argmax(dim=1), y)
+    acc_metric = acc_value.sum().item() / len(acc_value)
+
+    pred =F.softmax(y_pred)[:,1].to('cpu').detach().numpy().copy()
+    target = y.to('cpu').detach().numpy().copy()
+    
+    fpr, tpr, thres = roc_curve(target, pred)
+    auc = metrics.auc(fpr, tpr)
+    sng = 1 - fpr
+
+    print(f'{organ},test auc:{auc} ')
+    ## plot auc curve
+    plot_auc(fpr, tpr,organ,dataset = 'test')
+
+    # Youden indexによるカットオフ値による分類
+    y_pred_cutoff = pred >= cutoff
+    # 混同行列をヒートマップで可視化
+    cm = plot_confusion_matrix(target,y_pred_cutoff,organ,dataset = 'test')
+    print('confusion matrix : \n',confusion_matrix(target,y_pred.argmax(dim=1).to('cpu').detach().numpy().copy()),
+            '\n youden index : \n ',cm, '\n AUC : ',auc ,'accuracy : ',acc_metric )
+    #saver.finalize()
 
 
 if __name__ == "__main__":
@@ -134,13 +221,26 @@ if __name__ == "__main__":
                         help='which organ AD model to train')
     parser.add_argument('--datadir', default="/mnt/hdd/jmid/data/",
                         help='path to the data directory.')
+    parser.add_argument('--outputdir', default="../result_eval",
+                        help='path to the folder in which results are saved.')
     parser.add_argument('--weight_path', default="/mnt/hdd/jmid/data/weight.pth",
                         help='path to the weight.')
+    parser.add_argument('--num_train_imgs', default=13000, type=int,
+                        help='number of images for training.')
+    parser.add_argument('--num_val_imgs', default=13000, type=int,
+                        help='number of images for validation.')
+    parser.add_argument('--seed', default=0, type=int,
+                        help='random_seed.')
     
     args = parser.parse_args()
     print(args)
 
     datadir=args.datadir
+    outputdir = args.outputdir
+    os.makedirs(outputdir,exist_ok=True)
     organ = args.organ
     weight_path = args.weight_path
-    main(datadir,organ,weight_path,amp=True)
+    num_train_imgs = args.num_train_imgs
+    num_val_imgs = args.num_val_imgs
+    seed = args.seed
+    main(datadir,organ,weight_path,outputdir,num_train_imgs,num_val_imgs,seed,amp=True)
