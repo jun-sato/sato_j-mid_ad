@@ -107,6 +107,10 @@ def main(datadir,organ,weight_path,outputdir,num_train_imgs,num_val_imgs,seed,am
     train_files = [{"image": img, "label": label,'filename':filename} for img, label,filename in zip(images_train, labels_train,file_train)]
     val_files = [{"image": img, "label": label, 'filename':filename} for img, label,filename in zip(images_val, labels_val,file_val)]
     test_files = [{"image": img, "label": label, 'filename':filename} for img, label,filename in zip(images_test, labels_test,file_test)]
+    num = 13000
+    train_files = [{"image": img, "label": label,'filename':filename} for img, label,filename in zip(images[:num], labels[:num],filenames[:num])]
+    val_files = [{"image": img, "label": label, 'filename':filename} for img, label,filename in zip(images[num:-1000], labels[num:-1000],filenames[num:-1000])]
+    test_files = [{"image": img, "label": label, 'filename':filename} for img, label,filename in zip(images[-1000:], labels[-1000:],filenames[-1000:])]
     
     # Represent labels in one-hot format for binary classifier training,
     # BCEWithLogitsLoss requires target to have same shape as input
@@ -181,10 +185,12 @@ def main(datadir,organ,weight_path,outputdir,num_train_imgs,num_val_imgs,seed,am
         num_correct = 0.0
         metric_count = 0
         #saver = CSVSaver(output_dir="./output_eval")
+        files = []
         y_pred = torch.tensor([], dtype=torch.float32, device=device)
         y = torch.tensor([], dtype=torch.long, device=device)
         for test_data in test_loader:
-            test_images, test_labels = test_data['image'].to(device), test_data['label'].to(device)
+            test_images, test_labels,file = test_data['image'].to(device), test_data['label'].to(device),test_data['filename']
+            files += file
             with torch.no_grad():
                 tmp = model(test_images)
                 y_pred = torch.cat([y_pred, tmp], dim=0)
@@ -213,7 +219,9 @@ def main(datadir,organ,weight_path,outputdir,num_train_imgs,num_val_imgs,seed,am
     print('confusion matrix : \n',confusion_matrix(target,y_pred.argmax(dim=1).to('cpu').detach().numpy().copy()),
             '\n youden index : \n ',cm, '\n AUC : ',auc ,'accuracy : ',acc_metric )
     #saver.finalize()
-
+    _ = pd.DataFrame([files,list(pred),list(target)]).T
+    _.columns = ['file','prediction','target']
+    _.to_csv('../result_eval/test_prediction.csv',index=False)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='In order to remove unnecessary background, crop images based on segmenation labels.')

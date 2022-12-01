@@ -1,6 +1,5 @@
 # J-MID report-based 異常検知
  
-
 * 研究の内容
 * 既に論文などで公開されているならその情報
 * 参考にしたリポジトリなどあればその情報
@@ -46,7 +45,7 @@ condaを使っている場合は[condaによる環境再現](https://qiita.com/n
 # Dataset
 
 ```
-dataset  
+data  
  |-----liver
  |        |---jmid_0000000_0000.nii.gz  
  |        |---jmid_0000001_0000.nii.gz  
@@ -90,10 +89,16 @@ finished_img:予測完了したmaskと対応するimgファイル。
 
 ## training_DP.py
 切り取ってきた臓器画像を用いて異常検知モデルを学習させるファイル。  
-model:resnet18  
-DataParallel  
+model:se-resnext50 (詳細な精度評価は[ここから](https://catkin-resistance-4fa.notion.site/840bbe8525d943b4aa76eba305fc2891))  
+pytorch DataParallelを使用。  
 ```
-python training_DP.py --organ pancreas --num_epochs 5 --batch_size 2 --datadir /mnt/hdd/jmid/data/
+python training_DP.py --batch_size 16 --datadir /mnt/hdd/jmid/data --num_classes 2 --num_epochs 80 --organ kidney --num_train_img 13000 --num_val_img 500 --save_model_name ../data/weights/kidney_square_sgdsche_resized256_resnex_160.pth
+```
+
+## evaluation.py
+学習させたモデルで予測させて精度評価。AUC curveとconfusion_matrixのファイルを出力。
+```
+python evaluation.py  --organ kidney --datadir /mnt/hdd/jmid/data/ --weight_path /mnt/hdd/jmid/data/weights/kidney_square_sgdsche_resized256_resnex_160.pth  --num_train_img 13000 --num_val_img 500　--outputdir ../result_eval
 ```
 
 ## code/extract_abdomen.py
@@ -119,7 +124,8 @@ NIIサーバー上に置いてるコードの草案。スライス枚数によ�
 * 佐藤淳哉
 * 2022/8/21 initial commit  
 * 更新情報
-    2022/10/30 実効コードを追加。
+    2022/10/30 データの取得や前処理、学習に関するコードを追加。
+    2022/11/30 異常検知に用いるtraining, evaluationのコードを追加。各種コード修正。
  
 # License
 ライセンスを明示する。研究室内での使用限定ならその旨を記載。

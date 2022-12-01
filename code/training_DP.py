@@ -14,7 +14,7 @@ import pathlib
 import glob
 import random
 from sklearn.preprocessing import LabelEncoder
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split,StratifiedGroupKFold
 #from pytorch_metric_learning import losses, distances, regularizers
 
 from torch.utils.data import default_collate
@@ -101,13 +101,20 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,num_train_imgs,num_val_
     print_config()
     data_df = pd.read_csv(os.path.join(datadir,organ+'_dataset.csv'))
     filenames = data_df['file']
-    images = [os.path.join(datadir,organ+'_square_img',p) for p in data_df['file']]
+    images = np.array([os.path.join(datadir,organ+'_square_img',p) for p in data_df['file']])
     print(images[0])
-    labels = data_df['abnormal'].astype(int)
+    labels = data_df['abnormal'].astype(int).values
     print(len(labels),'num of abnormal label is ',labels.sum())
     #le = LabelEncoder()
     #encoded_data = le.fit_transform(data)
-    images_train, images_test, labels_train, labels_test, file_train, file_test = train_test_split(images, labels,filenames, shuffle=True, stratify=labels,random_state=seed,train_size=num_train_imgs)
+    groups = data_df['file'].apply(lambda x:'_'.join(x.split('_')[:-1])+'_0000.nii.gz').values
+    cv = StratifiedGroupKFold(n_splits=10,shuffle=True,random_state=seed)
+    for train_idxs, test_idxs in cv.split(images, labels, groups):
+        print(train_idxs,groups)
+        images_train,labels_train,file_train = images[train_idxs],labels[train_idxs],filenames[train_idxs]
+        images_test,labels_test,file_test = images[test_idxs],labels[test_idxs],filenames[test_idxs]
+        break
+    #images_train, images_test, labels_train, labels_test, file_train, file_test = train_test_split(images, labels,filenames, shuffle=True, stratify=labels,random_state=seed,train_size=num_train_imgs)
     images_val, images_test, labels_val, labels_test, file_val, file_test = train_test_split(images_test, labels_test,file_test, shuffle=True, stratify=labels_test,random_state=seed,train_size=num_val_imgs)
     train_files = [{"image": img, "label": label,'filename':filename} for img, label,filename in zip(images_train, labels_train,file_train)]
     val_files = [{"image": img, "label": label, 'filename':filename} for img, label,filename in zip(images_val, labels_val,file_val)]
@@ -195,7 +202,9 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,num_train_imgs,num_val_
 
             if amp and scaler is not None:
                 with torch.cuda.amp.autocast():
-                    outputs = model(inputs)
+                    x = model(inputs)
+                    l2 = torch.sqrt((x**2).sum()) # 基本的にこの行を追加しただけ
+                    outputs = 16 * (x / l2)  
                     loss = loss_function(outputs, labels)
                 scaler.scale(loss).backward()
                 scaler.step(optimizer)
