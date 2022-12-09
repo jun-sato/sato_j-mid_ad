@@ -206,7 +206,6 @@ def main(datadir,organ,weight_path,outputdir,num_train_imgs,num_val_imgs,segtype
                 outputs = model(val_images)
                 y_pred = torch.cat([y_pred, outputs], dim=0)
                 y = torch.cat([y, val_labels], dim=0)
-                break
             total_y_pred_val = torch.cat([total_y_pred_val, y_pred], dim=0)
             total_y_val = torch.cat([total_y_val, y], dim=0)
 
@@ -225,7 +224,6 @@ def main(datadir,organ,weight_path,outputdir,num_train_imgs,num_val_imgs,segtype
                 outputs = model(test_images)
                 y_pred = torch.cat([y_pred, outputs], dim=0)
                 y = torch.cat([y, test_labels], dim=0)
-                break
             total_y_pred_test = torch.cat([total_y_pred_test, y_pred], dim=0)
             total_y_test = y
         _ = calc_metrics(y_pred,y,organ,cutoff=cutoff,dataset='test')
