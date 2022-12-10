@@ -172,9 +172,9 @@ def main(datadir,organ,weight_path,outputdir,num_train_imgs,num_val_imgs,segtype
         post_label = Compose([AsDiscrete(to_onehot=2)])
         # create a validation data loader
         val_ds = Dataset(data=val_files, transform=val_transforms)
-        val_loader = DataLoader(val_ds, batch_size=16, num_workers=2, pin_memory=True, collate_fn=pad_list_data_collate,)
+        val_loader = DataLoader(val_ds, batch_size=36, num_workers=2, pin_memory=True, collate_fn=pad_list_data_collate,)
         test_ds = Dataset(data=test_files, transform=val_transforms)
-        test_loader = DataLoader(test_ds, batch_size=16, num_workers=2, pin_memory=True, collate_fn=pad_list_data_collate,)
+        test_loader = DataLoader(test_ds, batch_size=36, num_workers=2, pin_memory=True, collate_fn=pad_list_data_collate,)
 
         auc_metric = ROCAUCMetric()
         cutoff_criterions = list()

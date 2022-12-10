@@ -71,7 +71,7 @@ def get_transforms(spatial_size):
                     b_max=1.0,
                     clip=True,
                 ),
-                RandRotated(keys=['image'],range_x =np.pi*0.5,range_y=np.pi*0.5, prob=0.3),
+                RandRotated(keys=['image'],range_x =np.pi*0.2,range_y=np.pi*0.2, prob=0.2),
                 #SpatialPadd(keys=["image"],spatial_size=(256, 256, 64)),
                 Resized(keys=["image"], spatial_size=spatial_size),
             ]
