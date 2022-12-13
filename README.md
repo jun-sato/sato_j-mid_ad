@@ -92,14 +92,22 @@ finished_img:予測完了したmaskと対応するimgファイル。
 model:se-resnext50 (詳細な精度評価は[ここから](https://catkin-resistance-4fa.notion.site/840bbe8525d943b4aa76eba305fc2891))  
 pytorch DataParallelを使用。  
 ```
-python training_DP.py --batch_size 16 --datadir /mnt/hdd/jmid/data --num_classes 2 --num_epochs 80 --organ kidney --num_train_img 13000 --num_val_img 500 --save_model_name ../data/weights/kidney_square_sgdsche_resized256_resnex_160.pth
+python training_DP.py --batch_size 16 --datadir /sqfs/work/K22A11/u6b588/jmid/data --num_classes 2 --num_epochs 50 --organ liver --save_model_name weights/liver_seg_baseline_80.pth --segtype seg
 ```
+
+segtype:'seg'か'square'を使用。squareはbboxで切り取ってくる。
 
 ## evaluation.py
 学習させたモデルで予測させて精度評価。AUC curveとconfusion_matrixのファイルを出力。
 ```
-python evaluation.py  --organ kidney --datadir /mnt/hdd/jmid/data/ --weight_path /mnt/hdd/jmid/data/weights/kidney_square_sgdsche_resized256_resnex_160.pth  --num_train_img 13000 --num_val_img 500　--outputdir ../result_eval
+python evaluation.py --datadir /mnt/hdd/jmid/data  --organ liver --weight_path ../data/weights/liver_seg_baseline_80_seed4.pth --seed 4 --segtype seg
 ```
+
+出力されるファイル:
+    outputdir上にAUC curveとConfusion matrixのグラフが作成される。
+    totalとヘッダーが付いているもの：5fold cvでの結果。
+    それ以外：各foldでの結果。
+
 
 ## code/extract_abdomen.py
 NIIサーバー上から患者情報のcsvファイルをダウンロード。腹部に対応するCT所見をcsv情報から絞り込んでくる。  
@@ -124,8 +132,10 @@ NIIサーバー上に置いてるコードの草案。スライス枚数によ�
 * 佐藤淳哉
 * 2022/8/21 initial commit  
 * 更新情報
-    2022/10/30 データの取得や前処理、学習に関するコードを追加。
+    2022/10/30 データの取得や前処理、学習に関するコードを追加。  
     2022/11/30 異常検知に用いるtraining, evaluationのコードを追加。各種コード修正。
+    2022/12/13 training, evaluationのコードを修正。
+
  
 # License
 ライセンスを明示する。研究室内での使用限定ならその旨を記載。

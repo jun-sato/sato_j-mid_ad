@@ -48,7 +48,7 @@ from monai.metrics import ROCAUCMetric
 import torch.nn.functional as F
 
 
-def plot_auc(fpr, tpr,organ,dataset = 'validation'):
+def plot_auc(fpr, tpr,organ,dataset = 'validation',fold=None):
     fig = plt.figure(figsize=(10,10))
     ax = fig.add_subplot(111)
     ax.plot(fpr, tpr, marker='o', label=organ)    
@@ -56,17 +56,23 @@ def plot_auc(fpr, tpr,organ,dataset = 'validation'):
     ax.grid()
     ax.set_xlabel('FPR: False Positive Rete', fontsize = 13)
     ax.set_ylabel('TPR: True Positive Rete', fontsize = 13)
-    fig.savefig(f'{outputdir}/{organ}_ROC_curve_{dataset}.jpg')
+    if fold is not None:
+        fig.savefig(f'{outputdir}/{organ}_ROC_curve_{dataset}_fold{fold}.jpg')
+    else:
+        fig.savefig(f'{outputdir}/{organ}_ROC_curve_{dataset}.jpg')
     plt.close()
 
-def plot_confusion_matrix(target,y_pred_cutoff,organ,dataset = 'validation'):
+def plot_confusion_matrix(target,y_pred_cutoff,organ,dataset = 'validation',fold=None):
     fig = plt.figure(figsize=(10,7))
     ax = fig.add_subplot(111)
     cm = confusion_matrix(target, y_pred_cutoff)
     sns.heatmap(cm, annot=True,fmt = '.4g', cmap='Blues', ax=ax)
     ax.set_title('cutoff (Youden index)')
     #ax.ticklabel_format(style='plain')
-    fig.savefig(f'{outputdir}/{organ}_confsion_matrix_{dataset}.jpg')
+    if fold is not None:
+        fig.savefig(f'{outputdir}/{organ}_confsion_matrix_{dataset}_fold{fold}.jpg')
+    else:
+        fig.savefig(f'{outputdir}/{organ}_confsion_matrix_{dataset}.jpg')
     plt.close()
     return cm
 
@@ -83,7 +89,7 @@ class L2ConstraintedNet(nn.Module):
         x = self.alpha * (x / l2)     # 基本的にこの行を追加しただけ
         return x
 
-def calc_metrics(y_pred,y,organ,cutoff=None,dataset='validation'):
+def calc_metrics(y_pred,y,organ,cutoff=None,dataset='validation',fold=None):
     ##metrics計算
     acc_value = torch.eq(y_pred.argmax(dim=1), y)
     acc_metric = acc_value.sum().item() / len(acc_value)
@@ -99,16 +105,16 @@ def calc_metrics(y_pred,y,organ,cutoff=None,dataset='validation'):
         cutoff = thres[index]
     print(f'{organ}, auc:{auc} ,cutoff : {cutoff}')
     ## plot auc curve
-    plot_auc(fpr, tpr,organ,dataset = dataset)
+    plot_auc(fpr, tpr,organ,dataset = dataset,fold=fold)
     # Youden indexによるカットオフ値による分類
     y_pred_cutoff = pred >= cutoff
     # 混同行列をヒートマップで可視化
-    cm = plot_confusion_matrix(target,y_pred_cutoff,organ,dataset = dataset)
+    cm = plot_confusion_matrix(target,y_pred_cutoff,organ,dataset = dataset,fold=fold)
     print('confusion matrix : \n',confusion_matrix(target,y_pred.argmax(dim=1).to('cpu').detach().numpy().copy()),
             '\n youden index : \n ',cm, '\n AUC : ',auc ,'accuracy : ',acc_metric )
     return cutoff
 
-def main(datadir,organ,weight_path,outputdir,num_train_imgs,num_val_imgs,segtype,seed,amp=True):
+def main(datadir,organ,weight_path,outputdir,segtype,seed,amp=True):
     monai.config.print_config()
     logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
@@ -209,7 +215,7 @@ def main(datadir,organ,weight_path,outputdir,num_train_imgs,num_val_imgs,segtype
             total_y_pred_val = torch.cat([total_y_pred_val, y_pred], dim=0)
             total_y_val = torch.cat([total_y_val, y], dim=0)
 
-        cutoff = calc_metrics(y_pred,y,organ,dataset='validation')
+        cutoff = calc_metrics(y_pred,y,organ,dataset='validation',fold=str(n))
 
         with torch.no_grad():
             num_correct = 0.0
@@ -226,13 +232,13 @@ def main(datadir,organ,weight_path,outputdir,num_train_imgs,num_val_imgs,segtype
                 y = torch.cat([y, test_labels], dim=0)
             total_y_pred_test = total_y_pred_test + y_pred
             total_y_test = y
-        _ = calc_metrics(y_pred,y,organ,cutoff=cutoff,dataset='test')
+        _ = calc_metrics(y_pred,y,organ,cutoff=cutoff,dataset='test',fold=str(n))
         #saver.finalize()
 
     print('####-----------------overall metrics-------------------------###')
     total_y_pred_test = total_y_pred_test/5
-    overall_cutoff = calc_metrics(total_y_pred_val,total_y_val,organ,dataset='total_val')
-    _ = calc_metrics(total_y_pred_test,total_y_test,organ,cutoff=overall_cutoff,dataset='total_test')
+    overall_cutoff = calc_metrics(total_y_pred_val,total_y_val,organ,dataset='total_val',fold=None)
+    _ = calc_metrics(total_y_pred_test,total_y_test,organ,cutoff=overall_cutoff,dataset='total_test',fold=None)
 
 
     pred_df = pd.DataFrame([files,list(F.softmax(total_y_pred_test)[:,1].to('cpu').detach().numpy().copy()),
@@ -254,10 +260,6 @@ if __name__ == "__main__":
                         help='path to the folder in which results are saved.')
     parser.add_argument('--weight_path', default="/mnt/hdd/jmid/data/weight.pth",
                         help='path to the weight.')
-    parser.add_argument('--num_train_imgs', default=13000, type=int,
-                        help='number of images for training.')
-    parser.add_argument('--num_val_imgs', default=13000, type=int,
-                        help='number of images for validation.')
     parser.add_argument('--seed', default=0, type=int,
                         help='random_seed.')
     parser.add_argument('--segtype', default="square",
@@ -271,8 +273,6 @@ if __name__ == "__main__":
     os.makedirs(outputdir,exist_ok=True)
     organ = args.organ
     weight_path = args.weight_path
-    num_train_imgs = args.num_train_imgs
-    num_val_imgs = args.num_val_imgs
     segtype = args.segtype
     seed = args.seed
-    main(datadir,organ,weight_path,outputdir,num_train_imgs,num_val_imgs,segtype,seed,amp=True)
+    main(datadir,organ,weight_path,outputdir,segtype,seed,amp=True)
