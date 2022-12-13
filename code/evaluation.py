@@ -137,8 +137,8 @@ def main(datadir,organ,weight_path,outputdir,num_train_imgs,num_val_imgs,segtype
             ]
         )
 
-    data_df = pd.read_csv(os.path.join(datadir,organ+'_dataset_train.csv'))
-    test_df = pd.read_csv(os.path.join(datadir,organ+'_dataset_test.csv'))
+    data_df = pd.read_csv(os.path.join(datadir,organ+'_dataset_train_'+str(seed)+'.csv'))
+    test_df = pd.read_csv(os.path.join(datadir,organ+'_dataset_test_clean.csv'))
     filenames = data_df['file']
     file_test = test_df['file']
     images = np.array([os.path.join(datadir,organ+'_'+segtype+'_img',p) for p in data_df['file']])
@@ -154,8 +154,8 @@ def main(datadir,organ,weight_path,outputdir,num_train_imgs,num_val_imgs,segtype
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     total_y_pred_val = torch.tensor([], dtype=torch.float32, device=device)
     total_y_val = torch.tensor([], dtype=torch.long, device=device)
-    total_y_pred_test = torch.tensor([], dtype=torch.float32, device=device)
-    total_y_test = torch.tensor([], dtype=torch.long, device=device)
+    total_y_pred_test = torch.zeros((len(labels_test),2), dtype=torch.float32, device=device)
+    total_y_test = torch.zeros((len(labels_test)), dtype=torch.long, device=device)
     
     for n,(train_idxs, test_idxs) in enumerate(cv.split(images, labels, groups)):
         print('---------------- fold ',n,'-------------------')
@@ -172,9 +172,9 @@ def main(datadir,organ,weight_path,outputdir,num_train_imgs,num_val_imgs,segtype
         post_label = Compose([AsDiscrete(to_onehot=2)])
         # create a validation data loader
         val_ds = Dataset(data=val_files, transform=val_transforms)
-        val_loader = DataLoader(val_ds, batch_size=36, num_workers=2, pin_memory=True, collate_fn=pad_list_data_collate,)
+        val_loader = DataLoader(val_ds, batch_size=16, num_workers=2, pin_memory=True, collate_fn=pad_list_data_collate,)
         test_ds = Dataset(data=test_files, transform=val_transforms)
-        test_loader = DataLoader(test_ds, batch_size=36, num_workers=2, pin_memory=True, collate_fn=pad_list_data_collate,)
+        test_loader = DataLoader(test_ds, batch_size=16, num_workers=2, pin_memory=True, collate_fn=pad_list_data_collate,)
 
         auc_metric = ROCAUCMetric()
         cutoff_criterions = list()
@@ -224,13 +224,13 @@ def main(datadir,organ,weight_path,outputdir,num_train_imgs,num_val_imgs,segtype
                 outputs = model(test_images)
                 y_pred = torch.cat([y_pred, outputs], dim=0)
                 y = torch.cat([y, test_labels], dim=0)
-            total_y_pred_test = torch.cat([total_y_pred_test, y_pred], dim=0)
+            total_y_pred_test = total_y_pred_test + y_pred
             total_y_test = y
         _ = calc_metrics(y_pred,y,organ,cutoff=cutoff,dataset='test')
         #saver.finalize()
 
     print('####-----------------overall metrics-------------------------###')
-    total_y_pred_test = total_y_pred_test.view(-1,5,2).mean(axis=1)
+    total_y_pred_test = total_y_pred_test/5
     overall_cutoff = calc_metrics(total_y_pred_val,total_y_val,organ,dataset='total_val')
     _ = calc_metrics(total_y_pred_test,total_y_test,organ,cutoff=overall_cutoff,dataset='total_test')
 
@@ -242,7 +242,7 @@ def main(datadir,organ,weight_path,outputdir,num_train_imgs,num_val_imgs,segtype
     pred_df['final_prediction'] = (pred_df['prediction']>cutoff).astype(int)
     groups = test_df['FACILITY_CODE'].astype(str)+test_df['ACCESSION_NUMBER'].astype(str)
     columns = ['file','prediction','final_prediction','target','io_tokens','FINDING','FINDING_JSON']
-    pred_df.merge(test_df,on='file',how='left').drop_duplicates(subset='file')[columns].to_csv(f'../result_eval/{organ}_with_finding.csv',index=False)
+    pred_df.merge(test_df,on='file',how='left').drop_duplicates(subset='file')[columns].to_csv(f'../result_eval/{organ}_with_finding_{str(seed)}.csv',index=False)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='In order to remove unnecessary background, crop images based on segmenation labels.')

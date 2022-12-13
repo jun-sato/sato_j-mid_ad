@@ -58,8 +58,8 @@ def get_transforms(spatial_size):
                 LoadImaged(keys=["image"]),
                 EnsureChannelFirstd(keys=["image"]),
                 Orientationd(keys=["image"], axcodes="RAS"),
-                RandScaleIntensityd(keys=["image"], factors = [-0.15,0.15], prob=0.3),
-                RandAdjustContrastd(keys=["image"],prob=0.1,gamma=(0.75,1.25)),
+                #RandScaleIntensityd(keys=["image"], factors = [-0.15,0.15], prob=0.3),
+                #RandAdjustContrastd(keys=["image"],prob=0.1,gamma=(0.75,1.25)),
                 #OneOf([RandAdjustContrastd(keys=["image"],prob=0.3,gamma=(0.75,1.5)),
                 #        RandScaleIntensityd(keys=["image"], factors = [-0.2,0.2], prob=0.3),
                 #        RandGaussianNoised(keys=["image"], prob=0.2, mean=0.0, std=0.1)]),
@@ -71,7 +71,7 @@ def get_transforms(spatial_size):
                     b_max=1.0,
                     clip=True,
                 ),
-                RandRotated(keys=['image'],range_x =np.pi*0.2,range_y=np.pi*0.2, prob=0.2),
+                RandRotated(keys=['image'],range_x =np.pi*0.5,range_y=np.pi*0.5, prob=0.3),
                 #SpatialPadd(keys=["image"],spatial_size=(256, 256, 64)),
                 Resized(keys=["image"], spatial_size=spatial_size),
             ]
@@ -116,22 +116,23 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,save_model_name,segtype
     logging.basicConfig(stream=sys.stdout, level=logging.INFO)
     print_config()
     data_df = pd.read_csv(os.path.join(datadir,organ+'_dataset_train.csv'))
-    filenames = data_df['file']
-    images = np.array([os.path.join(datadir,organ+'_'+segtype+'_img',p) for p in data_df['file']])
+    total_filenames = data_df['file'].values
+    total_images = np.array([os.path.join(datadir,organ+'_'+segtype+'_img',p) for p in data_df['file']])
 
-    print(images[0])
-    labels = data_df['abnormal'].astype(int).values
-    print(len(labels),'num of abnormal label is ',labels.sum())
+    print(total_images[0])
+    total_labels = data_df['abnormal'].astype(int).values
+    print(len(total_labels),'num of abnormal label is ',total_labels.sum())
     #le = LabelEncoder()
     #encoded_data = le.fit_transform(data)
     groups = data_df['FACILITY_CODE'].astype(str)+data_df['ACCESSION_NUMBER'].astype(str)
     cv = StratifiedGroupKFold(n_splits=5,shuffle=True,random_state=seed)
-    for n,(train_idxs, test_idxs) in enumerate(cv.split(images, labels, groups)):
+    for n,(train_idxs, test_idxs) in enumerate(cv.split(total_images, total_labels, groups)):
         print('---------------- fold ',n,'-------------------')
+        print(train_idxs,test_idxs)
+        #if n ==0 : continue
         save_model_name_ = save_model_name.split('.pth')[0] +'_'+str(n)+'.pth'
-        images_train,labels_train,file_train = images[train_idxs],labels[train_idxs],filenames[train_idxs]
-        images_val,labels_val,file_val = images[test_idxs],labels[test_idxs],filenames[test_idxs]
-
+        images_train,labels_train,file_train = total_images[train_idxs],total_labels[train_idxs],total_filenames[train_idxs]
+        images_val,labels_val,file_val = total_images[test_idxs],total_labels[test_idxs],total_filenames[test_idxs]
         num_train_imgs = len(images_train)
         num_val_imgs = len(images_val)
         print(f'number of train images is {num_train_imgs}, number of validation images is {num_val_imgs}')
@@ -178,7 +179,7 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,save_model_name,segtype
             #model = monai.networks.nets.EfficientNetBN("efficientnet-b1", pretrained=False,
             #            progress=False, spatial_dims=3, in_channels=1, num_classes=num_classes,
             #            norm=('batch', {'eps': 0.001, 'momentum': 0.01}), adv_prop=False).to(device)
-            model = monai.networks.nets.seresnext50(spatial_dims=3,in_channels=1,dropout_prob=0.2,num_classes=num_classes).to(device)
+            model = monai.networks.nets.seresnext50(spatial_dims=3,in_channels=1,num_classes=num_classes).to(device)
             #model = L2ConstraintedNet(model,alpha=16,num_classes=num_classes).to(device)
 
         model = torch.nn.DataParallel(model, device_ids=list(range(num_gpu)))
@@ -301,10 +302,6 @@ if __name__ == '__main__':
                         help='number of target classes.')
     parser.add_argument('--batch_size', default=8, type=int,
                         help='number of batch size to train.')
-    # parser.add_argument('--num_train_imgs', default=13000, type=int,
-    #                     help='number of images for training.')
-    # parser.add_argument('--num_val_imgs', default=13000, type=int,
-    #                     help='number of images for validation.')
     parser.add_argument('--seed', default=0, type=int,
                         help='random_seed.')
     parser.add_argument('--segtype', default="square",
@@ -323,8 +320,6 @@ if __name__ == '__main__':
     num_classes = args.num_classes
     datadir = args.datadir
     batch_size = args.batch_size
-    # num_train_imgs = args.num_train_imgs
-    # num_val_imgs = args.num_val_imgs
     segtype = args.segtype
     seed = args.seed
     save_model_name = args.save_model_name
