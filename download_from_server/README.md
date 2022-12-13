@@ -12,7 +12,7 @@ SINET6に接続しているデバイスを経由してデータを取得する�
 
  ## 1. sshの接続~所見文から適切な画像を検索。
 
- SINET6接続されているパソコンのterminalから以下でログイン。(秘密鍵は~/.ssh/nii)にあるという前提。
+ SINET6接続されているパソコンのterminalから以下でログイン。(秘密鍵は~/.ssh/niiにあるという前提。)
 ```
 ssh -i ~/.ssh/nii usropsaiE1@10.1.10.52
 ```
@@ -40,3 +40,40 @@ bash abd_download.sh
 これで指定された場所にniftiファイルが保存されるはず！！(所要時間1日/1ヶ月分)
 
 ## 3. SQUIDにuploadしてセグメンテーションを実行。
+
+まず、scpコマンドを使ってlocalからSQUID上にデータをuploadする。
+```
+## K22A11以下は各々のpathを指定。
+scp -r path/to/the/dataset u6b588@squidhpc.hpc.cmc.osaka-u.ac.jp:/sqfs/work/K22A11/u6b588/jmid/data/
+```
+uploadされたデータを、renameして、スライス厚ごとに分けてディレクトリを分割する。(←効率よくセグメンテーションを実施するため。)
+* rename_jmid_ver2.pyを使用。
+```
+python rename_jmid_ver2.py --datadir ../data --start_id 4000 --num_threads 20
+## --datadir uploadしたniftiファイルのpath
+## --start_id 以前にいくつかrenameを実行していた場合、番号が重なるので、以前の番号の後から始める。
+## --num_threads マルチプロセス数
+```
+これで、niftiファイルがスライス数ごとに一定数ディレクトリに保存された。
+次に、nn-UNetを用いてセグメンテーションを行う。
+ディレクトリごとに.shファイルを作成しSQUID上で並列実行していく。
+(e.g. nnunet_pred_5_1.sh)
+予測が終了したものを集めて一つのディレクトトリ(finish_img/pred)にまとめる。
+* extract_finished_file.pyを使用。
+```
+python extract_finished_file.py
+```
+予測できたファイルのリストがfinished.csvとして出力される。
+これでCT画像から多臓器セグメンテーションをした予測ファイルを作成できた。これは全体では扱えないので、特定臓器のみを抽出させて後の処理に繋げる。
+## 4. セグメンテーション画像から使いたい臓器を抜き出す。
+
+* crop_dataset.pyを使用
+```
+python crop_dataset.py --maskdir /path/to/maskdir/ --imagedir /path/to/imagedir --save_maskdir /path/to/saved/maskdir --save_imagedir /path/to/saved/maskdir --num_threads 20 --organ_id 8
+## --maskdir セグメンテーションの予測フォルダ
+## --imagedir 元画像のフォルダ
+## --save_maskdir 特定の臓器を切り取った後に予測を保存するフォルダ
+## --save_imagedir 特定の臓器を切り取った後に元画像を保存するフォルダ
+##--num_threads 20　マルチプロセス数
+##--organ_id 8　臓器id(crop_dataset.py内を参照)
+```
