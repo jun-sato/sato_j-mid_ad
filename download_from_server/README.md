@@ -61,7 +61,11 @@ python rename_jmid_ver2.py --datadir ../data --start_id 4000 --num_threads 20
 予測が終了したものを集めて一つのディレクトトリ(finish_img/pred)にまとめる。
 * extract_finished_file.pyを使用。
 ```
-python extract_finished_file.py
+python extract_finished_file.py --outdir ../data/finish_img/ --preddir ../data/pred_*_*/ --summary_path ../data/finished.csv
+
+## --outdir 予測が終了した元画像の移動先のディレクトリ
+## --preddir 予測が終了したmaskのディレクトリ
+## --summary_path まとめファイルを保存するpath
 ```
 予測できたファイルのリストがfinished.csvとして出力される。
 これでCT画像から多臓器セグメンテーションをした予測ファイルを作成できた。これは全体では扱えないので、特定臓器のみを抽出させて後の処理に繋げる。
@@ -77,3 +81,8 @@ python crop_dataset.py --maskdir /path/to/maskdir/ --imagedir /path/to/imagedir 
 ##--num_threads 20　マルチプロセス数
 ##--organ_id 8　臓器id(crop_dataset.py内を参照)
 ```
+
+## subfolderのまとめ
+include_abdomen.csvのデータと、renamedのデータ、所見のデータをすべて紐付かせる。  
+inclode_abdomen.csv←→renamed.csvはzipファイルで紐付いている。  
+紐づけたあと、所見データはFacility_idとaccession_idでinclude_abdomenで紐づく。  
