@@ -43,6 +43,7 @@ pip install SimpleITK
 condaを使っている場合は[condaによる環境再現](https://qiita.com/nshinya/items/cb1cffabc3305c907bc5)が便利です。
  
 # Dataset
+NIIサーバーからデータと所見文をdownloadして、セグメンテーションさせるまでの流れは[こちらのREADME参照](https://github.com/ai-radiol-ou/sato_j-mid_ad/tree/main/download_from_server/)。
 
 ```
 data  
@@ -83,9 +84,9 @@ finished_img:予測完了したmaskと対応するimgファイル。
 両者は同数であるはず。  
 
  
-## eda_json.ipynb
-所見文構造化jsonファイルを利用して特定の情報を抽出するファイル。  
 
+## labeling_{臓器名}.ipynb
+所見文構造化jsonファイルを利用して特定の臓器からの情報を抽出するファイル。 
 
 ## training_DP.py
 切り取ってきた臓器画像を用いて異常検知モデルを学習させるファイル。  
@@ -108,15 +109,14 @@ python evaluation.py --datadir /mnt/hdd/jmid/data  --organ liver --weight_path .
     totalとヘッダーが付いているもの：5fold cvでの結果。
     それ以外：各foldでの結果。
 
-
-## code/extract_abdomen.py
-NIIサーバー上から患者情報のcsvファイルをダウンロード。腹部に対応するCT所見をcsv情報から絞り込んでくる。  
-include_abdomen_{開始期間}_{終了期間}.csvのファイルが出力される。また、pathの情報のファイルも出力される。
-
+## display_gradcam.ipynb
+学習・評価したモデルを使ってモデルの注目部分を可視化する。  
+[gradcam](https://github.com/MECLabTUDA/M3d-Cam)と[occlusion_sensitivity](https://docs.monai.io/en/stable/visualize.html#monai.visualize.occlusion_sensitivity.OcclusionSensitivity)を用いたコード。occlusion_sensitivityの方が良い？
+occlusion_sisitivityは重要箇所(その部分を隠したときに大きく値が異なる)が青く表示される。
+→出力は予測確率であり、重要部分を隠すとそのクラスに属する確率は下がる(negative value)になるから、、、？[公式のチュートリアル](https://github.com/Project-MONAI/tutorials/blob/main/modules/interpretability/covid_classification.ipynb)をみる限りそんな感じ。
 
 ## code/eda.ipynb
 NIIサーバー上に置いてるコードの草案。スライス枚数によってグループ分けして、効率よくセグメンテーションが行えるようにする。
-
 
 
 
@@ -133,7 +133,7 @@ NIIサーバー上に置いてるコードの草案。スライス枚数によ�
 * 2022/8/21 initial commit  
 * 更新情報
     2022/10/30 データの取得や前処理、学習に関するコードを追加。  
-    2022/11/30 異常検知に用いるtraining, evaluationのコードを追加。各種コード修正。
+    2022/11/30 異常検知に用いるtraining, evaluationのコードを追加。各種コード修正。  
     2022/12/13 training, evaluationのコードを修正。
 
  
