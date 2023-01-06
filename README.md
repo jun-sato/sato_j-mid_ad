@@ -25,7 +25,7 @@ CT画像はAI学習には大きすぎる。512☓512☓300の画像はどのGPU�
  
 # Requirement
  
-"hoge"を動かすのに必要なライブラリなどを列挙する
+必要なライブラリ
  
 * monai
 * simpleitk
@@ -113,7 +113,7 @@ python evaluation.py --datadir /mnt/hdd/jmid/data  --organ liver --weight_path .
 学習・評価したモデルを使ってモデルの注目部分を可視化する。  
 [gradcam](https://github.com/MECLabTUDA/M3d-Cam)と[occlusion_sensitivity](https://docs.monai.io/en/stable/visualize.html#monai.visualize.occlusion_sensitivity.OcclusionSensitivity)を用いたコード。occlusion_sensitivityの方が良い？
 occlusion_sisitivityは重要箇所(その部分を隠したときに大きく値が異なる)が青く表示される。
-→出力は予測確率であり、重要部分を隠すとそのクラスに属する確率は下がる(negative value)になるから、、、？[公式のチュートリアル](https://github.com/Project-MONAI/tutorials/blob/main/modules/interpretability/covid_classification.ipynb)をみる限りそんな感じ。
+→出力は予測確率であり、重要部分を隠すとそのクラスに属する確率は下がる(negative value)になるから、、、？monaiの[公式のチュートリアル](https://github.com/Project-MONAI/tutorials/blob/main/modules/interpretability/covid_classification.ipynb)をみる限りそんな感じ。
 
 ## code/eda.ipynb
 NIIサーバー上に置いてるコードの草案。スライス枚数によってグループ分けして、効率よくセグメンテーションが行えるようにする。
@@ -134,7 +134,9 @@ NIIサーバー上に置いてるコードの草案。スライス枚数によ�
 * 更新情報
     2022/10/30 データの取得や前処理、学習に関するコードを追加。  
     2022/11/30 異常検知に用いるtraining, evaluationのコードを追加。各種コード修正。  
-    2022/12/13 training, evaluationのコードを修正。
+    2022/12/13 training, evaluationのコードを修正。  
+    2022/12/26 visualization(gradcam,occ_sens)のファイルを追加、各臓器のラベリングのフォルダを作成。
+    2023/01/06 serverからのダウンロードファイルを取得(abd_download.sh)。
 
  
 # License
