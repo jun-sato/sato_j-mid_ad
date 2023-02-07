@@ -98,6 +98,9 @@ python training_DP.py --batch_size 16 --datadir /sqfs/work/K22A11/u6b588/jmid/da
 
 segtype:'seg'か'square'を使用。squareはbboxで切り取ってくる。
 
+## training_25D.py
+2.5次元CNNを使ったモデルで異常検知モデルを学習させるファイル。
+
 ## evaluation.py
 学習させたモデルで予測させて精度評価。AUC curveとconfusion_matrixのファイルを出力。
 ```
@@ -115,10 +118,18 @@ python evaluation.py --datadir /mnt/hdd/jmid/data  --organ liver --weight_path .
 occlusion_sisitivityは重要箇所(その部分を隠したときに大きく値が異なる)が青く表示される。
 →出力は予測確率であり、重要部分を隠すとそのクラスに属する確率は下がる(negative value)になるから、、、？monaiの[公式のチュートリアル](https://github.com/Project-MONAI/tutorials/blob/main/modules/interpretability/covid_classification.ipynb)をみる限りそんな感じ。
 
+## occlusion_sensitivity.py
+occlusion sensitivityのコード。display_gradcam.ipynbの改良版。5-fold CVのアンサンブルの可視化を出力できる。
+```bash
+python occlusion_sensitivity.py --datadir ../data/ --save_imagedir ../attention_maps/ --organ liver --segtype 25D --seed 0 --backbone tf_efficientnetv2_s_in21ft1k --load_model_name ../data/weights/liver_25D_new_valloss.pth
+```
+
+
 ## code/eda.ipynb
 NIIサーバー上に置いてるコードの草案。スライス枚数によってグループ分けして、効率よくセグメンテーションが行えるようにする。
 
-
+## utils.py
+コードに使ういろいろな関数。
 
  
 # Note
