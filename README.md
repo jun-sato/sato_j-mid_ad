@@ -1,8 +1,4 @@
 # J-MID report-based 異常検知
- 
-* 研究の内容
-* 既に論文などで公開されているならその情報
-* 参考にしたリポジトリなどあればその情報
 
  
 # Features
@@ -101,10 +97,14 @@ segtype:'seg'か'square'を使用。squareはbboxで切り取ってくる。
 ## training_25D.py
 2.5次元CNNを使ったモデルで異常検知モデルを学習させるファイル。
 
-## evaluation.py
+## evaluation.py(evaluation_25D.py)
 学習させたモデルで予測させて精度評価。AUC curveとconfusion_matrixのファイルを出力。
 ```
 python evaluation.py --datadir /mnt/hdd/jmid/data  --organ liver --weight_path ../data/weights/liver_seg_baseline_80_seed4.pth --seed 4 --segtype seg
+```
+
+```
+python evaluation_25D.py --datadir /mnt/hdd/jmid/data  --organ liver --weight_path ../data/weights/liver_25D_new_valloss.pth --segtype 25D --outputdir ../result_eval/
 ```
 
 出力されるファイル:
@@ -148,6 +148,8 @@ NIIサーバー上に置いてるコードの草案。スライス枚数によ�
     2022/12/13 training, evaluationのコードを修正。  
     2022/12/26 visualization(gradcam,occ_sens)のファイルを追加、各臓器のラベリングのフォルダを作成。
     2023/01/06 serverからのダウンロードファイルを取得(abd_download.sh)。
+    2023/02/08 2.5次元データの学習＆occlusion sensitivityのコードを追加。
+    2023/03/11 2.5次元データの作成コード＆評価コードの追加。
 
  
 # License
