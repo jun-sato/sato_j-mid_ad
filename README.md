@@ -25,6 +25,8 @@ CT画像はAI学習には大きすぎる。512☓512☓300の画像はどのGPU�
  
 * monai
 * simpleitk
+* Pytorch
+* Timm
  
 # Installation
  
