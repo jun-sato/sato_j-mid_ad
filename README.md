@@ -32,10 +32,12 @@ CT画像はAI学習には大きすぎる。512☓512☓300の画像はどのGPU�
  
 Requirementで列挙したライブラリなどのインストール方法を説明する  
  nnUNetの学習方法は[公式github](https://github.com/MIC-DKFZ/nnUNet)を参照する。
+ pytorchは各々のGPU環境に合ったもの[公式](https://pytorch.org/get-started/locally/)から選んでインストール
 
 ```bash
 pip install monai
 pip install SimpleITK
+pip install timm
 ```
 
 condaを使っている場合は[condaによる環境再現](https://qiita.com/nshinya/items/cb1cffabc3305c907bc5)が便利です。
@@ -86,7 +88,26 @@ finished_img:予測完了したmaskと対応するimgファイル。
 ## labeling_{臓器名}.ipynb
 所見文構造化jsonファイルを利用して特定の臓器からの情報を抽出するファイル。 
 
-## training_DP.py
+
+
+## display_gradcam.ipynb
+学習・評価したモデルを使ってモデルの注目部分を可視化する。  
+[gradcam](https://github.com/MECLabTUDA/M3d-Cam)と[occlusion_sensitivity](https://docs.monai.io/en/stable/visualize.html#monai.visualize.occlusion_sensitivity.OcclusionSensitivity)を用いたコード。occlusion_sensitivityの方が良い？
+occlusion_sisitivityは重要箇所(その部分を隠したときに大きく値が異なる)が青く表示される。
+→出力は予測確率であり、重要部分を隠すとそのクラスに属する確率は下がる(negative value)になるから、、、？monaiの[公式のチュートリアル](https://github.com/Project-MONAI/tutorials/blob/main/modules/interpretability/covid_classification.ipynb)をみる限りそんな感じ。
+
+## occlusion_sensitivity.py
+occlusion sensitivityのコード。display_gradcam.ipynbの改良版。5-fold CVのアンサンブルの可視化を出力できる。
+```bash
+python occlusion_sensitivity.py --datadir ../data/ --save_imagedir ../attention_maps/ --organ liver --segtype 25D --seed 0 --backbone tf_efficientnetv2_s_in21ft1k --load_model_name ../data/weights/liver_25D_new_valloss.pth
+```
+
+
+## code/eda.ipynb
+NIIサーバー上に置いてるコードの草案。スライス枚数によってグループ分けして、効率よくセグメンテーションが行えるようにする。
+
+# Script for model training/inference
+### training_DP.py
 切り取ってきた臓器画像を用いて異常検知モデルを学習させるファイル。  
 model:se-resnext50 (詳細な精度評価は[ここから](https://catkin-resistance-4fa.notion.site/840bbe8525d943b4aa76eba305fc2891))  
 pytorch DataParallelを使用。  
@@ -114,21 +135,17 @@ python evaluation_25D.py --datadir /mnt/hdd/jmid/data  --organ liver --weight_pa
     totalとヘッダーが付いているもの：5fold cvでの結果。
     それ以外：各foldでの結果。
 
-## display_gradcam.ipynb
-学習・評価したモデルを使ってモデルの注目部分を可視化する。  
-[gradcam](https://github.com/MECLabTUDA/M3d-Cam)と[occlusion_sensitivity](https://docs.monai.io/en/stable/visualize.html#monai.visualize.occlusion_sensitivity.OcclusionSensitivity)を用いたコード。occlusion_sensitivityの方が良い？
-occlusion_sisitivityは重要箇所(その部分を隠したときに大きく値が異なる)が青く表示される。
-→出力は予測確率であり、重要部分を隠すとそのクラスに属する確率は下がる(negative value)になるから、、、？monaiの[公式のチュートリアル](https://github.com/Project-MONAI/tutorials/blob/main/modules/interpretability/covid_classification.ipynb)をみる限りそんな感じ。
+## dataset.py
+データセットの定義関数
 
-## occlusion_sensitivity.py
-occlusion sensitivityのコード。display_gradcam.ipynbの改良版。5-fold CVのアンサンブルの可視化を出力できる。
-```bash
-python occlusion_sensitivity.py --datadir ../data/ --save_imagedir ../attention_maps/ --organ liver --segtype 25D --seed 0 --backbone tf_efficientnetv2_s_in21ft1k --load_model_name ../data/weights/liver_25D_new_valloss.pth
-```
+## models.py
+CNNモデルの定義関数
 
+## transforms.py
+augmentation/transformの定義関数
 
-## code/eda.ipynb
-NIIサーバー上に置いてるコードの草案。スライス枚数によってグループ分けして、効率よくセグメンテーションが行えるようにする。
+## loss.py
+loss関数の定義関数
 
 ## utils.py
 コードに使ういろいろな関数。
