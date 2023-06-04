@@ -161,20 +161,19 @@ loss関数の定義関数
  
 * 佐藤淳哉
 * 2022/8/21 initial commit  
-* 更新情報
-    2022/10/30 データの取得や前処理、学習に関するコードを追加。  
+* 更新情報  
+    2022/10/30 データの取得や前処理、学習に関するコードを追加。
     2022/11/30 異常検知に用いるtraining, evaluationのコードを追加。各種コード修正。  
     2022/12/13 training, evaluationのコードを修正。  
-    2022/12/26 visualization(gradcam,occ_sens)のファイルを追加、各臓器のラベリングのフォルダを作成。
-    2023/01/06 serverからのダウンロードファイルを取得(abd_download.sh)。
-    2023/02/08 2.5次元データの学習＆occlusion sensitivityのコードを追加。
-    2023/03/11 2.5次元データの作成コード＆評価コードの追加。
-    2023/0
+    2022/12/26 visualization(gradcam,occ_sens)のファイルを追加、各臓器のラベリングのフォルダを作成。  
+    2023/01/06 serverからのダウンロードファイルを取得(abd_download.sh)。  
+    2023/02/08 2.5次元データの学習＆occlusion sensitivityのコードを追加。  
+    2023/03/11 2.5次元データの作成コード＆評価コードの追加。  
+    2023/06/04 学習に必要なファイルを分離しsrcに収納。trainingファイルも関数ごとに分離した。
 
  
 # License
 ライセンスを明示する。研究室内での使用限定ならその旨を記載。
  
-"hoge" is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
+This repo is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
   
-"hoge" is Private.
