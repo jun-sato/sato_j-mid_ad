@@ -27,12 +27,14 @@ CT画像はAI学習には大きすぎる。512☓512☓300の画像はどのGPU�
 * simpleitk
 * Pytorch
 * Timm
+* matplotlib
  
 # Installation
  
 Requirementで列挙したライブラリなどのインストール方法を説明する  
  nnUNetの学習方法は[公式github](https://github.com/MIC-DKFZ/nnUNet)を参照する。
- pytorchは各々のGPU環境に合ったもの[公式](https://pytorch.org/get-started/locally/)から選んでインストール
+ pytorchは各々のGPU環境に合ったもの[公式](https://pytorch.org/get-started/locally/)から選んでインストール今回はpytorch==1.13.1を選択
+ ``conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 -c pytorc``
 
 ```bash
 pip install monai
@@ -62,8 +64,6 @@ data
  
  
 # Usage
- 
-"hoge"の基本的な使い方を説明する。
 
 **丁寧かつ簡潔に、初めて見た人でも理解できる様に**
 
@@ -162,7 +162,7 @@ loss関数の定義関数
 * 佐藤淳哉
 * 2022/8/21 initial commit  
 * 更新情報  
-    2022/10/30 データの取得や前処理、学習に関するコードを追加。
+    2022/10/30 データの取得や前処理、学習に関するコードを追加。  
     2022/11/30 異常検知に用いるtraining, evaluationのコードを追加。各種コード修正。  
     2022/12/13 training, evaluationのコードを修正。  
     2022/12/26 visualization(gradcam,occ_sens)のファイルを追加、各臓器のラベリングのフォルダを作成。  

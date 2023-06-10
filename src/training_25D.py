@@ -1,8 +1,6 @@
 import logging
 import os
 import sys
-import shutil
-import tempfile
 import argparse
 import matplotlib.pyplot as plt
 import torch
@@ -14,8 +12,6 @@ from torch.utils.tensorboard import SummaryWriter
 import numpy as np
 import pandas as pd
 import time
-import pathlib
-import glob
 import random
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split,StratifiedGroupKFold
@@ -28,7 +24,7 @@ from monai.losses import FocalLoss
 from monai.apps import download_and_extract
 from monai.config import print_config
 from monai.data import DataLoader, ImageDataset, PersistentDataset, pad_list_data_collate, ThreadBuffer,Dataset,decollate_batch
-
+from monai.transforms import Compose, Activations, AsDiscrete
 
 from monai.utils import get_torch_version_tuple, set_determinism
 from monai.metrics import ROCAUCMetric
@@ -50,16 +46,16 @@ def train_one_epoch(epoch, model, optimizer, scheduler, loss_function, amp, scal
         inputs, labels = batch_data[0].to(device), batch_data[1].to(device)
         optimizer.zero_grad()
         do_mixup = False
-        if random.random() < p_mixup:
-            do_mixup = True
-            inputs, labels, targets_mix, lam = mixup(inputs, labels)
+        # if random.random() < p_mixup:
+        #     do_mixup = True
+        #     inputs, labels, targets_mix, lam = mixup(inputs, labels)
         if amp and scaler is not None:
             with torch.cuda.amp.autocast():
                 outputs = model(inputs)
                 loss = loss_function(outputs, labels) 
-                if do_mixup:
-                    loss11 = criterion(outputs, targets_mix)
-                    loss = loss * lam  + loss11 * (1 - lam)
+                # if do_mixup:
+                #     loss11 = criterion(outputs, targets_mix)
+                #     loss = loss * lam  + loss11 * (1 - lam)
             scaler.scale(loss).backward()
             scaler.step(optimizer)
             scaler.update()
@@ -118,7 +114,7 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,save_model_name,backbon
     
     print_config()
     #data_df = pd.read_csv(os.path.join(datadir,organ+'_dataset_train_multi'+str(num_classes)+'.csv'))
-    data_df = pd.read_csv(os.path.join(datadir,organ+'_dataset_train_new.csv'))
+    data_df = pd.read_csv(os.path.join(datadir,organ+'_dataset_train.csv'))
     total_filenames = data_df['file'].values
     total_images = np.array([os.path.join(datadir,organ+'_'+segtype+'_img',p) for p in data_df['file']])
     total_preds = np.array([os.path.join(datadir,organ+'_'+segtype+'_pred',p.split('.')[0][:-5]+'.nii.gz') for p in data_df['file']])
@@ -128,11 +124,12 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,save_model_name,backbon
     g = torch.Generator()
     g.manual_seed(seed)
     print(len(total_labels),'num of abnormal label is ',total_labels.sum(axis=0))
-    groups = data_df['FACILITY_CODE'].astype(str)+data_df['ACCESSION_NUMBER'].astype(str)
+    groups = data_df['Facility_Code'].astype(str)+data_df[' Accession_Number'].astype(str)
     cv = StratifiedGroupKFold(n_splits=5,shuffle=True,random_state=seed)
     for n,(train_idxs, test_idxs) in enumerate(cv.split(total_images, total_labels, groups)):
         print('---------------- fold ',n,'-------------------')
         print(train_idxs,test_idxs)
+        test_idxs = test_idxs[:1000]
         #if n !=4 : continue
         save_model_name_ = save_model_name.split('.pth')[0] +'_'+str(n)+'.pth'
         images_train,labels_train,file_train,mask_train = total_images[train_idxs],total_labels[train_idxs],total_filenames[train_idxs],total_preds[train_idxs]

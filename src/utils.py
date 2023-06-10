@@ -53,3 +53,9 @@ def criterion(logits, targets, activated=False):
     norm = torch.ones(logits.view(-1).shape[0]).to(device)
     norm[targets.view(-1) > 0] *= 2
     return losses.sum() / norm.sum()
+
+
+
+##matploglibなど
+
+

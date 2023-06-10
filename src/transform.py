@@ -1,24 +1,24 @@
 import albumentations
-# from monai.transforms import (
-#     OneOf,
-#     RandAdjustContrastd,
-#     RandScaleIntensityd,
-#     RandGaussianNoised,
-#     EnsureChannelFirstd,
-#     AsDiscrete,
-#     Activations,
-#     Compose,
-#     CropForegroundd,
-#     LoadImaged,
-#     Orientationd,
-#     RandCropByPosNegLabeld,
-#     RandRotated,
-#     ScaleIntensityRanged,
-#     MaskIntensityd,
-#     Spacingd,
-#     SpatialPadd,
-#     Resized
-# )
+from monai.transforms import (
+    OneOf,
+    RandAdjustContrastd,
+    RandScaleIntensityd,
+    RandGaussianNoised,
+    EnsureChannelFirstd,
+    AsDiscrete,
+    Activations,
+    Compose,
+    CropForegroundd,
+    LoadImaged,
+    Orientationd,
+    RandCropByPosNegLabeld,
+    RandRotated,
+    ScaleIntensityRanged,
+    MaskIntensityd,
+    Spacingd,
+    SpatialPadd,
+    Resized
+)
 def get_transforms(image_size,seed):
     # Define transforms
     train_transforms = albumentations.Compose([
@@ -46,3 +46,24 @@ def get_transforms(image_size,seed):
     val_transforms = albumentations.Compose([
     albumentations.Resize(image_size, image_size),])
     return train_transforms,val_transforms
+
+
+def get_val_transform(image_size):
+    val_transforms = Compose(
+        [
+            LoadImaged(keys=["image"]),
+            EnsureChannelFirstd(keys=["image"]),
+            Orientationd(keys=["image"], axcodes="RAS"),
+            ScaleIntensityRanged(
+                keys=["image"],
+                a_min=-200,
+                a_max=400,
+                b_min=-1.0,
+                b_max=1.0,
+                clip=True,
+            ),
+            #SpatialPadd(keys=["image"],spatial_size=(256, 256, 64)),
+            Resized(keys=["image"], spatial_size=input_size),
+        ]
+    )
+    return val_transforms
