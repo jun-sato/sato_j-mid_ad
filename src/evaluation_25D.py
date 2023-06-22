@@ -107,7 +107,6 @@ def main(datadir,organ,weight_path,outputdir,segtype,backbone,seed,amp=True):
 
     input_size = (384,384,64) if organ == 'liver' else (256,256,64)
     print('input size is ',input_size)
-    .
     # Define transforms for image
     val_transforms = get_val_transform(input_size)
 

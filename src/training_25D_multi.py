@@ -39,7 +39,7 @@ def train_one_epoch(epoch, num_classes, model, optimizer, scheduler, loss_functi
         step_start = time.time()
         step += 1
         inputs, labels = batch_data[0].to(device, non_blocking=True), batch_data[1].to(device, non_blocking=True)
-        labels = labels.contiguous().view(-1, num_classes)
+        labels = labels.contiguous().view(-1, num_classes) #torch.Size([96, 9])#32分増やして、batchsizeと統合する。
         optimizer.zero_grad()
         do_mixup = False
         # if random.random() < p_mixup:
@@ -48,7 +48,7 @@ def train_one_epoch(epoch, num_classes, model, optimizer, scheduler, loss_functi
         if amp and scaler is not None:
             with torch.cuda.amp.autocast():
                 outputs = model(inputs)
-                loss = loss_function(outputs, labels) 
+                loss = loss_function(outputs[:,-1], labels[:,-1])*(3/4) + loss_function(outputs[:,:-1], labels[:,:-1])*(1/4) 
                 # if do_mixup:
                 #     loss11 = criterion(outputs, targets_mix)
                 #     loss = loss * lam  + loss11 * (1 - lam)
@@ -80,19 +80,20 @@ def validate(model, num_classes, loss_function, val_loader, device, post_pred, p
     num_correct = 0.0
     metric_count = 0
 
-    y_pred = torch.zeros([0], dtype=torch.float32, device=device)
-    y = torch.zeros([0], dtype=torch.long, device=device)
+    y_pred = torch.zeros([0,num_classes], dtype=torch.float32, device=device)
+    y = torch.zeros([0,num_classes], dtype=torch.long, device=device)
     
     for n, val_data in enumerate(val_loader):
-        if n >= 100:break
+        if n > 100:break
         val_images, val_labels = val_data[0].to(device), val_data[1].to(device)
-        val_labels = val_labels.contiguous().view(-1, num_classes)
+        val_labels = val_labels.contiguous().view(-1, num_classes) #torch.Size([96, 9])#32分増やして、batchsizeと統合する。
         with torch.no_grad():
             y_pred = torch.cat([y_pred, model(val_images)], dim=0)
             y = torch.cat([y, val_labels], dim=0)
     loss = loss_function(y_pred, y)
     print(y_pred, y_pred.size(), loss)
-    acc_value = torch.eq(y_pred > 0, y)
+    # acc_value = torch.eq(y_pred > 0, y)
+    acc_value = torch.eq(y_pred[:,-1]>0, y[:,-1])
     acc_metric = acc_value.sum().item() / len(acc_value)
     y_onehot = y#[post_label(i) for i in decollate_batch(y, detach=False)]
     y_pred_act = [post_pred(i) for i in decollate_batch(y_pred)]
@@ -115,18 +116,18 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,save_model_name,backbon
     total_filenames = data_df['file'].values
     total_images = np.array([os.path.join(datadir,organ+'_'+segtype+'_img',p) for p in data_df['file']])
     total_preds = np.array([os.path.join(datadir,organ+'_'+segtype+'_pred',p.split('.')[0][:-5]+'.nii.gz') for p in data_df['file']])
-
+    abnormal_list = ['嚢胞','脂肪肝','胆管拡張','SOL','変形','石灰化','pneumobilia','other_abnormality','nofinding']
     print(total_images[0])
-    total_labels = data_df['nofinding'].astype(float).values 
+    #total_labels = data_df['nofinding'].astype(float).values
+    total_labels = data_df.loc[:,abnormal_list].astype(int).values 
     g = torch.Generator()
     g.manual_seed(seed)
     print(len(total_labels),'num of abnormal label is ',total_labels.sum(axis=0))
     groups = data_df['患者ID'].astype(str)
     cv = StratifiedGroupKFold(n_splits=5,shuffle=True,random_state=seed)
-    for n,(train_idxs, test_idxs) in enumerate(cv.split(total_images, total_labels, groups)):
+    for n,(train_idxs, test_idxs) in enumerate(cv.split(total_images, total_labels[:,0], groups)):
         print('---------------- fold ',n,'-------------------')
         print(train_idxs,test_idxs)
-        test_idxs = test_idxs
         #if n !=4 : continue
         save_model_name_ = save_model_name.split('.pth')[0] +'_'+str(n)+'.pth'
         images_train,labels_train,file_train,mask_train = total_images[train_idxs],total_labels[train_idxs],total_filenames[train_idxs],total_preds[train_idxs]
@@ -134,7 +135,9 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,save_model_name,backbon
         num_train_imgs = len(images_train)
         num_val_imgs = len(images_val)
         print(f'number of train images is {num_train_imgs}, number of validation images is {num_val_imgs}')
-        print('total_normal_labels is ',labels_val.sum())
+        print('total_normal_labels is ',labels_val.sum(axis=0))
+        train_files = [{"image": img, "label":np.repeat(label[np.newaxis, :], 32, axis=0),'filename':filename,'mask':mask} for img, label,filename,mask in zip(images_train, labels_train,file_train,mask_train)]
+        val_files = [{"image": img, "label": np.repeat(label[np.newaxis, :], 32, axis=0), 'filename':filename,'mask':mask} for img, label,filename,mask in zip(images_val, labels_val,file_val,mask_val)]
         post_pred = Compose([Activations(sigmoid=True)])
         post_label = Compose([AsDiscrete(argmax=True)])
 
@@ -150,7 +153,7 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,save_model_name,backbon
         val_ds = CLSDataset(filenames=images_val,labels=labels_val,transform=val_transforms)
         val_loader = ThreadDataLoader(val_ds, batch_size=batch_size, num_workers=num_gpu*2, pin_memory=pin_memory)
 
-        model = TimmModel(backbone, input_size=input_size,pretrained=True).to(device)
+        model = TimmModel(backbone, input_size=input_size,num_classes=num_classes,pretrained=True).to(device)
         model = torch.nn.DataParallel(model, device_ids=list(range(num_gpu)))
 
         loss_function = torch.nn.BCEWithLogitsLoss().to(device)  # also works with this data
