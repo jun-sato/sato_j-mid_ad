@@ -33,8 +33,8 @@ CT画像はAI学習には大きすぎる。512☓512☓300の画像はどのGPU�
  
 Requirementで列挙したライブラリなどのインストール方法を説明する  
  nnUNetの学習方法は[公式github](https://github.com/MIC-DKFZ/nnUNet)を参照する。
- pytorchは各々のGPU環境に合ったもの[公式](https://pytorch.org/get-started/locally/)から選んでインストール今回はpytorch==1.13.1を選択
- ``conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 -c pytorc``
+ pytorchは各々のGPU環境に合ったもの[公式](https://pytorch.org/get-started/locally/)から選んでインストール今回はpytorch==1.13.1を選択  
+ ``conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.6 -c pytorch -c nvidia``
 
 ```bash
 pip install monai

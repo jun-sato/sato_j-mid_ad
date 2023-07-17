@@ -127,7 +127,7 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,save_model_name,backbon
         print('---------------- fold ',n,'-------------------')
         print(train_idxs,test_idxs)
         test_idxs = test_idxs
-        #if n !=4 : continue
+        if n !=0 : continue
         save_model_name_ = save_model_name.split('.pth')[0] +'_'+str(n)+'.pth'
         images_train,labels_train,file_train,mask_train = total_images[train_idxs],total_labels[train_idxs],total_filenames[train_idxs],total_preds[train_idxs]
         images_val,labels_val,file_val,mask_val = total_images[test_idxs],total_labels[test_idxs],total_filenames[test_idxs],total_preds[test_idxs]

@@ -31,13 +31,14 @@ import seaborn as sns
 import monai
 from monai.data import DataLoader, CSVSaver,ImageDataset, PersistentDataset, pad_list_data_collate, ThreadBuffer,Dataset,decollate_batch
 from monai.metrics import ROCAUCMetric
+from monai.transforms import Compose, Activations, AsDiscrete
 import torch.nn.functional as F
 import SimpleITK as sitk
 from utils import seed_everything,seed_worker,L2ConstraintedNet,mixup,criterion
 import timm
 from dataset import CLSDataset_eval
 from models import TimmModel
-from transform import get_val_transform
+from transform import get_transforms
 
 def plot_auc(fpr, tpr,organ,dataset = 'validation',fold=None):
     fig = plt.figure(figsize=(10,10))
@@ -105,24 +106,24 @@ def main(datadir,organ,weight_path,outputdir,segtype,backbone,seed,amp=True):
     monai.config.print_config()
     logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
-    input_size = (384,384,64) if organ == 'liver' else (256,256,64)
+    input_size = 256
     print('input size is ',input_size)
     # Define transforms for image
-    val_transforms = get_val_transform(input_size)
+    _, val_transforms = get_transforms(input_size,seed)
 
-    data_df = pd.read_csv(os.path.join(datadir,organ+'_dataset_train_'+str(seed)+'.csv'))
-    test_df = pd.read_csv(os.path.join(datadir,organ+'_dataset_test_clean.csv'))
+    data_df = pd.read_csv(os.path.join(datadir,organ+'_dataset_train_multi_internal.csv'))
+    test_df = pd.read_csv(os.path.join(datadir,organ+'_dataset_test.csv'))
     filenames = data_df['file']
     file_test = test_df['file']
     images = np.array([os.path.join(datadir,organ+'_'+segtype+'_img',p) for p in data_df['file']])
     images_test = np.array([os.path.join(datadir,organ+'_'+segtype+'_img',p) for p in test_df['file']])
     print(images[0])
-    labels = data_df['abnormal'].astype(int).values
-    labels_test = test_df['abnormal'].astype(int).values
-    print(len(labels),'num of abnormal label is ',labels.sum())
+    labels = data_df['nofinding'].astype(int).values
+    labels_test = test_df['肝臓'].isna().astype(int).values
+    print(len(labels_test),'num of abnormal label is ',labels_test.sum())
     #le = LabelEncoder()
     #encoded_data = le.fit_transform(data)
-    groups = data_df['FACILITY_CODE'].astype(str)+data_df['ACCESSION_NUMBER'].astype(str)
+    groups = data_df['患者ID'].astype(str)
     cv = StratifiedGroupKFold(n_splits=5,shuffle=True,random_state=seed)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     total_y_pred_val = torch.tensor([], dtype=torch.float32, device=device)
@@ -131,7 +132,7 @@ def main(datadir,organ,weight_path,outputdir,segtype,backbone,seed,amp=True):
     total_y_test = torch.zeros((len(labels_test)), dtype=torch.long, device=device)
     
     for n,(train_idxs, test_idxs) in enumerate(cv.split(images, labels, groups)):
-        if n!=4:continue
+        if n!=0:continue
         print('---------------- fold ',n,'-------------------')
         images_train,labels_train,file_train = images[train_idxs],labels[train_idxs],filenames[train_idxs]
         images_val,labels_val,file_val = images[test_idxs],labels[test_idxs],filenames[test_idxs]
@@ -156,7 +157,7 @@ def main(datadir,organ,weight_path,outputdir,segtype,backbone,seed,amp=True):
 
         # Create DenseNet121
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        model = TimmModel(backbone, pretrained=False).to(device)
+        model = TimmModel(backbone, input_size=input_size, pretrained=False).to(device)
         model = torch.nn.DataParallel(model, device_ids=list(range(num_gpu)))
         weight_path_ = weight_path.split('.pth')[0] +'_'+str(n)+'.pth'
         model.load_state_dict(torch.load(weight_path_))
@@ -172,14 +173,16 @@ def main(datadir,organ,weight_path,outputdir,segtype,backbone,seed,amp=True):
 
             for val_data in val_loader:
                 val_images, val_labels = val_data[0].to(device), val_data[1].to(device)
-                outputs = model(val_images)
+                outputs = model(val_images).view(4,32)  #torch.Size([4, 32])
                 y_pred = torch.cat([y_pred, outputs], dim=0)
                 y = torch.cat([y, val_labels], dim=0)
                 break
             y_pred = y_pred.mean(1)
+            y = y.mean(1)
             total_y_pred_val = torch.cat([total_y_pred_val, y_pred], dim=0)
             total_y_val = torch.cat([total_y_val, y], dim=0)
-        cutoff = calc_metrics(y_pred,y,organ,dataset='validation',fold=str(n))
+        #print(total_y_pred_val.shape,total_y_val.shape) torch.Size([4]) torch.Size([4])
+        #cutoff = calc_metrics(y_pred,y,organ,dataset='validation',fold=str(n))
         with torch.no_grad():
             num_correct = 0.0
             metric_count = 0
@@ -191,10 +194,12 @@ def main(datadir,organ,weight_path,outputdir,segtype,backbone,seed,amp=True):
             for test_data in test_loader:
                 test_images, test_labels,file = test_data[0].to(device), test_data[1].to(device),test_data[2]
                 files += file
-                outputs = model(test_images)
+                outputs = model(test_images).view(4,32)
                 y_pred = torch.cat([y_pred, outputs], dim=0)
                 y = torch.cat([y, test_labels], dim=0)
             y_pred = y_pred.mean(1)
+            y = y.mean(1)
+            print(torch.eq(y_pred>0,y).sum(),'prediction')
             total_y_pred_test = total_y_pred_test + y_pred
             total_y_test = y
         _ = calc_metrics(y_pred,y,organ,cutoff=cutoff,dataset='test',fold=str(n))

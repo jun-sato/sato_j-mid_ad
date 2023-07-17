@@ -26,7 +26,7 @@ from monai.metrics import ROCAUCMetric
 from loss import LabelSmoothingCrossEntropy
 from utils import seed_everything,seed_worker,L2ConstraintedNet,mixup,criterion
 from transform import get_transforms
-from models import TimmModel
+from models import TimmModel, TimmModelMultiHead
 from dataset import CLSDataset
 
 def train_one_epoch(epoch, num_classes, model, optimizer, scheduler, loss_function, amp, scaler, src, train_ds, train_loader, writer, device, p_mixup):
@@ -35,7 +35,8 @@ def train_one_epoch(epoch, num_classes, model, optimizer, scheduler, loss_functi
     model.train()
     epoch_loss = 0
     step = 0
-    for batch_data in src:
+    for n, batch_data in enumerate(src):
+        if n > 500:break
         step_start = time.time()
         step += 1
         inputs, labels = batch_data[0].to(device, non_blocking=True), batch_data[1].to(device, non_blocking=True)
@@ -47,8 +48,8 @@ def train_one_epoch(epoch, num_classes, model, optimizer, scheduler, loss_functi
         #     inputs, labels, targets_mix, lam = mixup(inputs, labels)
         if amp and scaler is not None:
             with torch.cuda.amp.autocast():
-                outputs = model(inputs)
-                loss = loss_function(outputs[:,-1], labels[:,-1])*(3/4) + loss_function(outputs[:,:-1], labels[:,:-1])*(1/4) 
+                outputs_binary, outputs_multi = model(inputs)
+                loss =  loss_function(outputs_binary, labels[:,-1:]) + 0.05*loss_function(outputs_multi, labels[:,:-1])#loss_function(outputs[:,-1], labels[:,-1])*(3/4) + loss_function(outputs[:,:-1], labels[:,:-1])*(1/4) 
                 # if do_mixup:
                 #     loss11 = criterion(outputs, targets_mix)
                 #     loss = loss * lam  + loss11 * (1 - lam)
@@ -88,7 +89,9 @@ def validate(model, num_classes, loss_function, val_loader, device, post_pred, p
         val_images, val_labels = val_data[0].to(device), val_data[1].to(device)
         val_labels = val_labels.contiguous().view(-1, num_classes) #torch.Size([96, 9])#32分増やして、batchsizeと統合する。
         with torch.no_grad():
-            y_pred = torch.cat([y_pred, model(val_images)], dim=0)
+            out_binary, out_multi = model(val_images)
+            pred = torch.cat([out_multi,out_binary],axis=1)
+            y_pred = torch.cat([y_pred, pred], dim=0)
             y = torch.cat([y, val_labels], dim=0)
     loss = loss_function(y_pred, y)
     print(y_pred, y_pred.size(), loss)
@@ -112,7 +115,7 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,save_model_name,backbon
     
     print_config()
     #data_df = pd.read_csv(os.path.join(datadir,organ+'_dataset_train_multi'+str(num_classes)+'.csv'))
-    data_df = pd.read_csv(os.path.join(datadir,organ+'_dataset_train_multi.csv'))
+    data_df = pd.read_csv(os.path.join(datadir,organ+'_dataset_train_multi_internal.csv'))
     total_filenames = data_df['file'].values
     total_images = np.array([os.path.join(datadir,organ+'_'+segtype+'_img',p) for p in data_df['file']])
     total_preds = np.array([os.path.join(datadir,organ+'_'+segtype+'_pred',p.split('.')[0][:-5]+'.nii.gz') for p in data_df['file']])
@@ -128,7 +131,7 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,save_model_name,backbon
     for n,(train_idxs, test_idxs) in enumerate(cv.split(total_images, total_labels[:,0], groups)):
         print('---------------- fold ',n,'-------------------')
         print(train_idxs,test_idxs)
-        #if n !=4 : continue
+        if n !=0 : continue
         save_model_name_ = save_model_name.split('.pth')[0] +'_'+str(n)+'.pth'
         images_train,labels_train,file_train,mask_train = total_images[train_idxs],total_labels[train_idxs],total_filenames[train_idxs],total_preds[train_idxs]
         images_val,labels_val,file_val,mask_val = total_images[test_idxs],total_labels[test_idxs],total_filenames[test_idxs],total_preds[test_idxs]
@@ -153,7 +156,7 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,save_model_name,backbon
         val_ds = CLSDataset(filenames=images_val,labels=labels_val,transform=val_transforms)
         val_loader = ThreadDataLoader(val_ds, batch_size=batch_size, num_workers=num_gpu*2, pin_memory=pin_memory)
 
-        model = TimmModel(backbone, input_size=input_size,num_classes=num_classes,pretrained=True).to(device)
+        model = TimmModelMultiHead(backbone, input_size=input_size,num_classes=num_classes,pretrained=True).to(device)
         model = torch.nn.DataParallel(model, device_ids=list(range(num_gpu)))
 
         loss_function = torch.nn.BCEWithLogitsLoss().to(device)  # also works with this data
