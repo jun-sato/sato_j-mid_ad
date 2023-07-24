@@ -69,21 +69,15 @@ class TimmModelMultiHead(nn.Module):
 
         self.lstm = nn.LSTM(hdim, 256, num_layers=2, dropout=0., bidirectional=True, batch_first=True)
         
-        self.output1 = nn.Sequential(
+        self.feature = nn.Sequential(
             nn.Linear(512, 256),
             nn.BatchNorm1d(256),
             nn.Dropout(0.3),
             nn.LeakyReLU(0.1),
-            nn.Linear(256, 1)
-        )  # 異常の有無を出力するための出力層
+        )  
 
-        self.output2 = nn.Sequential(
-            nn.Linear(512, 256),
-            nn.BatchNorm1d(256),
-            nn.Dropout(0.3),
-            nn.LeakyReLU(0.1),
-            nn.Linear(256, num_classes-1)
-        )  # 異常の種類を出力するための出力層
+        self.output1 = nn.Linear(256, 1)# 異常の有無を出力するための出力層
+        self.output2 = nn.Linear(256, num_classes-1)# 異常の種類を出力するための出力層
 
     def forward(self, x):  # (bs, nslice, ch, sz, sz)
         bs = x.shape[0]
@@ -93,6 +87,7 @@ class TimmModelMultiHead(nn.Module):
         feat, _ = self.lstm(feat)
         feat = feat.contiguous().view(bs * 32, -1)
 
+        feat = self.feature(feat)  
         output1 = self.output1(feat)  # 異常の有無の予測
         output2 = self.output2(feat)  # 異常の種類の予測
 

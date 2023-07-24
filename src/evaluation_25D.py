@@ -37,7 +37,7 @@ import SimpleITK as sitk
 from utils import seed_everything,seed_worker,L2ConstraintedNet,mixup,criterion
 import timm
 from dataset import CLSDataset_eval
-from models import TimmModel
+from models import TimmModel, TimmModelMultiHead
 from transform import get_transforms
 
 def plot_auc(fpr, tpr,organ,dataset = 'validation',fold=None):
@@ -73,7 +73,7 @@ def plot_confusion_matrix(target,y_pred_cutoff,organ,dataset = 'validation',fold
 def calc_metrics(y_pred,y,organ,cutoff=None,dataset='validation',fold=None):
     ##metrics計算
     print(y_pred,y)
-    acc_value = torch.eq(y_pred>0.5, y)
+    acc_value = torch.eq(y_pred>0, y)
     acc_metric = acc_value.sum().item() / len(acc_value)
     pred =F.sigmoid(y_pred).to('cpu').detach().numpy().copy()
     target = y.to('cpu').detach().numpy().copy()
@@ -81,28 +81,29 @@ def calc_metrics(y_pred,y,organ,cutoff=None,dataset='validation',fold=None):
     auc = metrics.auc(fpr, tpr)
     sng = 1 - fpr
     # Youden indexを用いたカットオフ基準
-    Youden_index_candidates = tpr-fpr
-    index = np.where(Youden_index_candidates==max(Youden_index_candidates))[0][0]
-    if cutoff == None:
-        cutoff = thres[index]
+    # Youden_index_candidates = tpr-fpr
+    # index = np.where(Youden_index_candidates==max(Youden_index_candidates))[0][0]
+    # if cutoff == None:
+    #     cutoff = thres[index]
+    cutoff = 0.83
     print(f'{organ}, auc:{auc} ,cutoff : {cutoff}')
     ## plot auc curve
     plot_auc(fpr, tpr,organ,dataset = dataset,fold=fold)
-    # Youden indexによるカットオフ値による分類
-    #if dataset == 'test':
-    #    for cutoff in np.arange(0,1,0.001):
-    #        print('fdajsio')
-    #        y_pred_cutoff = pred >= cutoff
-    #        cm = plot_confusion_matrix(target,y_pred_cutoff,organ,dataset = dataset,fold=fold)
-    #        print('cutoff: ',cutoff,cm)
-    
+    # # Youden indexによるカットオフ値による分類
+    if dataset == 'test':
+        for cutoff in np.arange(0,1,0.001):
+            print('fdajsio')
+            y_pred_cutoff = pred >= cutoff
+            cm = plot_confusion_matrix(target,y_pred_cutoff,organ,dataset = dataset,fold=fold)
+            print('cutoff: ',cutoff,cm)
+    y_pred_cutoff = pred >= cutoff
     # 混同行列をヒートマップで可視化
     cm = plot_confusion_matrix(target,y_pred_cutoff,organ,dataset = dataset,fold=fold)
-    print('confusion matrix : \n',confusion_matrix(target,(y_pred>0.5).to('cpu').detach().numpy().copy()),
+    print('confusion matrix : \n',confusion_matrix(target,(pred>0.5)),
             '\n youden index : \n ',cm, '\n AUC : ',auc ,'accuracy : ',acc_metric )
     return cutoff
 
-def main(datadir,organ,weight_path,outputdir,segtype,backbone,seed,amp=True):
+def main(datadir,organ,num_classes,weight_path,outputdir,segtype,backbone,seed,amp=True):
     monai.config.print_config()
     logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
@@ -113,11 +114,12 @@ def main(datadir,organ,weight_path,outputdir,segtype,backbone,seed,amp=True):
 
     data_df = pd.read_csv(os.path.join(datadir,organ+'_dataset_train_multi_internal.csv'))
     test_df = pd.read_csv(os.path.join(datadir,organ+'_dataset_test.csv'))
+    #test_df = test_df[test_df['大学名'].apply(lambda x:x in ['tokushima','ehime','kyushu','juntendo'])]
     filenames = data_df['file']
     file_test = test_df['file']
     images = np.array([os.path.join(datadir,organ+'_'+segtype+'_img',p) for p in data_df['file']])
     images_test = np.array([os.path.join(datadir,organ+'_'+segtype+'_img',p) for p in test_df['file']])
-    print(images[0])
+
     labels = data_df['nofinding'].astype(int).values
     labels_test = test_df['肝臓'].isna().astype(int).values
     print(len(labels_test),'num of abnormal label is ',labels_test.sum())
@@ -157,7 +159,7 @@ def main(datadir,organ,weight_path,outputdir,segtype,backbone,seed,amp=True):
 
         # Create DenseNet121
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        model = TimmModel(backbone, input_size=input_size, pretrained=False).to(device)
+        model = TimmModelMultiHead(backbone, input_size=input_size, pretrained=False,num_classes=num_classes).to(device)
         model = torch.nn.DataParallel(model, device_ids=list(range(num_gpu)))
         weight_path_ = weight_path.split('.pth')[0] +'_'+str(n)+'.pth'
         model.load_state_dict(torch.load(weight_path_))
@@ -167,22 +169,22 @@ def main(datadir,organ,weight_path,outputdir,segtype,backbone,seed,amp=True):
             num_correct = 0.0
             metric_count = 0
             #saver = CSVSaver(output_dir="./output_eval")
-
             y_pred = torch.tensor([], dtype=torch.float32, device=device)
             y = torch.tensor([], dtype=torch.long, device=device)
 
             for val_data in val_loader:
                 val_images, val_labels = val_data[0].to(device), val_data[1].to(device)
-                outputs = model(val_images).view(4,32)  #torch.Size([4, 32])
+                outputs,_ = model(val_images) #torch.Size([4, 32])
+                outputs = outputs.view(4,32)
                 y_pred = torch.cat([y_pred, outputs], dim=0)
                 y = torch.cat([y, val_labels], dim=0)
-                break
+                if len(y) > 100:break
             y_pred = y_pred.mean(1)
             y = y.mean(1)
             total_y_pred_val = torch.cat([total_y_pred_val, y_pred], dim=0)
             total_y_val = torch.cat([total_y_val, y], dim=0)
         #print(total_y_pred_val.shape,total_y_val.shape) torch.Size([4]) torch.Size([4])
-        #cutoff = calc_metrics(y_pred,y,organ,dataset='validation',fold=str(n))
+        cutoff = calc_metrics(y_pred,y,organ,dataset='validation',fold=str(n))
         with torch.no_grad():
             num_correct = 0.0
             metric_count = 0
@@ -190,11 +192,11 @@ def main(datadir,organ,weight_path,outputdir,segtype,backbone,seed,amp=True):
             files = []
             y_pred = torch.tensor([], dtype=torch.float32, device=device)
             y = torch.tensor([], dtype=torch.long, device=device)
-            print(len(test_loader))
             for test_data in test_loader:
                 test_images, test_labels,file = test_data[0].to(device), test_data[1].to(device),test_data[2]
                 files += file
-                outputs = model(test_images).view(4,32)
+                outputs,_ = model(test_images)
+                outputs = outputs.view(4,32)
                 y_pred = torch.cat([y_pred, outputs], dim=0)
                 y = torch.cat([y, test_labels], dim=0)
             y_pred = y_pred.mean(1)
@@ -216,8 +218,8 @@ def main(datadir,organ,weight_path,outputdir,segtype,backbone,seed,amp=True):
     pred_df.columns = ['file','prediction','target']
 
     pred_df['final_prediction'] = (pred_df['prediction']>cutoff).astype(int)
-    groups = test_df['FACILITY_CODE'].astype(str)+test_df['ACCESSION_NUMBER'].astype(str)
-    columns = ['file','prediction','final_prediction','target','io_tokens','FINDING','FINDING_JSON']
+    groups = test_df['患者ID']
+    columns = ['file','prediction','final_prediction','target','io_tokens','所見','所見_JSON']
     pred_df.merge(test_df,on='file',how='left').drop_duplicates(subset='file')[columns].to_csv(f'../result_eval/{organ}_with_finding_{str(seed)}.csv',index=False)
 
 if __name__ == "__main__":
@@ -226,6 +228,8 @@ if __name__ == "__main__":
                         help='which organ AD model to train')
     parser.add_argument('--datadir', default="/mnt/hdd/jmid/data/",
                         help='path to the data directory.')
+    parser.add_argument('--num_classes', default=1, type=int,
+                        help='number of target classes.')
     parser.add_argument('--outputdir', default="../result_eval",
                         help='path to the folder in which results are saved.')
     parser.add_argument('--weight_path', default="/mnt/hdd/jmid/data/weight.pth",
@@ -244,8 +248,9 @@ if __name__ == "__main__":
     outputdir = args.outputdir
     os.makedirs(outputdir,exist_ok=True)
     organ = args.organ
+    num_classes = args.num_classes
     weight_path = args.weight_path
     segtype = args.segtype
     backbone = args.backbone
     seed = args.seed
-    main(datadir,organ,weight_path,outputdir,segtype,backbone,seed,amp=True)
+    main(datadir,organ,num_classes,weight_path,outputdir,segtype,backbone,seed,amp=True)

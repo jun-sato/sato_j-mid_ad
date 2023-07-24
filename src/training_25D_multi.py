@@ -36,7 +36,6 @@ def train_one_epoch(epoch, num_classes, model, optimizer, scheduler, loss_functi
     epoch_loss = 0
     step = 0
     for n, batch_data in enumerate(src):
-        if n > 500:break
         step_start = time.time()
         step += 1
         inputs, labels = batch_data[0].to(device, non_blocking=True), batch_data[1].to(device, non_blocking=True)
@@ -48,11 +47,12 @@ def train_one_epoch(epoch, num_classes, model, optimizer, scheduler, loss_functi
         #     inputs, labels, targets_mix, lam = mixup(inputs, labels)
         if amp and scaler is not None:
             with torch.cuda.amp.autocast():
-                outputs_binary, outputs_multi = model(inputs)
-                loss =  loss_function(outputs_binary, labels[:,-1:]) + 0.05*loss_function(outputs_multi, labels[:,:-1])#loss_function(outputs[:,-1], labels[:,-1])*(3/4) + loss_function(outputs[:,:-1], labels[:,:-1])*(1/4) 
-                # if do_mixup:
-                #     loss11 = criterion(outputs, targets_mix)
-                #     loss = loss * lam  + loss11 * (1 - lam)
+                outputs = model(inputs)
+                #loss = loss_function(outputs_binary, labels[:,-1])*(3/4) + loss_function(outputs[:,:-1], labels[:,:-1])*(1/4) 
+                loss =  loss_function(outputs[:,-1:], labels[:,-1:]) + 0.05*loss_function(outputs[:,:-1], labels[:,:-1])#loss_function(outputs[:,-1], labels[:,-1])*(3/4) + loss_function(outputs[:,:-1], labels[:,:-1])*(1/4) 
+                if do_mixup:
+                    loss11 = criterion(outputs, targets_mix)
+                    loss = loss * lam  + loss11 * (1 - lam)
             scaler.scale(loss).backward()
             scaler.step(optimizer)
             scaler.update()
@@ -89,8 +89,8 @@ def validate(model, num_classes, loss_function, val_loader, device, post_pred, p
         val_images, val_labels = val_data[0].to(device), val_data[1].to(device)
         val_labels = val_labels.contiguous().view(-1, num_classes) #torch.Size([96, 9])#32分増やして、batchsizeと統合する。
         with torch.no_grad():
-            out_binary, out_multi = model(val_images)
-            pred = torch.cat([out_multi,out_binary],axis=1)
+            pred = model(val_images)
+            #pred = torch.cat([out_multi,out_binary],axis=1)
             y_pred = torch.cat([y_pred, pred], dim=0)
             y = torch.cat([y, val_labels], dim=0)
     loss = loss_function(y_pred, y)
@@ -130,7 +130,6 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,save_model_name,backbon
     cv = StratifiedGroupKFold(n_splits=5,shuffle=True,random_state=seed)
     for n,(train_idxs, test_idxs) in enumerate(cv.split(total_images, total_labels[:,0], groups)):
         print('---------------- fold ',n,'-------------------')
-        print(train_idxs,test_idxs)
         if n !=0 : continue
         save_model_name_ = save_model_name.split('.pth')[0] +'_'+str(n)+'.pth'
         images_train,labels_train,file_train,mask_train = total_images[train_idxs],total_labels[train_idxs],total_filenames[train_idxs],total_preds[train_idxs]
@@ -146,7 +145,7 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,save_model_name,backbon
 
         num_gpu = torch.cuda.device_count()
         # create a training data loader
-        input_size = 256# if organ == 'liver' else (256,256,64)
+        input_size = 384# if organ == 'liver' else (256,256,64)
         print('input size is ',input_size)
 
         train_transforms, val_transforms = get_transforms(input_size,seed)
@@ -156,7 +155,7 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,save_model_name,backbon
         val_ds = CLSDataset(filenames=images_val,labels=labels_val,transform=val_transforms)
         val_loader = ThreadDataLoader(val_ds, batch_size=batch_size, num_workers=num_gpu*2, pin_memory=pin_memory)
 
-        model = TimmModelMultiHead(backbone, input_size=input_size,num_classes=num_classes,pretrained=True).to(device)
+        model = TimmModel(backbone, input_size=input_size,num_classes=num_classes,pretrained=True).to(device)
         model = torch.nn.DataParallel(model, device_ids=list(range(num_gpu)))
 
         loss_function = torch.nn.BCEWithLogitsLoss().to(device)  # also works with this data
