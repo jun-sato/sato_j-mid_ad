@@ -20,6 +20,7 @@ import monai
 from monai.config import print_config
 from monai.data import DataLoader, ThreadDataLoader, ImageDataset, PersistentDataset, pad_list_data_collate, ThreadBuffer,Dataset,decollate_batch
 from monai.transforms import Compose, Activations, AsDiscrete
+from monai.losses import FocalLoss
 
 from monai.utils import get_torch_version_tuple, set_determinism
 from monai.metrics import ROCAUCMetric
@@ -49,7 +50,7 @@ def train_one_epoch(epoch, num_classes, model, optimizer, scheduler, loss_functi
             with torch.cuda.amp.autocast():
                 outputs = model(inputs)
                 #loss = loss_function(outputs_binary, labels[:,-1])*(3/4) + loss_function(outputs[:,:-1], labels[:,:-1])*(1/4) 
-                loss =  loss_function(outputs[:,-1:], labels[:,-1:]) + 0.05*loss_function(outputs[:,:-1], labels[:,:-1])#loss_function(outputs[:,-1], labels[:,-1])*(3/4) + loss_function(outputs[:,:-1], labels[:,:-1])*(1/4) 
+                loss =  loss_function(outputs, labels) #+ loss_function(outputs[:,:-1], labels[:,:-1])#loss_function(outputs[:,-1], labels[:,-1])*(3/4) + loss_function(outputs[:,:-1], labels[:,:-1])*(1/4) 
                 if do_mixup:
                     loss11 = criterion(outputs, targets_mix)
                     loss = loss * lam  + loss11 * (1 - lam)
@@ -130,7 +131,7 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,save_model_name,backbon
     cv = StratifiedGroupKFold(n_splits=5,shuffle=True,random_state=seed)
     for n,(train_idxs, test_idxs) in enumerate(cv.split(total_images, total_labels[:,0], groups)):
         print('---------------- fold ',n,'-------------------')
-        if n !=0 : continue
+        if n !=1 : continue
         save_model_name_ = save_model_name.split('.pth')[0] +'_'+str(n)+'.pth'
         images_train,labels_train,file_train,mask_train = total_images[train_idxs],total_labels[train_idxs],total_filenames[train_idxs],total_preds[train_idxs]
         images_val,labels_val,file_val,mask_val = total_images[test_idxs],total_labels[test_idxs],total_filenames[test_idxs],total_preds[test_idxs]
@@ -145,7 +146,7 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,save_model_name,backbon
 
         num_gpu = torch.cuda.device_count()
         # create a training data loader
-        input_size = 384# if organ == 'liver' else (256,256,64)
+        input_size = 256# if organ == 'liver' else (256,256,64)
         print('input size is ',input_size)
 
         train_transforms, val_transforms = get_transforms(input_size,seed)
@@ -159,6 +160,7 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,save_model_name,backbon
         model = torch.nn.DataParallel(model, device_ids=list(range(num_gpu)))
 
         loss_function = torch.nn.BCEWithLogitsLoss().to(device)  # also works with this data
+        #loss_function = FocalLoss().to(device)
 
         optimizer = torch.optim.AdamW(model.parameters(), lr=23e-5)
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=int(num_train_imgs/batch_size)*num_epochs, eta_min=23e-6)

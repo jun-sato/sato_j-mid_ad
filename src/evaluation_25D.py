@@ -134,7 +134,7 @@ def main(datadir,organ,num_classes,weight_path,outputdir,segtype,backbone,seed,a
     total_y_test = torch.zeros((len(labels_test)), dtype=torch.long, device=device)
     
     for n,(train_idxs, test_idxs) in enumerate(cv.split(images, labels, groups)):
-        if n!=0:continue
+        #if n!=0:continue
         print('---------------- fold ',n,'-------------------')
         images_train,labels_train,file_train = images[train_idxs],labels[train_idxs],filenames[train_idxs]
         images_val,labels_val,file_val = images[test_idxs],labels[test_idxs],filenames[test_idxs]
@@ -159,7 +159,7 @@ def main(datadir,organ,num_classes,weight_path,outputdir,segtype,backbone,seed,a
 
         # Create DenseNet121
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        model = TimmModelMultiHead(backbone, input_size=input_size, pretrained=False,num_classes=num_classes).to(device)
+        model = TimmModel(backbone, input_size=input_size, pretrained=False,num_classes=num_classes).to(device)
         model = torch.nn.DataParallel(model, device_ids=list(range(num_gpu)))
         weight_path_ = weight_path.split('.pth')[0] +'_'+str(n)+'.pth'
         model.load_state_dict(torch.load(weight_path_))
@@ -174,8 +174,8 @@ def main(datadir,organ,num_classes,weight_path,outputdir,segtype,backbone,seed,a
 
             for val_data in val_loader:
                 val_images, val_labels = val_data[0].to(device), val_data[1].to(device)
-                outputs,_ = model(val_images) #torch.Size([4, 32])
-                outputs = outputs.view(4,32)
+                outputs = model(val_images) #torch.Size([4, 32])
+                outputs = outputs[:,-1].view(4,32)
                 y_pred = torch.cat([y_pred, outputs], dim=0)
                 y = torch.cat([y, val_labels], dim=0)
                 if len(y) > 100:break
@@ -195,8 +195,8 @@ def main(datadir,organ,num_classes,weight_path,outputdir,segtype,backbone,seed,a
             for test_data in test_loader:
                 test_images, test_labels,file = test_data[0].to(device), test_data[1].to(device),test_data[2]
                 files += file
-                outputs,_ = model(test_images)
-                outputs = outputs.view(4,32)
+                outputs = model(test_images)
+                outputs = outputs[:,-1].view(4,32)
                 y_pred = torch.cat([y_pred, outputs], dim=0)
                 y = torch.cat([y, test_labels], dim=0)
             y_pred = y_pred.mean(1)
