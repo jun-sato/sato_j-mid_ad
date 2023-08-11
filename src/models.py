@@ -3,7 +3,7 @@ import timm
 
 
 class TimmModel(nn.Module):
-    def __init__(self, backbone,input_size=384, num_classes=1, pretrained=False):
+    def __init__(self, backbone,input_size=(256,256,64), num_classes=1, pretrained=False):
         super(TimmModel, self).__init__()
 
         self.encoder = timm.create_model(
@@ -35,11 +35,11 @@ class TimmModel(nn.Module):
 
     def forward(self, x):  # (bs, nslice, ch, sz, sz)
         bs = x.shape[0]
-        x = x.view(bs * 32, 5,self.input_size, self.input_size)
+        x = x.view(bs * self.input_size[2]//2, 5,self.input_size[0], self.input_size[1])
         feat = self.encoder(x)
-        feat = feat.view(bs, 32, -1)
+        feat = feat.view(bs, self.input_size[2]//2, -1)
         feat, _ = self.lstm(feat)
-        feat = feat.contiguous().view(bs * 32, -1)
+        feat = feat.contiguous().view(bs * self.input_size[2]//2, -1)
         feat = self.head(feat)
         
         return feat

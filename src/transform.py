@@ -22,12 +22,12 @@ from monai.transforms import (
 def get_transforms(image_size,seed):
     # Define transforms
     train_transforms = albumentations.Compose([
-        albumentations.Resize(image_size, image_size),
-        #albumentations.HorizontalFlip(p=0.5),
-        #albumentations.VerticalFlip(p=0.5),
+        albumentations.Resize(image_size[0], image_size[1]),
+        albumentations.HorizontalFlip(p=0.5),
+        albumentations.VerticalFlip(p=0.5),
         #albumentations.Transpose(p=0.5),
-        #albumentations.RandomBrightness(limit=0.1, p=0.7),
-        #albumentations.ShiftScaleRotate(shift_limit=0.3, scale_limit=0.3, rotate_limit=45, border_mode=4, p=0.7),
+        #albumentations.RandomBrightness(limit=0.1, p=0.5),
+        #albumentations.ShiftScaleRotate(shift_limit=0.3, scale_limit=0.3, rotate_limit=45, border_mode=4, p=0.5),
 
         #albumentations.OneOf([
         #    albumentations.MotionBlur(blur_limit=3),
@@ -44,7 +44,7 @@ def get_transforms(image_size,seed):
     ])
 
     val_transforms = albumentations.Compose([
-    albumentations.Resize(image_size, image_size),])
+    albumentations.Resize(image_size[0], image_size[1]),])
     return train_transforms,val_transforms
 
 

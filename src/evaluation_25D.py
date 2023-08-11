@@ -85,14 +85,13 @@ def calc_metrics(y_pred,y,organ,cutoff=None,dataset='validation',fold=None):
     # index = np.where(Youden_index_candidates==max(Youden_index_candidates))[0][0]
     # if cutoff == None:
     #     cutoff = thres[index]
-    cutoff = 0.83
+    cutoff = 0.5
     print(f'{organ}, auc:{auc} ,cutoff : {cutoff}')
     ## plot auc curve
     plot_auc(fpr, tpr,organ,dataset = dataset,fold=fold)
     # # Youden indexによるカットオフ値による分類
     if dataset == 'test':
         for cutoff in np.arange(0,1,0.001):
-            print('fdajsio')
             y_pred_cutoff = pred >= cutoff
             cm = plot_confusion_matrix(target,y_pred_cutoff,organ,dataset = dataset,fold=fold)
             print('cutoff: ',cutoff,cm)
@@ -103,28 +102,45 @@ def calc_metrics(y_pred,y,organ,cutoff=None,dataset='validation',fold=None):
             '\n youden index : \n ',cm, '\n AUC : ',auc ,'accuracy : ',acc_metric )
     return cutoff
 
-def main(datadir,organ,num_classes,weight_path,outputdir,segtype,backbone,seed,amp=True):
+def main(datadir,organ,weight_path,outputdir,segtype,backbone,seed,amp=True):
     monai.config.print_config()
     logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
-    input_size = 256
+    input_size = (256,256,64)
     print('input size is ',input_size)
     # Define transforms for image
     _, val_transforms = get_transforms(input_size,seed)
 
     data_df = pd.read_csv(os.path.join(datadir,organ+'_dataset_train_multi_internal.csv'))
-    test_df = pd.read_csv(os.path.join(datadir,organ+'_dataset_test.csv'))
+    test_df = pd.read_csv(os.path.join(datadir,'dataset_test.csv'))
     #test_df = test_df[test_df['大学名'].apply(lambda x:x in ['tokushima','ehime','kyushu','juntendo'])]
     filenames = data_df['file']
     file_test = test_df['file']
     images = np.array([os.path.join(datadir,organ+'_'+segtype+'_img',p) for p in data_df['file']])
     images_test = np.array([os.path.join(datadir,organ+'_'+segtype+'_img',p) for p in test_df['file']])
+    
+
+    organs_mapping = {
+        'liver': (['嚢胞','脂肪肝','胆管拡張','SOL','変形','石灰化','pneumobilia','other_abnormality','nofinding'], '肝臓'),
+        'adrenal': (['SOL','腫大','脂肪','石灰化','other_abnormality','nofinding'], '副腎'),
+        'esophagus': (['mass','hernia','拡張','other_abnormality','nofinding'], '食道'),
+        'gallbladder': (['SOL','腫大','変形','胆石','壁肥厚','ポリープ','other_abnormality','nofinding'], '胆嚢'),
+        'kidney': (['嚢胞','SOL(including_complicated_cyst)','腫大','萎縮','変形','石灰化','other_abnormality','nofinding'], '腎臓'),
+        'pancreas': (['嚢胞','SOL','腫大','萎縮','石灰化','膵管拡張/萎縮','other_abnormality','nofinding'], '膵臓'),
+        'spleen': (['嚢胞','SOL','変形','石灰化','other_abnormality','nofinding'], '脾臓'),
+    }
+
+    abnormal_list, col = organs_mapping.get(organ)
+    if abnormal_list is None or col is None:
+        raise ValueError("please set appropriate organ")
+
+    num_classes = len(abnormal_list)
 
     labels = data_df['nofinding'].astype(int).values
-    labels_test = test_df['肝臓'].isna().astype(int).values
+    labels_test = test_df[col].isna().astype(int).values
     print(len(labels_test),'num of abnormal label is ',labels_test.sum())
-    #le = LabelEncoder()
-    #encoded_data = le.fit_transform(data)
+    cutoff = labels_test.sum()/len(labels_test)
+
     groups = data_df['患者ID'].astype(str)
     cv = StratifiedGroupKFold(n_splits=5,shuffle=True,random_state=seed)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -175,7 +191,7 @@ def main(datadir,organ,num_classes,weight_path,outputdir,segtype,backbone,seed,a
             for val_data in val_loader:
                 val_images, val_labels = val_data[0].to(device), val_data[1].to(device)
                 outputs = model(val_images) #torch.Size([4, 32])
-                outputs = outputs[:,-1].view(4,32)
+                outputs = outputs[:,-1].view(val_images.size(0),input_size[2]//2)
                 y_pred = torch.cat([y_pred, outputs], dim=0)
                 y = torch.cat([y, val_labels], dim=0)
                 if len(y) > 100:break
@@ -196,7 +212,7 @@ def main(datadir,organ,num_classes,weight_path,outputdir,segtype,backbone,seed,a
                 test_images, test_labels,file = test_data[0].to(device), test_data[1].to(device),test_data[2]
                 files += file
                 outputs = model(test_images)
-                outputs = outputs[:,-1].view(4,32)
+                outputs = outputs[:,-1].view(test_images.size(0),input_size[2]//2)
                 y_pred = torch.cat([y_pred, outputs], dim=0)
                 y = torch.cat([y, test_labels], dim=0)
             y_pred = y_pred.mean(1)
@@ -228,8 +244,8 @@ if __name__ == "__main__":
                         help='which organ AD model to train')
     parser.add_argument('--datadir', default="/mnt/hdd/jmid/data/",
                         help='path to the data directory.')
-    parser.add_argument('--num_classes', default=1, type=int,
-                        help='number of target classes.')
+    # parser.add_argument('--num_classes', default=1, type=int,
+    #                     help='number of target classes.')
     parser.add_argument('--outputdir', default="../result_eval",
                         help='path to the folder in which results are saved.')
     parser.add_argument('--weight_path', default="/mnt/hdd/jmid/data/weight.pth",
@@ -248,9 +264,9 @@ if __name__ == "__main__":
     outputdir = args.outputdir
     os.makedirs(outputdir,exist_ok=True)
     organ = args.organ
-    num_classes = args.num_classes
+    #num_classes = args.num_classes
     weight_path = args.weight_path
     segtype = args.segtype
     backbone = args.backbone
     seed = args.seed
-    main(datadir,organ,num_classes,weight_path,outputdir,segtype,backbone,seed,amp=True)
+    main(datadir,organ,weight_path,outputdir,segtype,backbone,seed,amp=True)

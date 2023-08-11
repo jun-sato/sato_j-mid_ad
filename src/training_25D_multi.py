@@ -109,20 +109,34 @@ def validate(model, num_classes, loss_function, val_loader, device, post_pred, p
     return acc_metric, auc_result, loss
 
 
-def main(organ,num_epochs,num_classes,datadir,batch_size,save_model_name,backbone,segtype,seed=0,p_mixup=0,amp=True,use_buffer=True,metric_learning=False):
-    pin_memory = torch.cuda.is_available()
+def main(organ,num_epochs,datadir,batch_size,save_model_name,backbone,segtype,seed=0,p_mixup=0,amp=True,use_buffer=True,metric_learning=False):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    pin_memory = device.type == "cuda"
     logging.basicConfig(stream=sys.stdout, level=logging.INFO)
     
     print_config()
-    #data_df = pd.read_csv(os.path.join(datadir,organ+'_dataset_train_multi'+str(num_classes)+'.csv'))
     data_df = pd.read_csv(os.path.join(datadir,organ+'_dataset_train_multi_internal.csv'))
     total_filenames = data_df['file'].values
     total_images = np.array([os.path.join(datadir,organ+'_'+segtype+'_img',p) for p in data_df['file']])
     total_preds = np.array([os.path.join(datadir,organ+'_'+segtype+'_pred',p.split('.')[0][:-5]+'.nii.gz') for p in data_df['file']])
-    abnormal_list = ['嚢胞','脂肪肝','胆管拡張','SOL','変形','石灰化','pneumobilia','other_abnormality','nofinding']
+
+    #各臓器でのラベルの定義
+    abnormal_mapping = {
+        'liver': ['嚢胞','脂肪肝','胆管拡張','SOL','変形','石灰化','pneumobilia','other_abnormality','nofinding'],
+        'adrenal': ['SOL','腫大','脂肪','石灰化','other_abnormality','nofinding'],
+        'esophagus':['mass','hernia','拡張','other_abnormality','nofinding'],
+        'gallbladder': ['SOL','腫大','変形','胆石','壁肥厚','ポリープ','other_abnormality','nofinding'],
+        'kidney': ['嚢胞','SOL(including_complicated_cyst)','腫大','萎縮','変形','石灰化','other_abnormality','nofinding'],
+        'pancreas': ['嚢胞','SOL','腫大','萎縮','石灰化','膵管拡張/萎縮','other_abnormality','nofinding'],
+        'spleen' : ['嚢胞','SOL','変形','石灰化','other_abnormality','nofinding'],
+        }
+    abnormal_list = abnormal_mapping.get(organ)
+    if abnormal_list is None:
+        raise ValueError("please set appropriate organ")
+    num_classes = len(abnormal_list)
     print(total_images[0])
-    #total_labels = data_df['nofinding'].astype(float).values
+
+    input_size = (256,256,64)
     total_labels = data_df.loc[:,abnormal_list].astype(int).values 
     g = torch.Generator()
     g.manual_seed(seed)
@@ -131,7 +145,7 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,save_model_name,backbon
     cv = StratifiedGroupKFold(n_splits=5,shuffle=True,random_state=seed)
     for n,(train_idxs, test_idxs) in enumerate(cv.split(total_images, total_labels[:,0], groups)):
         print('---------------- fold ',n,'-------------------')
-        if n !=1 : continue
+        #if n >2 : continue
         save_model_name_ = save_model_name.split('.pth')[0] +'_'+str(n)+'.pth'
         images_train,labels_train,file_train,mask_train = total_images[train_idxs],total_labels[train_idxs],total_filenames[train_idxs],total_preds[train_idxs]
         images_val,labels_val,file_val,mask_val = total_images[test_idxs],total_labels[test_idxs],total_filenames[test_idxs],total_preds[test_idxs]
@@ -139,18 +153,15 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,save_model_name,backbon
         num_val_imgs = len(images_val)
         print(f'number of train images is {num_train_imgs}, number of validation images is {num_val_imgs}')
         print('total_normal_labels is ',labels_val.sum(axis=0))
-        train_files = [{"image": img, "label":np.repeat(label[np.newaxis, :], 32, axis=0),'filename':filename,'mask':mask} for img, label,filename,mask in zip(images_train, labels_train,file_train,mask_train)]
-        val_files = [{"image": img, "label": np.repeat(label[np.newaxis, :], 32, axis=0), 'filename':filename,'mask':mask} for img, label,filename,mask in zip(images_val, labels_val,file_val,mask_val)]
+        train_files = [{"image": img, "label":np.repeat(label[np.newaxis, :], input_size[2]//2, axis=0),'filename':filename,'mask':mask} for img, label,filename,mask in zip(images_train, labels_train,file_train,mask_train)]
+        val_files = [{"image": img, "label": np.repeat(label[np.newaxis, :], input_size[2]//2, axis=0), 'filename':filename,'mask':mask} for img, label,filename,mask in zip(images_val, labels_val,file_val,mask_val)]
         post_pred = Compose([Activations(sigmoid=True)])
         post_label = Compose([AsDiscrete(argmax=True)])
 
         num_gpu = torch.cuda.device_count()
-        # create a training data loader
-        input_size = 256# if organ == 'liver' else (256,256,64)
         print('input size is ',input_size)
 
         train_transforms, val_transforms = get_transforms(input_size,seed)
-        
         train_ds = CLSDataset(filenames=images_train,labels=labels_train,transform=train_transforms)
         train_loader = ThreadDataLoader(train_ds, batch_size=batch_size, shuffle=True, num_workers=num_gpu*6, pin_memory=pin_memory)
         val_ds = CLSDataset(filenames=images_val,labels=labels_val,transform=val_transforms)
@@ -160,8 +171,6 @@ def main(organ,num_epochs,num_classes,datadir,batch_size,save_model_name,backbon
         model = torch.nn.DataParallel(model, device_ids=list(range(num_gpu)))
 
         loss_function = torch.nn.BCEWithLogitsLoss().to(device)  # also works with this data
-        #loss_function = FocalLoss().to(device)
-
         optimizer = torch.optim.AdamW(model.parameters(), lr=23e-5)
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=int(num_train_imgs/batch_size)*num_epochs, eta_min=23e-6)
         auc_metric = ROCAUCMetric()
@@ -208,8 +217,6 @@ if __name__ == '__main__':
                         help='which organ AD model to train')
     parser.add_argument('--num_epochs', default=5, type=int,
                         help='number of epochs to train.')
-    parser.add_argument('--num_classes', default=2, type=int,
-                        help='number of target classes.')
     parser.add_argument('--batch_size', default=8, type=int,
                         help='number of batch size to train.')
     parser.add_argument('--seed', default=0, type=int,
@@ -230,7 +237,6 @@ if __name__ == '__main__':
     print(args)
     organ = args.organ
     num_epochs = args.num_epochs
-    num_classes = args.num_classes
     datadir = args.datadir
     backbone = args.backbone
     batch_size = args.batch_size
@@ -241,4 +247,4 @@ if __name__ == '__main__':
     seed_everything(seed)
     #set_determinism(seed,use_deterministic_algorithms=True)
 
-    main(organ,num_epochs,num_classes,datadir,batch_size,save_model_name,backbone,segtype,seed,p_mixup=pmixup,amp=True,use_buffer=True,metric_learning=False)
+    main(organ,num_epochs,datadir,batch_size,save_model_name,backbone,segtype,seed,p_mixup=pmixup,amp=True,use_buffer=True,metric_learning=False)

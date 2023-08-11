@@ -6,11 +6,12 @@ import torch
 from monai.data import Dataset
 
 class CLSDataset(Dataset):
-    def __init__(self, filenames, labels, transform):
+    def __init__(self, filenames, labels, transform, num_zslices=32):
 
         self.files = filenames
         self.labels = labels
         self.transform = transform
+        self.num_zslices = num_zslices
 
     def __len__(self):
         return len(self.files)
@@ -26,7 +27,7 @@ class CLSDataset(Dataset):
         #    image = image.transpose(2, 0, 1).astype(np.float32)
         #    imgs.append(image)
         #images = np.stack(images,0)
-        labels  = np.repeat(labels[np.newaxis], 32, axis=0)
+        labels  = np.repeat(labels[np.newaxis], self.num_zslices, axis=0)
         images = torch.from_numpy(images).float()
         labels = torch.from_numpy(labels).float()
             
@@ -34,11 +35,12 @@ class CLSDataset(Dataset):
 
 
 class CLSDataset_eval(Dataset):
-    def __init__(self, filenames, labels, transform):
+    def __init__(self, filenames, labels, transform, num_zslices=32):
 
         self.files = filenames
         self.labels = labels
         self.transform = transform
+        self.num_zslices = num_zslices
 
     def __len__(self):
         return len(self.files)
@@ -54,7 +56,7 @@ class CLSDataset_eval(Dataset):
         #    image = image.transpose(2, 0, 1).astype(np.float32)
         #    imgs.append(image)
         #images = np.stack(images,0)
-        labels  = np.repeat(labels[np.newaxis], 32, axis=0)
+        labels  = np.repeat(labels[np.newaxis], self.num_zslices, axis=0)
         images = torch.from_numpy(images).float()
         labels = torch.from_numpy(labels).float()
             
