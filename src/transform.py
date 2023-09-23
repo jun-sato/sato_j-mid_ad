@@ -5,46 +5,41 @@ from monai.transforms import (
     RandScaleIntensityd,
     RandGaussianNoised,
     EnsureChannelFirstd,
+    EnsureChannelFirst,
     AsDiscrete,
     Activations,
     Compose,
     CropForegroundd,
     LoadImaged,
     Orientationd,
+    Orientation,
     RandCropByPosNegLabeld,
     RandRotated,
     ScaleIntensityRanged,
+    ScaleIntensityRange,
+    Pad,
     MaskIntensityd,
     Spacingd,
     SpatialPadd,
-    Resized
+    Resize,
+    RandRotate90d,
+    RandAffined,
+    RandFlipd,
+    SpatialPad,
+    RandFlip,
+    RandRotate90,
+    RandShiftIntensity
 )
 def get_transforms(image_size,seed):
-    # Define transforms
-    train_transforms = albumentations.Compose([
-        albumentations.Resize(image_size[0], image_size[1]),
-        albumentations.HorizontalFlip(p=0.5),
-        albumentations.VerticalFlip(p=0.5),
-        #albumentations.Transpose(p=0.5),
-        #albumentations.RandomBrightness(limit=0.1, p=0.5),
-        #albumentations.ShiftScaleRotate(shift_limit=0.3, scale_limit=0.3, rotate_limit=45, border_mode=4, p=0.5),
-
-        #albumentations.OneOf([
-        #    albumentations.MotionBlur(blur_limit=3),
-        #    albumentations.MedianBlur(blur_limit=3),
-        #    albumentations.GaussianBlur(blur_limit=3),
-        #    albumentations.GaussNoise(var_limit=(3.0, 9.0)),
-        #], p=0.5),
-        #albumentations.OneOf([
-        #    albumentations.OpticalDistortion(distort_limit=1.),
-        #    albumentations.GridDistortion(num_steps=5, distort_limit=1.),
-        #], p=0.5),
-
-        #albumentations.Cutout(max_h_size=int(image_size * 0.5), max_w_size=int(image_size * 0.5), num_holes=1, p=0.5),
+    train_transforms = Compose([
+        RandRotate90d(keys=['image'], prob=0.5, spatial_axes=(0, 1)),
+        RandFlipd(keys=['image'], spatial_axis=[0,1], prob=0.5), # ランダムフリップを追加
     ])
+
 
     val_transforms = albumentations.Compose([
     albumentations.Resize(image_size[0], image_size[1]),])
+
     return train_transforms,val_transforms
 
 
@@ -67,3 +62,49 @@ def get_val_transform(image_size):
         ]
     )
     return val_transforms
+
+
+def get_nifti_transform():
+    train_transforms = Compose(
+        [
+            ScaleIntensityRange(
+                a_min=-200,
+                a_max=400,
+                b_min=0.0,
+                b_max=1.0,
+                clip=True,
+            ),
+            SpatialPad(spatial_size=[64, 256, 256]),
+            Resize(spatial_size=(-1,256, 256)),
+            RandFlip(
+                spatial_axis=[0],
+                prob=0.10,
+            ),        
+            RandFlip(
+                spatial_axis=[1],
+                prob=0.10,
+            ),
+            RandFlip(
+                spatial_axis=[2],
+                prob=0.10,
+            ),
+            RandShiftIntensity(
+                offsets=0.10,
+                prob=0.50,
+            ),
+        ]
+    )
+    val_transforms = Compose(
+        [
+            ScaleIntensityRange(
+                a_min=-200,
+                a_max=400,
+                b_min=0.0,
+                b_max=1.0,
+                clip=True,
+            ),
+            SpatialPad(spatial_size=[64, 256, 256]),
+            Resize(spatial_size=(-1,256, 256)),
+        ]
+    )
+    return train_transforms,val_transforms

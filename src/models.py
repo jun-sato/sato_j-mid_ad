@@ -35,12 +35,21 @@ class TimmModel(nn.Module):
 
     def forward(self, x):  # (bs, nslice, ch, sz, sz)
         bs = x.shape[0]
-        x = x.view(bs * self.input_size[2]//2, 5,self.input_size[0], self.input_size[1])
-        feat = self.encoder(x)
-        feat = feat.view(bs, self.input_size[2]//2, -1)
-        feat, _ = self.lstm(feat)
-        feat = feat.contiguous().view(bs * self.input_size[2]//2, -1)
-        feat = self.head(feat)
+        if len(x.shape) == 6:# if tta
+            n_tta = x.shape[1]
+            x = x.view(bs * n_tta* self.input_size[2]//2, 5,self.input_size[0], self.input_size[1])
+            feat = self.encoder(x)
+            feat = feat.view(bs*n_tta, self.input_size[2]//2, -1)
+            feat, _ = self.lstm(feat)
+            feat = feat.contiguous().view(bs * n_tta * self.input_size[2]//2, -1)
+            feat = self.head(feat)
+        else:
+            x = x.view(bs * self.input_size[2]//2, 5,self.input_size[0], self.input_size[1])
+            feat = self.encoder(x)
+            feat = feat.view(bs, self.input_size[2]//2, -1)
+            feat, _ = self.lstm(feat)
+            feat = feat.contiguous().view(bs * self.input_size[2]//2, -1)
+            feat = self.head(feat)
         
         return feat
 

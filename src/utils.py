@@ -54,6 +54,27 @@ def criterion(logits, targets, activated=False):
     norm[targets.view(-1) > 0] *= 2
     return losses.sum() / norm.sum()
 
+def tta(tensor):
+    # 入力テンソルの形状: torch.Size([8, 32, 5, 384, 384])
+    
+    # 結果を格納するためのテンソルを確保
+    result_shape = (tensor.size(0), 4, *tensor.size()[1:])
+    augmented = torch.empty(result_shape, device=tensor.device, dtype=tensor.dtype)
+
+    # 元のデータ
+    augmented[:, 0] = tensor
+
+    # Horizontal Flip
+    augmented[:, 1] = torch.flip(tensor, [-1])
+
+    # Vertical Flip
+    augmented[:, 2] = torch.flip(tensor, [-2])
+
+    # Horizontal + Vertical Flip
+    augmented[:, 3] = torch.flip(augmented[:, 1], [-2])
+
+    return augmented
+
 
 
 ##matploglibなど

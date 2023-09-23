@@ -26,9 +26,9 @@ from monai.utils import get_torch_version_tuple, set_determinism
 from monai.metrics import ROCAUCMetric
 from loss import LabelSmoothingCrossEntropy
 from utils import seed_everything,seed_worker,L2ConstraintedNet,mixup,criterion
-from transform import get_transforms
+from transform import get_transforms,get_nifti_transform
 from models import TimmModel, TimmModelMultiHead
-from dataset import CLSDataset
+from dataset import CLSDataset,NiftiDataset
 
 def train_one_epoch(epoch, num_classes, model, optimizer, scheduler, loss_function, amp, scaler, src, train_ds, train_loader, writer, device, p_mixup):
     print("-" * 10)
@@ -86,7 +86,7 @@ def validate(model, num_classes, loss_function, val_loader, device, post_pred, p
     y = torch.zeros([0,num_classes], dtype=torch.long, device=device)
     
     for n, val_data in enumerate(val_loader):
-        if n > 100:break
+        if n > 200:break
         val_images, val_labels = val_data[0].to(device), val_data[1].to(device)
         val_labels = val_labels.contiguous().view(-1, num_classes) #torch.Size([96, 9])#32分増やして、batchsizeと統合する。
         with torch.no_grad():
@@ -94,13 +94,13 @@ def validate(model, num_classes, loss_function, val_loader, device, post_pred, p
             #pred = torch.cat([out_multi,out_binary],axis=1)
             y_pred = torch.cat([y_pred, pred], dim=0)
             y = torch.cat([y, val_labels], dim=0)
-    loss = loss_function(y_pred, y)
+    loss = loss_function(y_pred[:,-1].float(), y[:,-1].float())
     print(y_pred, y_pred.size(), loss)
     # acc_value = torch.eq(y_pred > 0, y)
     acc_value = torch.eq(y_pred[:,-1]>0, y[:,-1])
     acc_metric = acc_value.sum().item() / len(acc_value)
-    y_onehot = y#[post_label(i) for i in decollate_batch(y, detach=False)]
-    y_pred_act = [post_pred(i) for i in decollate_batch(y_pred)]
+    y_onehot = y[:,-1]#[post_label(i) for i in decollate_batch(y, detach=False)]
+    y_pred_act = [post_pred(i) for i in decollate_batch(y_pred[:,-1])]
     auc_metric(y_pred_act, y_onehot)
     auc_result = auc_metric.aggregate()
     auc_metric.reset()
@@ -116,6 +116,12 @@ def main(organ,num_epochs,datadir,batch_size,save_model_name,backbone,segtype,se
     
     print_config()
     data_df = pd.read_csv(os.path.join(datadir,organ+'_dataset_train_multi_internal.csv'))
+    if organ == 'kidney':
+        exclude_list = ['jmid_0202983_0000left.nii.gz']
+        data_df = data_df[data_df['file'].apply(lambda x:x not in exclude_list)]
+    elif organ == 'liver' and segtype == 'seg':
+        exclude_list = ['jmid_0156527_0000.nii.gz','jmid_0204188_0000.nii.gz','jmid_0198344_0000.nii.gz']
+        data_df = data_df[data_df['file'].apply(lambda x:x not in exclude_list)]#seg特有
     total_filenames = data_df['file'].values
     total_images = np.array([os.path.join(datadir,organ+'_'+segtype+'_img',p) for p in data_df['file']])
     total_preds = np.array([os.path.join(datadir,organ+'_'+segtype+'_pred',p.split('.')[0][:-5]+'.nii.gz') for p in data_df['file']])
@@ -143,14 +149,15 @@ def main(organ,num_epochs,datadir,batch_size,save_model_name,backbone,segtype,se
     print(len(total_labels),'num of abnormal label is ',total_labels.sum(axis=0))
     groups = data_df['患者ID'].astype(str)
     cv = StratifiedGroupKFold(n_splits=5,shuffle=True,random_state=seed)
-    for n,(train_idxs, test_idxs) in enumerate(cv.split(total_images, total_labels[:,0], groups)):
+    for n,(train_idxs, test_idxs) in enumerate(cv.split(total_images, total_labels[:,-1], groups)):
         print('---------------- fold ',n,'-------------------')
-        #if n >2 : continue
+        #if n <=2 : continue
         save_model_name_ = save_model_name.split('.pth')[0] +'_'+str(n)+'.pth'
         images_train,labels_train,file_train,mask_train = total_images[train_idxs],total_labels[train_idxs],total_filenames[train_idxs],total_preds[train_idxs]
         images_val,labels_val,file_val,mask_val = total_images[test_idxs],total_labels[test_idxs],total_filenames[test_idxs],total_preds[test_idxs]
         num_train_imgs = len(images_train)
         num_val_imgs = len(images_val)
+        print('sample files',images_val[:5],labels_val[:5])
         print(f'number of train images is {num_train_imgs}, number of validation images is {num_val_imgs}')
         print('total_normal_labels is ',labels_val.sum(axis=0))
         train_files = [{"image": img, "label":np.repeat(label[np.newaxis, :], input_size[2]//2, axis=0),'filename':filename,'mask':mask} for img, label,filename,mask in zip(images_train, labels_train,file_train,mask_train)]
@@ -161,11 +168,18 @@ def main(organ,num_epochs,datadir,batch_size,save_model_name,backbone,segtype,se
         num_gpu = torch.cuda.device_count()
         print('input size is ',input_size)
 
+        #train_transforms, val_transforms = get_transforms(input_size,seed)
+        # train_transforms,val_transforms = get_nifti_transform()
+        # train_ds = NiftiDataset(filenames=images_train,labels=labels_train,transform=train_transforms,num_zslices=64)
+        # train_loader = ThreadDataLoader(train_ds, batch_size=batch_size, shuffle=True, num_workers=num_gpu*6, pin_memory=pin_memory)
+        # val_ds = NiftiDataset(filenames=images_val,labels=labels_val,transform=val_transforms,num_zslices=64)
+        # val_loader = ThreadDataLoader(val_ds, batch_size=batch_size, num_workers=num_gpu*2, pin_memory=pin_memory)
         train_transforms, val_transforms = get_transforms(input_size,seed)
         train_ds = CLSDataset(filenames=images_train,labels=labels_train,transform=train_transforms)
         train_loader = ThreadDataLoader(train_ds, batch_size=batch_size, shuffle=True, num_workers=num_gpu*6, pin_memory=pin_memory)
-        val_ds = CLSDataset(filenames=images_val,labels=labels_val,transform=val_transforms)
+        val_ds = CLSDataset(filenames=images_val,labels=labels_val,transform=None)
         val_loader = ThreadDataLoader(val_ds, batch_size=batch_size, num_workers=num_gpu*2, pin_memory=pin_memory)
+
 
         model = TimmModel(backbone, input_size=input_size,num_classes=num_classes,pretrained=True).to(device)
         model = torch.nn.DataParallel(model, device_ids=list(range(num_gpu)))
@@ -180,6 +194,7 @@ def main(organ,num_epochs,datadir,batch_size,save_model_name,backbone,segtype,se
         val_interval = 1
         best_metric = -1
         best_metric_epoch = -1
+        best_acc = 0
         epoch_loss_values = []
         metric_values = []
         writer = SummaryWriter()
@@ -202,7 +217,7 @@ def main(organ,num_epochs,datadir,batch_size,save_model_name,backbone,segtype,se
                     torch.save(model.state_dict(), save_model_name_)
                     print("saved new best metric model")
 
-                print("current epoch: {} current accuracy: {:.4f} current AUC: {:.4f} best acc: {:.4f} at epoch {} then AUC: {:.4f} valloss: {:.4f}".format(
+                print("current epoch: {} current accuracy: {:.4f} current AUC: {:.4f} best AUC: {:.4f} at epoch {} then ACC: {:.4f} valloss: {:.4f}".format(
                             epoch + 1, acc_metric, auc_result, best_metric, best_metric_epoch, best_acc,loss))
                 writer.add_scalar("val_accuracy", acc_metric, epoch + 1)
 
