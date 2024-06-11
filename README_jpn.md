@@ -1,52 +1,51 @@
-# Abnormality Detection Based on J-MID Reports
+# J-MID report-based 異常検知
 
-## Features
+ 
+# Features
+ 
+**ラベルを所見文から抽出して**画像分類モデルを学習する。  
+これにより、アノテーションの労働力的負担が減少し、大きなデータセットを作成できる。  
+更に、J-MIDデータを利用することにより、多施設かつ世界最大規模のCTデータセットを構築できる。  
+→今までのAI医療研究(特に放射線領域)は少ないデータを如何に利用するかが課題だったが、それらを解決できるかもしれない。  
 
-Train an image classification model by extracting labels from report texts.  
-This reduces the labor-intensive annotation work and allows the creation of a large dataset.  
-By utilizing J-MID data, we can build a multi-center and the world's largest CT dataset.  
-→ Traditional AI medical research (especially in the field of radiology) has struggled with utilizing small datasets, but this approach may solve that problem.
+**CT画像をセグメンテーションして**画像分類モデルを学習させる。  
+CT画像はAI学習には大きすぎる。512☓512☓300の画像はどのGPUにも載らない。臓器を正確にセグメンテーションできるモデルを作成することにより、計算量を落とし、所見と臓器との関連を学習させやすくする。  
 
-Train an image classification model by segmenting CT images.  
-CT images are too large for AI training. Images of 512x512x300 are too large for any GPU. By creating a model that can accurately segment organs, we can reduce the computational load and make it easier to learn the relationship between findings and organs.
+## 研究方針
+1. 腹部を含んだ数十万件のJ-MID所見分データをすべて構造化する。構造化したデータには、**どの臓器の所見か**という情報と、**何があるか**という情報が紐付いている。
+2. 注目する臓器(まず肝胆膵？)の所見の情報を集める。
+3. 臓器の所見のあるCT画像を収集してくる。
+4. CT画像からセグメンテーションモデルを使い対象臓器を取ってくる。
+5. セグメンテーションした臓器をinput,**何があるか**という情報をlabelとして分類モデルを学習する。(multiclass & multilabel learning)
 
-## Research Approach
-
-1. Structure all tens of thousands of J-MID finding text data that include the abdomen. The structured data should be linked with information on **which organ's finding** and **what is found**.
-2. Collect information on findings for the organs of interest (e.g., liver, gallbladder, pancreas, etc.).
-3. Gather CT images with findings of the organs.
-4. Use a segmentation model to extract target organs from CT images.
-5. Train a classification model using the segmented organs as input and **what is found** information as labels (multiclass & multilabel learning).
-
-## Requirements
-
-Required Libraries:
-
+ 
+# Requirement
+ 
+必要なライブラリ
+ 
 * monai
-* SimpleITK
+* simpleitk
 * Pytorch
 * Timm
 * matplotlib
+ 
+# Installation
+ 
+Requirementで列挙したライブラリなどのインストール方法を説明する  
+ nnUNetの学習方法は[公式github](https://github.com/MIC-DKFZ/nnUNet)を参照する。
+ pytorchは各々のGPU環境に合ったもの[公式](https://pytorch.org/get-started/locally/)から選んでインストール今回はpytorch==1.13.1を選択  
+ ``conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.6 -c pytorch -c nvidia``
 
-## Installation
-
-Here is how to install the listed libraries.  
-For training nnUNet, refer to the [official GitHub](https://github.com/MIC-DKFZ/nnUNet).  
-Install PyTorch suitable for your GPU environment from the [official site](https://pytorch.org/get-started/locally/). This example uses pytorch==1.13.1:  
-```bash
-conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.6 -c pytorch -c nvidia
-```
 ```bash
 pip install monai
 pip install SimpleITK
 pip install timm
 ```
 
-If you are using conda, [recreating the environment with conda](https://qiita.com/nshinya/items/cb1cffabc3305c907bc5) is convenient.
-
-## Dataset
-Refer to [this README](https://github.com/ai-radiol-ou/sato_j-mid_ad/tree/main/download_from_server/) for the process from downloading data and reports from the NII server to segmentation.
-
+condaを使っている場合は[condaによる環境再現](https://qiita.com/nshinya/items/cb1cffabc3305c907bc5)が便利です。
+ 
+# Dataset
+NIIサーバーからデータと所見文をdownloadして、セグメンテーションさせるまでの流れは[こちらのREADME参照](https://github.com/ai-radiol-ou/sato_j-mid_ad/tree/main/download_from_server/)。
 
 ```
 data  
@@ -62,15 +61,15 @@ data
  |        |---jmid_0000001_0000.nii.gz  
  |
 ```
-### Abnormality Labels
+### 異常のラベル
 ```
-Liver: [‘cyst’, ‘fatty_liver’, ‘bile_duct_dilation’, ‘SOL’, ‘deformation’, ‘calcification’, ‘pneumobilia’, ‘other_abnormality’, ‘nofinding’]
-Gallbladder: [‘SOL’, ‘enlargement’, ‘deformation’, ‘gallstone’, ‘wall_thickening’, ‘polyp’, ‘other_abnormality’, ‘nofinding’]
-Pancreas: [‘cyst’, ‘SOL’, ‘enlargement’, ‘atrophy’, ‘calcification’, ‘pancreatic_duct_dilation/atrophy’, ‘other_abnormality’, ‘nofinding’]
-Spleen: [‘cyst’, ‘SOL’, ‘deformation’, ‘calcification’, ‘other_abnormality’, ‘nofinding’]
-Kidney: [‘cyst’, ‘SOL(including_complicated_cyst)’, ‘enlargement’, ‘atrophy’, ‘deformation’, ‘calcification’, ‘other_abnormality’, ‘nofinding’]
-Adrenal_gland: [‘SOL’, ‘enlargement’, ‘fat’, ‘calcification’, ‘other_abnormality’, ‘nofinding’]
-Esophagus: [‘mass’, ‘hernia’, ‘dilation’, ‘other_abnormality’, ‘nofinding’]
+肝臓:['嚢胞','脂肪肝','胆管拡張','SOL','変形','石灰化','pneumobilia','other_abnormality','nofinding']  
+胆嚢:['SOL','腫大','変形','胆石','壁肥厚','ポリープ','other_abnormality','nofinding']  
+膵臓:['嚢胞','SOL','腫大','萎縮','石灰化','膵管拡張/萎縮','other_abnormality','nofinding']  
+脾臓:['嚢胞','SOL','変形','石灰化','other_abnormality','nofinding']  
+腎臓:['嚢胞','SOL(including_complicated_cyst)','腫大','萎縮','変形','石灰化','other_abnormality','nofinding']  
+副腎:['SOL','腫大','脂肪','石灰化','other_abnormality','nofinding']  
+食道:['mass','hernia','拡張','other_abnormality','nofinding']  
 
 
 ```
