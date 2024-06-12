@@ -1,22 +1,10 @@
-# Abnormality Detection Based on J-MID Reports
+# Annotation-free multi-organ anomaly detection in abdominal CT using free-text radiology reports
 
 ## Features
 
-Train an image classification model by extracting labels from report texts.  
+Train an image classification model by extracting labels from radiology free-text reports.  
 This reduces the labor-intensive annotation work and allows the creation of a large dataset.  
-By utilizing J-MID data, we can build a multi-center and the world's largest CT dataset.  
-→ Traditional AI medical research (especially in the field of radiology) has struggled with utilizing small datasets, but this approach may solve that problem.
-
-Train an image classification model by segmenting CT images.  
-CT images are too large for AI training. Images of 512x512x300 are too large for any GPU. By creating a model that can accurately segment organs, we can reduce the computational load and make it easier to learn the relationship between findings and organs.
-
-## Research Approach
-
-1. Structure all tens of thousands of J-MID finding text data that include the abdomen. The structured data should be linked with information on **which organ's finding** and **what is found**.
-2. Collect information on findings for the organs of interest (e.g., liver, gallbladder, pancreas, etc.).
-3. Gather CT images with findings of the organs.
-4. Use a segmentation model to extract target organs from CT images.
-5. Train a classification model using the segmented organs as input and **what is found** information as labels (multiclass & multilabel learning).
+A multi-organ segmentation model and an information extraction schema were used to extract specific organ images and disease information, CT images and radiology reports, respectively, which were used to train a multiple-instance learning model for anomaly detection.
 
 ## Requirements
 
@@ -44,8 +32,9 @@ pip install timm
 
 If you are using conda, [recreating the environment with conda](https://qiita.com/nshinya/items/cb1cffabc3305c907bc5) is convenient.
 
-## Dataset
-Refer to [this README](https://github.com/ai-radiol-ou/sato_j-mid_ad/tree/main/download_from_server/) for the process from downloading data and reports from the NII server to segmentation.
+## model weights
+The pretrained weights used in this study (Organ segmentation, anomaly detection, dataset size experiment) are available from [google cloud](!https://drive.google.com/drive/folders/17DgUVCo1We4EHM6PSeJ4ChtNZU5zhAJV?usp=sharing)
+
 
 
 ```
@@ -71,8 +60,6 @@ Spleen: [‘cyst’, ‘SOL’, ‘deformation’, ‘calcification’, ‘other
 Kidney: [‘cyst’, ‘SOL(including_complicated_cyst)’, ‘enlargement’, ‘atrophy’, ‘deformation’, ‘calcification’, ‘other_abnormality’, ‘nofinding’]
 Adrenal_gland: [‘SOL’, ‘enlargement’, ‘fat’, ‘calcification’, ‘other_abnormality’, ‘nofinding’]
 Esophagus: [‘mass’, ‘hernia’, ‘dilation’, ‘other_abnormality’, ‘nofinding’]
-
-
 ```
 
 
@@ -85,40 +72,7 @@ Esophagus: [‘mass’, ‘hernia’, ‘dilation’, ‘other_abnormality’, �
 * 主要なファイルの説明。それぞれどのような関数があり、何ができるか？
 * コード実行の手順を記載。どうしたら目的の成果(モデルの学習や成果物の保存など)が得られるか。
  
-## crop_dataset.py
-セグメンテーションされた臓器のうち、特定の臓器を指定する。予測する臓器の周囲だけを抽出してくる。
-```bash
-python crop_dataset.py --maskdir ../data/pred_1/ --imagedir ../data/renamed_1/ --save_maskdir ../data/liver_pred_1 --save_imagedir ../data/liver_1 --num_threads 20
-```
 
-## select_img_from_pred.py
-SQUIDでセグメンテーション予測を行い出力されたファイルの元画像をNII取得フォルダから移動させる。  
-finished_pred:予測完了したmaskファイル。  
-finished_img:予測完了したmaskと対応するimgファイル。  
-両者は同数であるはず。  
-
- 
-
-## labeling_{臓器名}.ipynb
-所見文構造化jsonファイルを利用して特定の臓器からの情報を抽出するファイル。 
-
-
-
-## display_gradcam.ipynb
-学習・評価したモデルを使ってモデルの注目部分を可視化する。  
-[gradcam](https://github.com/MECLabTUDA/M3d-Cam)と[occlusion_sensitivity](https://docs.monai.io/en/stable/visualize.html#monai.visualize.occlusion_sensitivity.OcclusionSensitivity)を用いたコード。occlusion_sensitivityの方が良い？
-occlusion_sisitivityは重要箇所(その部分を隠したときに大きく値が異なる)が青く表示される。
-→出力は予測確率であり、重要部分を隠すとそのクラスに属する確率は下がる(negative value)になるから、、、？monaiの[公式のチュートリアル](https://github.com/Project-MONAI/tutorials/blob/main/modules/interpretability/covid_classification.ipynb)をみる限りそんな感じ。
-
-## occlusion_sensitivity.py
-occlusion sensitivityのコード。display_gradcam.ipynbの改良版。5-fold CVのアンサンブルの可視化を出力できる。
-```bash
-python occlusion_sensitivity.py --datadir ../data/ --save_imagedir ../attention_maps/ --organ liver --segtype 25D --seed 0 --backbone tf_efficientnetv2_s_in21ft1k --load_model_name ../data/weights/liver_25D_new_valloss.pth
-```
-
-
-## code/eda.ipynb
-NIIサーバー上に置いてるコードの草案。スライス枚数によってグループ分けして、効率よくセグメンテーションが行えるようにする。
 
 # Script for model training/inference
 ### training_DP.py
@@ -165,29 +119,17 @@ loss関数の定義関数
 コードに使ういろいろな関数。
 
  
-# Note
  
-注意点などがあれば書く
- 
-# Author
+# Author information
  
 作成情報を列挙する
  
-* 佐藤淳哉
+* Junya Sato
 * 2022/8/21 initial commit  
-* 更新情報  
-    2022/10/30 データの取得や前処理、学習に関するコードを追加。  
-    2022/11/30 異常検知に用いるtraining, evaluationのコードを追加。各種コード修正。  
-    2022/12/13 training, evaluationのコードを修正。  
-    2022/12/26 visualization(gradcam,occ_sens)のファイルを追加、各臓器のラベリングのフォルダを作成。  
-    2023/01/06 serverからのダウンロードファイルを取得(abd_download.sh)。  
-    2023/02/08 2.5次元データの学習＆occlusion sensitivityのコードを追加。  
-    2023/03/11 2.5次元データの作成コード＆評価コードの追加。  
-    2023/06/04 学習に必要なファイルを分離しsrcに収納。trainingファイルも関数ごとに分離した。
 
  
 # License
 ライセンスを明示する。研究室内での使用限定ならその旨を記載。
  
-This repo is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
+This code is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
   

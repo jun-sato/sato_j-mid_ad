@@ -209,9 +209,7 @@ if __name__ == '__main__':
                         help='random_seed.')
     parser.add_argument('--fold', default=0, type=int,
                         help='cross validation fold.')
-    parser.add_argument('--pmixup', default=0., type=float,
-                        help='mixup rate.')
-    parser.add_argument('--backbone', default='tf_efficientnetv2_s_in21ft1k',
+    parser.add_argument('--backbone', default='convnext_base_in22ft1k',
                         help='backbone of 2dCNN model.')
     parser.add_argument('--segtype', default="square",
                         help='whether to use seg or square.')
@@ -230,7 +228,6 @@ if __name__ == '__main__':
     segtype = args.segtype
     seed = args.seed
     fold = args.fold
-    pmixup = args.pmixup
     save_model_name = args.save_model_name
     seed_everything(seed)
 
