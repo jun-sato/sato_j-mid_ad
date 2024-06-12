@@ -65,16 +65,7 @@ Esophagus: [‘mass’, ‘hernia’, ‘dilation’, ‘other_abnormality’, �
 
  
 # Usage
-
-**丁寧かつ簡潔に、初めて見た人でも理解できる様に**
-
-* データセットの説明。どの位置に置き、どのような形式にしておけば良いか？
-* 主要なファイルの説明。それぞれどのような関数があり、何ができるか？
-* コード実行の手順を記載。どうしたら目的の成果(モデルの学習や成果物の保存など)が得られるか。
- 
-
-
-# Script for model training/inference
+## Script for model training/inference
 ### training_DP.py
 切り取ってきた臓器画像を用いて異常検知モデルを学習させるファイル。  
 pytorch DataParallelを使用。  
