@@ -77,7 +77,6 @@ Esophagus: [‘mass’, ‘hernia’, ‘dilation’, ‘other_abnormality’, �
 # Script for model training/inference
 ### training_DP.py
 切り取ってきた臓器画像を用いて異常検知モデルを学習させるファイル。  
-model:se-resnext50 (詳細な精度評価は[ここから](https://catkin-resistance-4fa.notion.site/840bbe8525d943b4aa76eba305fc2891))  
 pytorch DataParallelを使用。  
 ```
 python training_DP.py --batch_size 16 --datadir /sqfs/work/K22A11/u6b588/jmid/data --num_classes 2 --num_epochs 50 --organ liver --save_model_name weights/liver_seg_baseline_80.pth --segtype seg
@@ -129,7 +128,6 @@ loss関数の定義関数
 
  
 # License
-ライセンスを明示する。研究室内での使用限定ならその旨を記載。
  
 This code is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
   
