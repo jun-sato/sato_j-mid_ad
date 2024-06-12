@@ -33,7 +33,7 @@ pip install timm
 If you are using conda, [recreating the environment with conda](https://qiita.com/nshinya/items/cb1cffabc3305c907bc5) is convenient.
 
 ## model weights
-The pretrained weights used in this study (Organ segmentation, anomaly detection, dataset size experiment) are available from [google cloud](!https://drive.google.com/drive/folders/17DgUVCo1We4EHM6PSeJ4ChtNZU5zhAJV?usp=sharing)
+The pretrained weights used in this study (Organ segmentation, anomaly detection, dataset size experiment) are available from [google drive](https://drive.google.com/drive/folders/17DgUVCo1We4EHM6PSeJ4ChtNZU5zhAJV?usp=sharing)
 
 
 
