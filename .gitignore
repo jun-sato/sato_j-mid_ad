@@ -1,2 +1,8 @@
 src/__pycache__
 src/runs
+csv/
+download_from_server/
+json_data/
+output/
+result_eval/
+code/
