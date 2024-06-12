@@ -77,7 +77,6 @@ def plot_confusion_matrix(target,y_pred_cutoff,organ,dataset = 'validation',fold
 
 
 def calc_metrics(y_pred,y,organ,cutoff=None,dataset='validation',fold=None):
-    ##metrics計算
     print(y_pred,y)
     acc_value = torch.eq(y_pred>0, y)
     acc_metric = acc_value.sum().item() / len(acc_value)
@@ -86,15 +85,9 @@ def calc_metrics(y_pred,y,organ,cutoff=None,dataset='validation',fold=None):
     fpr, tpr, thres = roc_curve(target, pred)
     auc = metrics.auc(fpr, tpr)
     sng = 1 - fpr
-    # Youden indexを用いたカットオフ基準
-    # Youden_index_candidates = tpr-fpr
-    # index = np.where(Youden_index_candidates==max(Youden_index_candidates))[0][0]
-    # if cutoff == None:
-    #     cutoff = thres[index]
     print(f'{organ}, auc:{auc} ,cutoff : {cutoff}')
     ## plot auc curve
     plot_auc(fpr, tpr,organ,dataset = dataset,fold=fold)
-    # # Youden indexによるカットオフ値による分類
     sens_list = []
     if dataset == 'validation':
         for c in np.arange(0,1,0.001):
@@ -103,9 +96,7 @@ def calc_metrics(y_pred,y,organ,cutoff=None,dataset='validation',fold=None):
             sens_list.append(tmp4)
         print(0.001*np.argmax(sens_list),'validation vased cutoff')
         cutoff = 0.001*np.argmax(sens_list)
-    #         print('cutoff: ',cutoff,cm)
     y_pred_cutoff = pred >= cutoff
-    # 混同行列をヒートマップで可視化
     cm, f1, sens, spe, acc = plot_confusion_matrix(target,y_pred_cutoff,organ,dataset = dataset,fold=fold)
     print('confusion matrix : \n',confusion_matrix(target,(pred>0.5)),
             '\n youden index : \n ',cm, '\n AUC : ',auc ,'accuracy : ',acc_metric,'f1 score : ',f1,'sensitivity : ',sens,'specificity : ',spe )
@@ -117,14 +108,11 @@ def main(datadir,organ,weight_path,outputdir,segtype,backbone,seed,amp=True):
 
     input_size = (256,256,64)
     print('input size is ',input_size)
-    # Define transforms for image
     _, val_transforms = get_transforms(input_size,seed)
 
     organs_mapping = {
         'liver': (['嚢胞','脂肪肝','胆管拡張','SOL','変形','石灰化','pneumobilia','other_abnormality','nofinding'], '肝臓'),
-        'adrenal': (['SOL','腫大','脂肪','石灰化','other_abnormality','nofinding'], '副腎'),
-        'esophagus': (['mass','hernia','拡張','other_abnormality','nofinding'], '食道'),
-        'gallbladder': (['SOL','腫大','変形','胆石','壁肥厚','ポリープ','other_abnormality','nofinding'], '胆嚢'),
+        'gallbladder': (['SOL','腫大','胆石','壁肥厚','ポリープ','other_abnormality','nofinding'], '胆嚢'),
         'kidney': (['嚢胞','SOL(including_complicated_cyst)','腫大','萎縮','変形','石灰化','other_abnormality','nofinding'], '腎臓'),
         'pancreas': (['嚢胞','SOL','腫大','萎縮','石灰化','膵管拡張/萎縮','other_abnormality','nofinding'], '膵臓'),
         'spleen': (['嚢胞','SOL','変形','石灰化','other_abnormality','nofinding'], '脾臓'),
@@ -134,14 +122,10 @@ def main(datadir,organ,weight_path,outputdir,segtype,backbone,seed,amp=True):
     if abnormal_list is None or col is None:
         raise ValueError("please set appropriate organ")
 
-    data_df = pd.read_csv(os.path.join(datadir,organ+'_dataset_train_multi_internal.csv'))
+    data_df = pd.read_csv(os.path.join(datadir,organ+'_dataset_train_three_internal_final.csv'))
     test_df = pd.read_csv(os.path.join(datadir,'dataset_test.csv'))
-    
-    if organ == 'kidney':
-        exclude_list = ['jmid_0202983_0000left.nii.gz']
-        data_df = data_df[data_df['file'].apply(lambda x:x not in exclude_list)]
 
-    if col=='腎臓' or col=='副腎':
+    if col=='腎臓':
         print('specified organ is bilateral')
         test_df_left = test_df.copy()
         test_df_left['file'] = test_df['file'].apply(lambda x:x.split('.')[0]+'left'+'.nii.gz')
@@ -152,13 +136,12 @@ def main(datadir,organ,weight_path,outputdir,segtype,backbone,seed,amp=True):
         print(test_df[['file',col]].head())
 
     filenames = data_df['file'].values
-    #test_df = test_df[test_df['大学名'].apply(lambda x:x in ['tokushima','ehime','kyushu','juntendo'])]
     images = np.array([os.path.join(datadir,organ+'_'+segtype+'_img',p) for p in data_df['file']])
     images_test = np.array([os.path.join(datadir,organ+'_'+segtype+'_img',p) if os.path.isfile(os.path.join(datadir,organ+'_'+segtype+'_img',p)) else None for p in test_df['file']])
     print(images_test[:5],images_test.shape,(images_test!=None).sum())
 
     
-    test_df = test_df[images_test!=None].reset_index(drop=True) ##ファイルが存在しなければ計算から除外する。
+    test_df = test_df[images_test!=None].reset_index(drop=True)
     print(test_df.shape,'before shape')
     test_group = test_df[['Facility_Code', ' Accession_Number']]
     file_test = test_df['file']
@@ -179,10 +162,10 @@ def main(datadir,organ,weight_path,outputdir,segtype,backbone,seed,amp=True):
     total_y_pred_val = torch.zeros([0,num_classes], dtype=torch.float32, device=device)
     total_y_val = torch.tensor([], dtype=torch.long, device=device)
     total_y_pred_test = torch.zeros([len(labels_test),num_classes], dtype=torch.float32, device=device)
+    total_y_pred_test_perfold = torch.zeros([len(labels_test), 5 * num_classes], dtype=torch.float32)
     total_y_test = torch.zeros((len(labels_test)), dtype=torch.long, device=device)
     
     for n,(train_idxs, test_idxs) in enumerate(cv.split(images, labels, groups)):
-        #if n!=0:continue
         print('---------------- fold ',n,'-------------------')
         images_train,labels_train,file_train = images[train_idxs],labels[train_idxs],filenames[train_idxs]
         images_val,labels_val,file_val = images[test_idxs],labels[test_idxs],filenames[test_idxs]
@@ -191,7 +174,6 @@ def main(datadir,organ,weight_path,outputdir,segtype,backbone,seed,amp=True):
         num_val_imgs = len(images_val)
         cutoff = labels_val.sum()/len(labels_val)
 
-        #train_files = [{"image": img, "label": label,'filename':filename} for img, label,filename in zip(images[:num], labels[:num],filenames[:num])]
         val_files = [{"image": img, "label": label, 'filename':filename} for img, label,filename in zip(images_val, labels_val,file_val)]
         test_files = [{"image": img, "label": label, 'filename':filename} for img, label,filename in zip(images_test, labels_test,file_test)]
         post_pred = Compose([Activations(sigmoid=True)])
@@ -206,7 +188,6 @@ def main(datadir,organ,weight_path,outputdir,segtype,backbone,seed,amp=True):
         auc_metric = ROCAUCMetric()
         cutoff_criterions = list()
 
-        # Create DenseNet121
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         model = TimmModel(backbone, input_size=input_size, pretrained=False,num_classes=num_classes).to(device)
         model = torch.nn.DataParallel(model, device_ids=list(range(num_gpu)))
@@ -217,7 +198,6 @@ def main(datadir,organ,weight_path,outputdir,segtype,backbone,seed,amp=True):
         with torch.no_grad():
             num_correct = 0.0
             metric_count = 0
-            #saver = CSVSaver(output_dir="./output_eval")
             y_pred = torch.zeros([0,input_size[2]//2,num_classes], dtype=torch.float32, device=device)
             y = torch.tensor([], dtype=torch.long, device=device)
 
@@ -227,7 +207,7 @@ def main(datadir,organ,weight_path,outputdir,segtype,backbone,seed,amp=True):
                 outputs = outputs.view(val_images.size(0),input_size[2]//2,num_classes)
                 y_pred = torch.cat([y_pred, outputs], dim=0)
                 y = torch.cat([y, val_labels], dim=0)
-                if len(y) > 12800:break
+                #if len(y) > 12800:break
             y_pred = y_pred.mean(1)
             y = y.mean(1)
             total_y_pred_val = torch.cat([total_y_pred_val, y_pred], dim=0)
@@ -237,16 +217,14 @@ def main(datadir,organ,weight_path,outputdir,segtype,backbone,seed,amp=True):
         with torch.no_grad():
             num_correct = 0.0
             metric_count = 0
-            #saver = CSVSaver(output_dir="./output_eval")
             files = []
-            y_pred = torch.zeros([0,4* input_size[2]//2,num_classes], dtype=torch.float32, device=device)
+            y_pred = torch.zeros([0,input_size[2]//2,num_classes], dtype=torch.float32, device=device)
             y = torch.tensor([], dtype=torch.long, device=device)
             for test_data in test_loader:
                 test_images, test_labels,file = test_data[0].to(device), test_data[1].to(device),test_data[2]
                 files += file
-                test_images = tta(test_images)
                 outputs = model(test_images)
-                outputs = outputs.view(test_images.size(0),-1,num_classes) #outputs.view(test_images.size(0),input_size[2]//2,num_classes) 
+                outputs = outputs.view(test_images.size(0),input_size[2]//2,num_classes) 
                 y_pred = torch.cat([y_pred, outputs], dim=0)
                 y = torch.cat([y, test_labels], dim=0)
             y_pred = y_pred.mean(1)
@@ -254,36 +232,31 @@ def main(datadir,organ,weight_path,outputdir,segtype,backbone,seed,amp=True):
             print(torch.eq(y_pred[:,-1]>0,y).sum(),'prediction')
             total_y_pred_test = total_y_pred_test + y_pred
             total_y_test = y
+        total_y_pred_test_perfold[:, n*num_classes:(n+1)*num_classes] = F.sigmoid(y_pred)
         _ = calc_metrics(y_pred[:,-1],y,organ,cutoff=cutoff,dataset='test',fold=str(n))
-        #saver.finalize()
 
     print('####-----------------overall metrics-------------------------###')
     overall_cutoff = np.mean(overall_cutoff)
     total_y_pred_test = total_y_pred_test/5
     test_group['pred'] = total_y_pred_test[:,-1].to('cpu').detach().numpy()
     test_group['label'] = total_y_test.to('cpu').detach().numpy()
-    #total_y_pred_test = test_group.groupby(['Facility_Code', ' Accession_Number'])['pred'].mean()
-    #total_y_test = test_group.groupby(['Facility_Code', ' Accession_Number'])['label'].mean()
-    #_ = calc_metrics(total_y_pred_val,total_y_val,organ,cutoff=overall_cutoff,dataset='total_val',fold=None)
-    #_ = calc_metrics(total_y_pred_test,total_y_test,organ,cutoff=overall_cutoff,dataset='total_test',fold=None)
-
 
     pred_df = pd.DataFrame([files,list(F.sigmoid(total_y_pred_test).to('cpu').detach().numpy().copy()),
                     list(total_y_test.to('cpu').detach().numpy().copy())]).T
     pred_df = pd.concat([
         pd.DataFrame(files),
         pd.DataFrame(F.sigmoid(total_y_pred_test).to('cpu').detach().numpy().copy()),
-        pd.DataFrame(total_y_test.to('cpu').detach().numpy().copy())
+        pd.DataFrame(total_y_test.to('cpu').detach().numpy().copy()),
+        pd.DataFrame(total_y_pred_test_perfold.to('cpu').detach().numpy().copy())
     ], axis=1)
 
-
+    fold_columns = [f'fold_{n}_'+col for n in range(5) for col in abnormal_list]
     print(pred_df)
-    pred_df.columns = ['file']+abnormal_list+['target']
+    pred_df.columns = ['file']+abnormal_list+['target']+fold_columns
 
-    #pred_df['final_prediction'] = pred_df['prediction']#>0.5).astype(int)
     groups = test_df['患者ID']
     columns = ['file','prediction','final_prediction','target','io_tokens','所見','所見_JSON']
-    pred_df.merge(test_df,on='file',how='left').to_csv(f'../result_eval/{organ}_with_finding_{str(seed)}_multi_tta.csv',index=False)
+    pred_df.merge(test_df,on='file',how='left').to_csv(f'../result_eval/{organ}_with_finding_{os.path.basename(weight_path)}_final.csv',index=False)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='In order to remove unnecessary background, crop images based on segmenation labels.')
@@ -291,8 +264,6 @@ if __name__ == "__main__":
                         help='which organ AD model to train')
     parser.add_argument('--datadir', default="/mnt/hdd/jmid/data/",
                         help='path to the data directory.')
-    # parser.add_argument('--num_classes', default=1, type=int,
-    #                     help='number of target classes.')
     parser.add_argument('--outputdir', default="../result_eval",
                         help='path to the folder in which results are saved.')
     parser.add_argument('--weight_path', default="/mnt/hdd/jmid/data/weight.pth",
@@ -306,12 +277,10 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     print(args)
-
     datadir=args.datadir
     outputdir = args.outputdir
     os.makedirs(outputdir,exist_ok=True)
     organ = args.organ
-    #num_classes = args.num_classes
     weight_path = args.weight_path
     segtype = args.segtype
     backbone = args.backbone

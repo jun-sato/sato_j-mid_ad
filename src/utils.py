@@ -191,3 +191,13 @@ def create_combined_colormap(n_bins=100):
     return combined_cmap
 
 
+def transform_array(default_array):
+    # テンソルの形状を取得
+    B, C, D, H, W = default_array.shape
+    # インデクスのリストを作成
+    indices = [0, 0, 0, 1, 2] + [i for n in range(1, 31) for i in range(n * 2 - 2, n * 2 + 3)] + [59,60,61,62,63]
+    # torch.index_selectを使用してスライスを取り出し
+    selected_slices = torch.index_select(default_array, 2, torch.tensor(indices, device=default_array.device))
+    # 新しい形状にリシェイプ
+    new_array = selected_slices.view(B, 32, 5, 256, 256)
+    return new_array
