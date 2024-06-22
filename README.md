@@ -66,59 +66,29 @@ Esophagus: [‘mass’, ‘hernia’, ‘dilation’, ‘other_abnormality’, �
  
 # Usage
 ## Script for model training/inference
-### training_DP.py
-切り取ってきた臓器画像を用いて異常検知モデルを学習させるファイル。  
-pytorch DataParallelを使用。  
-```
-python training_DP.py --batch_size 16 --datadir /sqfs/work/K22A11/u6b588/jmid/data --num_classes 2 --num_epochs 50 --organ liver --save_model_name weights/liver_seg_baseline_80.pth --segtype seg
-```
-
-segtype:'seg'か'square'を使用。squareはbboxで切り取ってくる。
-
-## training_25D.py
-2.5次元CNNを使ったモデルで異常検知モデルを学習させるファイル。
-
-## evaluation.py(evaluation_25D.py)
-学習させたモデルで予測させて精度評価。AUC curveとconfusion_matrixのファイルを出力。
-```
-python evaluation.py --datadir /mnt/hdd/jmid/data  --organ liver --weight_path ../data/weights/liver_seg_baseline_80_seed4.pth --seed 4 --segtype seg
-```
+### training_25D_multi.py
+A file for training an anomaly detection model using images of excised organs.
+Using PyTorch DataParallel.
 
 ```
-python evaluation_25D.py --datadir /mnt/hdd/jmid/data  --organ liver --weight_path ../data/weights/liver_25D_new_valloss.pth --segtype 25D --outputdir ../result_eval/
+python training_25D_multi.py --batch_size 16 --datadir /path/to/the/data/directory --num_epochs 50 --organ liver --save_model_name /model/path 
 ```
 
-出力されるファイル:
-    outputdir上にAUC curveとConfusion matrixのグラフが作成される。
-    totalとヘッダーが付いているもの：5fold cvでの結果。
-    それ以外：各foldでの結果。
+## evaluation_25D.py
+Evaluation of predictions and accuracy using the trained model.
 
-## dataset.py
-データセットの定義関数
+```
+python evaluation_25D.py --datadir /path/to/the/data/directory --organ liver --weight_path /model/path --segtype 25D --outputdir ../result_eval/
+```
 
-## models.py
-CNNモデルの定義関数
-
-## transforms.py
-augmentation/transformの定義関数
-
-## loss.py
-loss関数の定義関数
-
-## utils.py
-コードに使ういろいろな関数。
-
+Output files:  
+  - AUC curve and Confusion matrix graphs are created on the output directory.
  
  
 # Author information
  
-作成情報を列挙する
- 
-* Junya Sato
+* Author: Junya Sato
 * 2022/8/21 initial commit  
 
  
-# License
- 
-This code is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
   
