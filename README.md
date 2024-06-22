@@ -20,17 +20,14 @@ Required Libraries:
 
 Here is how to install the listed libraries.  
 For training nnUNet, refer to the [official GitHub](https://github.com/MIC-DKFZ/nnUNet).  
-Install PyTorch suitable for your GPU environment from the [official site](https://pytorch.org/get-started/locally/). This example uses pytorch==1.13.1:  
-```bash
-conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.6 -c pytorch -c nvidia
-```
-```bash
-pip install monai
-pip install SimpleITK
-pip install timm
-```
+Install PyTorch suitable for your GPU environment from the [official site](https://pytorch.org/get-started/locally/). 
 
 If you are using conda, [recreating the environment with conda](https://qiita.com/nshinya/items/cb1cffabc3305c907bc5) is convenient.
+
+```bash
+conda env create -f=environment.yml
+```
+
 
 ## model weights
 The pretrained weights used in this study (Organ segmentation, anomaly detection, dataset size experiment) are available from [google drive](https://drive.google.com/drive/folders/17DgUVCo1We4EHM6PSeJ4ChtNZU5zhAJV?usp=sharing)
@@ -90,5 +87,19 @@ Output files:
 * Author: Junya Sato
 * 2022/8/21 initial commit  
 
- 
-  
+# License
+
+### Code
+
+The code in this repository is licensed under the Apache License 2.0. You are free to use, modify, and distribute it, provided that you comply with the terms of the license.
+
+### Pretrained Model Weights
+
+The pre-trained model weights are licensed under the Creative Commons Attribution-NonCommercial-NoDerivs 4.0 International (CC BY-NC-ND 4.0) license. You may use and share the model weights for non-commercial purposes only, and you may not distribute modified versions of the weights.
+
+[Link to model weights on Google Drive](https://drive.google.com/drive/folders/17DgUVCo1We4EHM6PSeJ4ChtNZU5zhAJV?usp=sharing)
+
+
+
+
+
