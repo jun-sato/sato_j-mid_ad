@@ -80,7 +80,12 @@ python evaluation_25D.py --datadir /path/to/the/data/directory --organ liver --w
 
 Output files:  
   - AUC curve and Confusion matrix graphs are created on the output directory.
- 
+
+
+## model.py
+Our model is multiple instance learning model (2.5D CNN).
+
+![model](fig/model_architecture.png)
  
 # Author information
  
