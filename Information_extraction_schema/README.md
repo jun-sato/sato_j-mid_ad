@@ -1,0 +1,1 @@
+## The original report is from [Radiopaedia](https://radiopaedia.org/?lang=us)
