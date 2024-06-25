@@ -1,0 +1,247 @@
+﻿file_name,所見,findings_Eng,所見_JSON
+0000001.nii.gz,"膵頭部に48×25mmの嚢胞性腫瘤を認めます。膵癌を疑います。
+肝臓に8mmの小嚢胞を認めます。
+腎臓、脾臓、副腎、胆嚢に異常所見は認めません。
+前立腺がやや肥大しています。","A 48×25 mm cystic mass is present in pancreatic head, suggesting pancreatic cancer.
+An 8 mm small cyst is present at the liver.
+The kidneys, spleen, adrenals and gallbladder are normal.
+The prostate gland is enlarged.","[
+    {
+        ""type"": ""Imaging_observation"",
+        ""tokens"": [
+            ""腫"",
+            ""瘤""
+        ],
+        ""start_idx"": 12,
+        ""end_idx"": 13,
+        ""surface_name"": ""腫瘤"",
+        ""surface_id"": ""S001222"",
+        ""certainty_level"": ""definitive"",
+        ""certainty_score"": 4,
+        ""key"": 0,
+        ""modifiers"": [
+            {
+                ""type"": ""Anatomical_entity"",
+                ""tokens"": [
+                    ""膵"",
+                    ""頭部""
+                ],
+                ""start_idx"": 0,
+                ""end_idx"": 1,
+                ""surface_name"": ""膵頭部"",
+                ""surface_id"": ""S008977"",
+                ""certainty_level"": null,
+                ""certainty_score"": null
+            },
+            {
+                ""type"": ""Size_descriptor"",
+                ""tokens"": [
+                    ""４"",
+                    ""８"",
+                    ""×"",
+                    ""２"",
+                    ""５"",
+                    ""mm""
+                ],
+                ""start_idx"": 3,
+                ""end_idx"": 8,
+                ""surface_name"": ""４８×２５mm"",
+                ""surface_id"": null,
+                ""certainty_level"": null,
+                ""certainty_score"": null
+            },
+            {
+                ""type"": ""Characteristics_descriptor"",
+                ""tokens"": [
+                    ""嚢胞"",
+                    ""性""
+                ],
+                ""start_idx"": 10,
+                ""end_idx"": 11,
+                ""surface_name"": ""嚢胞性"",
+                ""surface_id"": null,
+                ""certainty_level"": null,
+                ""certainty_score"": null
+            },
+            {
+                ""type"": ""Clinical_finding"",
+                ""tokens"": [
+                    ""膵"",
+                    ""癌""
+                ],
+                ""start_idx"": 18,
+                ""end_idx"": 19,
+                ""surface_name"": ""膵癌"",
+                ""surface_id"": ""S002179"",
+                ""certainty_level"": ""likely"",
+                ""certainty_score"": 3
+            }
+        ],
+        ""is_findings"": null
+    },
+    {
+        ""type"": ""Clinical_finding"",
+        ""tokens"": [
+            ""膵"",
+            ""癌""
+        ],
+        ""start_idx"": 18,
+        ""end_idx"": 19,
+        ""surface_name"": ""膵癌"",
+        ""surface_id"": ""S002179"",
+        ""certainty_level"": ""likely"",
+        ""certainty_score"": 3,
+        ""key"": 1,
+        ""modifiers"": [
+            {
+                ""type"": ""Anatomical_entity"",
+                ""tokens"": [
+                    ""膵"",
+                    ""頭部""
+                ],
+                ""start_idx"": 0,
+                ""end_idx"": 1,
+                ""surface_name"": ""膵頭部"",
+                ""surface_id"": ""S008977"",
+                ""certainty_level"": null,
+                ""certainty_score"": null
+            }
+        ],
+        ""is_findings"": null
+    },
+    {
+        ""type"": ""Imaging_observation"",
+        ""tokens"": [
+            ""小"",
+            ""嚢胞""
+        ],
+        ""start_idx"": 30,
+        ""end_idx"": 31,
+        ""surface_name"": ""小嚢胞"",
+        ""surface_id"": null,
+        ""certainty_level"": ""definitive"",
+        ""certainty_score"": 4,
+        ""key"": 2,
+        ""modifiers"": [
+            {
+                ""type"": ""Anatomical_entity"",
+                ""tokens"": [
+                    ""肝臓""
+                ],
+                ""start_idx"": 25,
+                ""end_idx"": 25,
+                ""surface_name"": ""肝臓"",
+                ""surface_id"": ""S007896"",
+                ""certainty_level"": null,
+                ""certainty_score"": null
+            },
+            {
+                ""type"": ""Size_descriptor"",
+                ""tokens"": [
+                    ""８"",
+                    ""mm""
+                ],
+                ""start_idx"": 27,
+                ""end_idx"": 28,
+                ""surface_name"": ""８mm"",
+                ""surface_id"": null,
+                ""certainty_level"": null,
+                ""certainty_score"": null
+            }
+        ],
+        ""is_findings"": null
+    },
+    {
+        ""type"": ""Imaging_observation"",
+        ""tokens"": [
+            ""異常"",
+            ""所見""
+        ],
+        ""start_idx"": 45,
+        ""end_idx"": 46,
+        ""surface_name"": ""異常所見"",
+        ""surface_id"": null,
+        ""certainty_level"": ""denial"",
+        ""certainty_score"": 0,
+        ""key"": 3,
+        ""modifiers"": [
+            {
+                ""type"": ""Anatomical_entity"",
+                ""tokens"": [
+                    ""腎臓""
+                ],
+                ""start_idx"": 37,
+                ""end_idx"": 37,
+                ""surface_name"": ""腎臓"",
+                ""surface_id"": ""S008644"",
+                ""certainty_level"": null,
+                ""certainty_score"": null
+            },
+            {
+                ""type"": ""Anatomical_entity"",
+                ""tokens"": [
+                    ""脾臓""
+                ],
+                ""start_idx"": 39,
+                ""end_idx"": 39,
+                ""surface_name"": ""脾臓"",
+                ""surface_id"": ""S008527"",
+                ""certainty_level"": null,
+                ""certainty_score"": null
+            },
+            {
+                ""type"": ""Anatomical_entity"",
+                ""tokens"": [
+                    ""副腎""
+                ],
+                ""start_idx"": 41,
+                ""end_idx"": 41,
+                ""surface_name"": ""副腎"",
+                ""surface_id"": ""S003647"",
+                ""certainty_level"": null,
+                ""certainty_score"": null
+            },
+            {
+                ""type"": ""Anatomical_entity"",
+                ""tokens"": [
+                    ""胆嚢""
+                ],
+                ""start_idx"": 43,
+                ""end_idx"": 43,
+                ""surface_name"": ""胆嚢"",
+                ""surface_id"": ""S008227"",
+                ""certainty_level"": null,
+                ""certainty_score"": null
+            }
+        ],
+        ""is_findings"": null
+    },
+    {
+        ""type"": ""Imaging_observation"",
+        ""tokens"": [
+            ""肥大""
+        ],
+        ""start_idx"": 56,
+        ""end_idx"": 56,
+        ""surface_name"": ""肥大"",
+        ""surface_id"": null,
+        ""certainty_level"": ""definitive"",
+        ""certainty_score"": 4,
+        ""key"": 4,
+        ""modifiers"": [
+            {
+                ""type"": ""Anatomical_entity"",
+                ""tokens"": [
+                    ""前立腺""
+                ],
+                ""start_idx"": 53,
+                ""end_idx"": 53,
+                ""surface_name"": ""前立腺"",
+                ""surface_id"": ""S003578"",
+                ""certainty_level"": null,
+                ""certainty_score"": null
+            }
+        ],
+        ""is_findings"": null
+    }
+]"
