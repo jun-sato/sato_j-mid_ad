@@ -1,0 +1,182 @@
+keyword,keyword_en,frequency,category
+n．p．,no problem,20602,5
+脾腫,Splenomegaly,14619,2
+腫大,Enlargement,1306,2
+n．p,no problem,798,5
+石灰化,Calcification,557,3
+脾梗塞,Splenic infarction,466,4
+腫瘤,Tumor,404,1
+LDA,LDA,403,4
+肝脾腫,Hepatosplenomegaly,395,2
+脾嚢胞,Splenic cyst,386,0
+低吸収域,Low-density area,359,4
+結節,Nodule,347,1
+嚢胞,Cyst,283,0
+良性病変,Benign lesion,176,4
+リンパ管腫,Lymphangioma,170,4
+腫瘍,Tumor,170,1
+脾腫大,Splenic enlargement,167,2
+嚢胞性病変,Cystic lesion,166,0
+脾転移,Splenic metastasis,158,1
+多脾症,Polysplenia,146,4
+転移,Metastasis,143,1
+低吸収結節,Low-density nodule,127,1
+小嚢胞,Small cyst,125,0
+過誤腫,Hamartoma,122,1
+梗塞,Infarction,120,4
+造影不良域,Poorly enhanced area,111,4
+np,no problem,99,5
+脾嚢胞性病変,Splenic cystic lesion,96,0
+変形,Deformation,94,2
+小結節,Small nodule,77,1
+梗塞後変化,Post-infarction change,73,4
+脾梗塞後,Post-splenic infarction,72,4
+脾腫不変,Unchanged splenomegaly,71,2
+萎縮,Atrophy,69,2
+脾石灰化,Splenic calcification,67,3
+造影不領域,Poorly enhanced area,64,4
+術後変化,Postoperative change,61,4
+SOL,SOL,60,1
+脾浸潤,Splenic infiltration,59,1
+小石灰化,Small calcification,54,3
+脾腫瘤,Splenic tumor,47,1
+腫瘍浸潤,Tumor infiltration,45,1
+脾損傷,Splenic injury,43,4
+小低吸収域,Small low-density area,43,4
+脾梗塞後変化,Post-splenic infarction change,41,4
+脾結節,Splenic nodule,41,1
+微小石灰化,Microcalcification,38,3
+造影欠損域,Enhanced defect area,37,4
+脾内低吸収域,Low-density area in the spleen,34,4
+腫瘤影,Tumor shadow,31,1
+脾低濃度結節,Low-density nodule in spleen,30,4
+低濃度域,Low-density area,29,4
+増強不良域,Poorly enhanced area,29,4
+脾梗塞像,Splenic infarction image,29,4
+低吸収,Low absorption,28,4
+脾梗塞後の変化,Post-splenic infarction change,27,4
+仮性嚢胞,Pseudocyst,24,0
+HCC転移,HCC metastasis,24,1
+陳旧性結核,Old tuberculosis,23,3
+原発巣,Primary site,22,1
+脾LDA,Splenic LDA,21,4
+脾腫同様,Same as splenomegaly,20,2
+脾萎縮,Splenic atrophy,20,2
+良性,Benign,20,4
+結節影,Nodular shadow,19,1
+脾のう胞,Splenic cyst,19,0
+陳旧性脾梗塞,Old splenic infarction,18,4
+腫瘤性病変,Tumorous lesion,18,1
+感染,Infection,17,4
+炎症,Inflammation,17,4
+脾内低吸収結節,Low-density nodule in spleen,17,4
+サルコイドーシス,Sarcoidosis,16,1
+巨脾,Massive splenomegaly,16,2
+造影欠損像,Enhanced defect image,16,4
+脾低吸収域,Low-density area in the spleen,16,4
+脾腫瘍,Splenic tumor,16,1
+軽度肝脾腫,Mild hepatosplenomegaly,15,2
+造影不良,Poorly enhanced,15,4
+乏血性結節,Hypovascular nodule,15,1
+梗塞後,Post-infarction,14,4
+虚血,Ischemia,14,4
+炎症性変化,Inflammatory change,14,4
+脾部分梗塞後変化,Post-partial splenic infarction change,14,4
+脾小嚢胞,Small splenic cyst,14,0
+陳旧性変化,Old change,14,4
+脾血管腫,Splenic hemangioma,13,1
+早期濃染結節,Early enhanced nodule,13,1
+脾部分梗塞,Partial splenic infarction,13,4
+膵癌の浸潤,Pancreatic cancer infiltration,12,1
+低吸収病変,Low-density lesion,12,4
+部分脾梗塞,Partial splenic infarction,12,4
+膿瘍,Abscess,12,1
+脾膿瘍,Splenic abscess,11,1
+LDAs,LDAs,11,4
+肝嚢胞脾嚢胞腎嚢胞,"Hepatic cyst, splenic cyst, renal cyst",10,0
+低吸収SOL,Low-density SOL,10,1
+脾門部嚢胞性病変,Cystic lesion in splenic hilum,10,0
+出血,Hemorrhage,10,4
+塞栓後,Post-embolization,10,4
+脾過誤腫,Splenic hamartoma,10,0
+遊走脾,Wandering spleen,10,4
+嚢胞性腫瘤,Cystic tumor,10,0
+良性結節,Benign nodule,10,4
+点状石灰化,Punctate calcification,9,3
+脾変形,Splenic deformation,9,2
+脾病変,Splenic lesion,9,4
+脾小石灰化,Small splenic calcification,9,3
+嚢胞病変,Cystic lesion,8,0
+脾低吸収結節,Low-density nodule in spleen,8,1
+濃染する結節,Enhanced nodule,8,1
+高吸収域,High-density area,8,4
+脾小結節,Small splenic nodule,7,1
+脾低濃度域,Low-density area in spleen,7,4
+脾腫腎嚢胞,Splenomegaly with renal cyst,7,0
+造影効果不良,Poor enhancement effect,7,4
+小LDA,Small LDA,7,4
+濃染結節,Enhanced nodule,7,1
+小嚢胞性病変,Small cystic lesion,7,0
+アーチファクト,Artifact,7,4
+軟部濃度結節,Soft tissue density nodule,6,1
+軟部腫瘤,Soft tissue tumor,6,4
+索状の造影不良,Striated poorly enhanced area,6,4
+結節状の構造,Nodular structure,6,1
+脾内石灰化,Intrasplenic calcification,5,3
+小低濃度結節,Small low-density nodule,5,1
+微小嚢胞,Microcyst,5,0
+巨大脾腫,Giant splenomegaly,5,2
+脾捻転,Splenic torsion,5,4
+副脾ないしsplenosis,Accessory spleen or splenosis,5,4
+造影効果低下,Decreased enhancement effect,5,4
+軟部濃度構造,Soft tissue density structure,4,4
+圧排変形,Compressional deformation,4,2
+軟部組織影,Soft tissue shadow,4,4
+低形成,Hypoplasia,4,4
+低吸収領域,Low absorption area,4,4
+脾内低濃度病変,Low-density lesion in spleen,3,4
+嚢胞性結節,Cystic nodule,3,0
+肝脾腫大,Hepatosplenomegaly,3,2
+濃染性結節,Enhanced nodule,3,1
+脾低吸収腫瘤,Low-density tumor in spleen,3,4
+嚢胞成分,Cystic component,3,0
+造影結節,Enhanced nodule,3,1
+脾内嚢胞性病変,Cystic lesion in spleen,3,0
+脾腫像,Splenomegaly image,3,2
+微小結節,Micro nodule,3,1
+脾腫同程度,Similar to splenomegaly,2,2
+脾梗塞部,Splenic infarction part,2,4
+脾低吸収病変,Low-density lesion in spleen,2,4
+低吸収値結節,Low absorption value nodule,2,4
+小結節状の低吸収域,Small nodular low absorption area,2,4
+脾像萎縮,Splenic image atrophy,2,2
+腫大して,Enlarged,2,2
+濃染腫瘤,Enhanced tumor,2,1
+高濃度域,High-density area,2,4
+梗塞域,Infarcted area,2,4
+微細石灰化,Microcalcification,2,3
+低造影域,Low contrast area,2,4
+脾内LDA,LDA in spleen,2,4
+脾腫大著明,Marked splenomegaly,2,2
+小腫瘤,Small tumor,2,1
+脾腫増大,Increased splenomegaly,2,2
+脾点状石灰化,Punctate calcification in spleen,2,3
+脾嚢胞低吸収結節,Splenic cyst low-density nodule,1,0
+微小石灰,Microcalcification,1,3
+脾内腫瘤,Intrasplenic tumor,1,1
+肝脾萎縮,Hepatosplenic atrophy,1,2
+脾嚢胞性腫瘤,Splenic cystic tumor,1,0
+結節状変化,Nodular change,1,1
+腫張,Swelling,1,2
+索状の造影欠損像,Striated enhanced defect image,1,4
+結節状低濃度,Nodular low density,1,4
+腫瘤状の低濃度域,Tumorous low-density area,1,1
+線状の低吸収域,Linear low absorption area,1,4
+脾内低吸収,Intrasplenic low absorption,1,4
+結節性病変,Nodular lesion,1,4
+線状の石灰化,Linear calcification,1,3
+胆石脾腫,Gallstone splenomegaly,1,2
+脾腫軽度,Mild splenomegaly,1,2
+脾結石,Splenic stone,1,3
+脾内低濃度結節,Intrasplenic low-density nodule,1,1
+石灰化腫瘤,Calcified tumor,1,3

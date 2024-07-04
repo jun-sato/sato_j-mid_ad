@@ -1,0 +1,1595 @@
+keyword,keyword_en,frequency,category
+肝嚢胞,Liver Cyst,68724,0
+脂肪肝,Fatty Liver,27327,1
+肝転移,Liver Metastasis,14344,3
+血管腫,Hemangioma,10433,3
+嚢胞,Cyst,8213,0
+腫瘤,Tumor,6045,3
+早期濃染,Early Enhancement,5868,7
+転移,Metastasis,5544,3
+肝内胆管拡張,Intrahepatic Bile Duct Dilation,5444,2
+低吸収域,Low Attenuation Area,4926,3
+肝血管腫,Hepatic Hemangioma,4518,3
+小嚢胞,Small Cyst,4396,0
+HCC,HCC,4381,3
+肝細胞癌,Hepatocellular Carcinoma,4098,3
+結節,Nodule,3604,3
+慢性肝障害,Chronic Liver Damage,3364,4
+早期濃染域,Early Enhanced Area,2943,7
+血流異常,Blood Flow Abnormality,2316,7
+LDA,LDA,2248,3
+石灰化,Calcification,2156,5
+胆管炎,Cholangitis,2096,7
+術後変化,Postoperative Changes,1920,7
+軟部影,Soft Tissue Shadow,1839,7
+液貯留,Fluid Retention,1824,7
+肝硬変,Liver Cirrhosis,1615,4
+腫大,Enlargement,1433,4
+液体貯留,Fluid Accumulation,1426,7
+低吸収,Low Absorption,1304,3
+AP_shunt,AP Shunt,1284,7
+腫瘍,Tumor,1235,3
+早期濃染結節,Early Enhanced Nodule,1200,7
+濃染,Enhancement,1190,7
+肝内胆管癌,Intrahepatic Cholangiocarcinoma,1142,3
+pneumobilia,Pneumobilia,1112,6
+胆管拡張,Bile Duct Dilation,1051,2
+肝膿瘍,Liver Abscess,1045,3
+膿瘍,Abscess,1044,7
+肝のう胞,Liver Cyst,1026,0
+変形,Deformation,986,4
+浸潤,Infiltration,982,3
+SOL,SOL,980,3
+washout,Washout,937,3
+低吸収結節,Low Attenuation Nodule,926,3
+萎縮,Atrophy,911,4
+造影不良域,Contrast Deficient Area,840,7
+肝門部胆管癌,Hilar Cholangiocarcinoma,835,3
+肝変形,Liver Deformation,819,4
+n．p．,N.p.,779,8
+低濃度域,Low Density Area,771,7
+軟部陰影,Soft Tissue Shadow,712,7
+肝腫大,Liver Enlargement,662,4
+A-P_shunt,A-P Shunt,629,7
+血腫,Hematoma,624,7
+再発,Recurrence,583,3
+脂肪沈着,Fat Deposition,576,1
+早期濃染像,Early Enhanced Image,565,7
+鈍化,Blunting,564,4
+肝縁鈍化,Blunted Liver Edge,560,4
+微小嚢胞,Micro Cyst,555,0
+biloma,Biloma,552,3
+炎症,Inflammation,549,7
+LC_pattern,LC Pattern,532,4
+肝小嚢胞,Small Liver Cyst,528,0
+RFA後変化,Post-RFA Changes,528,7
+小結節,Small Nodule,518,3
+高吸収,High Absorption,516,7
+APシャント,AP Shunt,515,7
+結節状,Nodular,499,3
+乏血性結節,Hypovascular Nodule,494,3
+転移巣,Metastatic Focus,486,3
+血栓,Thrombus,442,7
+小肝嚢胞,Small Liver Cyst,433,0
+肝細胞癌再発,Recurrent Hepatocellular Carcinoma,429,3
+小石灰化,Small Calcification,419,5
+肝脾腫,Hepatosplenomegaly,407,4
+軟部濃度,Soft Tissue Density,382,7
+濃染域,Enhanced Area,360,7
+高吸収域,High Absorption Area,358,7
+肝内転移,Intrahepatic Metastasis,346,3
+肝障害,Liver Damage,339,4
+肝腫瘤,Liver Tumor,338,3
+肝内結石,Intrahepatic Stone,322,5
+結石,Stone,321,5
+肝石灰化,Liver Calcification,313,5
+wash_out,Washout,311,3
+硬変肝,Cirrhotic Liver,306,4
+早期造影域,Early Enhanced Area,284,7
+凹凸不整,Irregular Contour,284,4
+腫瘤性病変,Tumorous Lesion,280,3
+HCC再発,Recurrent HCC,274,3
+早期増強効果,Early Enhancement Effect,274,7
+微小肝嚢胞,Micro Liver Cyst,272,0
+染まり抜け,Enhancement Loss,265,3
+腫瘍栓,Tumor Thrombus,261,7
+再発病変,Recurrent Lesion,258,3
+凹凸,Irregularity,256,4
+小血管腫,Small Hemangioma,253,3
+軟部組織,Soft Tissue,241,7
+転移性肝腫瘍,Metastatic Liver Tumor,237,3
+嚢胞性病変,Cystic Lesion,234,0
+感染,Infection,231,7
+軟部濃度域,Soft Tissue Density Area,230,7
+腫瘍浸潤,Tumor Infiltration,228,3
+ステント,Stent,224,7
+うっ血肝,Congested Liver,222,4
+FNH,FNH,221,3
+肝浸潤,Liver Infiltration,220,3
+肝内石灰化,Intrahepatic Calcification,216,5
+腫瘤影,Tumor Shadow,216,3
+転移性肝癌,Metastatic Liver Cancer,210,3
+治療後変化,Post-treatment Changes,207,7
+原発巣,Primary Lesion,206,3
+肝転移巣,Liver Metastatic Focus,203,3
+PV_shunt,PV Shunt,195,7
+shunt,Shunt,194,7
+viable_HCC,Viable HCC,193,3
+壊死,Necrosis,192,7
+浮腫,Edema,191,7
+染まり,Staining,183,0
+術後性変化,Postoperative Changes,178,7
+変形萎縮,Deformation Atrophy,178,4
+良性病変,Benign Lesion,178,7
+増強不良域,Poorly Enhanced Area,178,7
+periportal_collar,Periportal Collar,173,7
+濃染結節,Enhanced Nodule,172,3
+結節状の早期濃染,Nodular Early Enhancement,171,3
+炎症性変化,Inflammatory Changes,170,7
+PVシャント,PV Shunt,168,7
+AP-shunt,AP Shunt,167,7
+造影不領域,Contrast Deficient Area,158,7
+A-Pシャント,A-P Shunt,157,7
+出血,Hemorrhage,155,7
+液体貯留腔,Fluid Retention Cavity,154,7
+APshunt,AP Shunt,152,7
+小さな嚢胞,Small Cyst,151,0
+肝梗塞,Liver Infarction,146,7
+胆汁瘻,Biliary Fistula,145,7
+結節状早期濃染,Nodular Early Enhancement,145,3
+造影効果は不均一,Uneven Enhancement,144,7
+再生結節,Regenerative Nodule,144,3
+n．p,N.p.,143,8
+LC_shape,LC Shape,143,4
+肝病変,Liver Lesion,142,7
+third_inflow,Third Inflow,140,7
+造影結節,Contrast Nodule,136,3
+混合型肝癌,Mixed Type Liver Cancer,135,3
+うっ血,Congestion,132,4
+炎症波及,Inflammatory Spread,130,7
+肝内胆管気腫,Intrahepatic Biliary Pneumatosis,129,6
+小低吸収域,Small Low Absorption Area,122,3
+結節影,Nodular Shadow,122,3
+後期染まり抜け,Late Enhancement Loss,120,3
+造影不良,Poor Contrast,119,7
+viable_lesion,Viable Lesion,119,3
+脂肪化,Fatty Change,118,1
+慢性肝障害~肝硬変,Chronic Liver Damage to Liver Cirrhosis,117,4
+造影増強効果,Contrast Enhancement Effect,116,7
+HCC病変,HCC Lesion,116,3
+periportal_edema,Periportal Edema,114,7
+浮腫性変化,Edematous Change,112,7
+Lipiodol集積,Lipiodol Accumulation,111,7
+胆道気腫,Biliary Pneumatosis,110,6
+過形成結節,Hyperplastic Nodule,110,3
+リピオドール集積,Lipiodol Accumulation,108,7
+染まりムラ,Uneven Staining,108,7
+肝転移病変,Liver Metastatic Lesion,108,3
+総胆管拡張,Common Bile Duct Dilation,106,2
+局所血流異常,Local Blood Flow Abnormality,106,7
+脂肪,Fat,105,1
+肝細胞癌の再発,Recurrent Hepatocellular Carcinoma,105,3
+肝門部領域胆管癌,Hilar Cholangiocarcinoma,104,3
+軟部濃度組織,Soft Tissue Density Tissue,103,7
+P-V_shunt,P-V Shunt,103,7
+肝内胆管結石,Intrahepatic Bile Duct Stone,102,5
+偽脂肪腫,Pseudolipoma,102,3
+被包化液貯留,Encapsulated Fluid Retention,102,7
+cavernous_transformation,Cavernous Transformation,100,7
+肝腫瘍,Liver Tumor,98,3
+仮性動脈瘤,Pseudoaneurysm,98,7
+洗い出し,Washout,93,3
+血流障害,Blood Flow Impairment,93,7
+肝内小嚢胞,Intrahepatic Small Cyst,93,0
+肝萎縮,Liver Atrophy,91,4
+直腸癌肝転移,Rectal Cancer Liver Metastasis,90,3
+脂肪濃度,Fat Density,90,1
+lipiodol集積,Lipiodol Accumulation,88,7
+脂肪肝・肝嚢胞,Fatty Liver and Liver Cyst,87,1
+海綿状血管腫,Cavernous Hemangioma,87,3
+肝転移再発,Recurrent Liver Metastasis,86,3
+A-Pshunt,A-P Shunt,86,7
+軟部組織陰影,Soft Tissue Shadow,86,7
+肝内病変,Intrahepatic Lesion,82,7
+低吸収病変,Low Absorption Lesion,81,3
+リピオドール沈着,Lipiodol Deposition,81,7
+急性肝障害,Acute Liver Damage,78,4
+濃染像,Enhanced Image,77,7
+肝辺縁鈍化,Blunted Liver Edge,76,4
+肝結節,Liver Nodule,75,3
+局所再発,Local Recurrence,75,3
+増強域,Enhanced Area,74,7
+濃度上昇,Increased Density,74,7
+mass,Mass,73,3
+胆管気腫,Biliary Pneumatosis,73,6
+慢性肝障害パターン,Chronic Liver Damage Pattern,73,4
+血液灌流異常,Blood Perfusion Abnormality,72,7
+ドレナージチューブ,Drainage Tube,72,7
+肝細胞腺腫,Hepatocellular Adenoma,71,3
+早期濃染領域,Early Enhanced Area,71,7
+小LDA,Small LDA,70,3
+PSC,PSC,69,7
+軽度胆管拡張,Mild Bile Duct Dilation,68,2
+肝損傷,Liver Injury,68,7
+胆管炎合併,Cholangitis Complication,68,7
+肝内胆管拡張像,Intrahepatic Bile Duct Dilation Image,68,2
+乏血性病変,Hypovascular Lesion,66,3
+小さな肝嚢胞,Small Liver Cyst,65,0
+血流改変,Blood Flow Modification,65,7
+血管筋脂肪腫,Angiomyolipoma,64,3
+軟部濃度構造,Soft Tissue Density Structure,64,7
+造影効果が低下,Reduced Enhancement Effect,64,7
+高吸収結節,High Absorption Nodule,64,3
+悪性リンパ腫,Malignant Lymphoma,63,3
+悪性腫瘍,Malignant Tumor,62,3
+門脈腫瘍栓,Portal Vein Tumor Thrombus,62,7
+微小膿瘍,Micro Abscess,62,7
+P-Vシャント,P-V Shunt,62,7
+LDAs,LDAs,62,3
+陥凹,Depression,61,4
+肝HCC,Liver HCC,61,3
+肝癌,Liver Cancer,61,3
+転移病変,Metastatic Lesion,61,3
+早期濃染-washout,Early Enhanced Washout,61,3
+早期増強域,Early Enhanced Area,61,7
+門脈血栓,Portal Vein Thrombus,61,7
+炎症後変化,Post-inflammatory Changes,60,7
+軟部組織濃度,Soft Tissue Density,60,7
+被包化液体貯留,Encapsulated Fluid Retention,60,7
+早期濃染腫瘤,Early Enhanced Tumor,60,3
+鈍化変形,Blunted Deformation,59,4
+肥大,Hypertrophy,59,4
+Lipiodol貯留,Lipiodol Retention,59,7
+リピオドール,Lipiodol,59,7
+辺縁鈍化,Blunted Edge,58,4
+焼灼域,Ablation Area,56,7
+ガス像,Gas Image,55,6
+extravasation,Extravasation,55,7
+早期造影効果,Early Contrast Effect,55,7
+Pneumobilia,Pneumobilia,55,6
+S状結腸癌肝転移,Sigmoid Colon Cancer Liver Metastasis,55,3
+鉄沈着,Iron Deposition,54,7
+LCパターン,LC Pattern,54,4
+胆管狭窄,Bile Duct Stricture,54,7
+TACE後病変,Post-TACE Lesion,53,7
+RFA後の変化,Post-RFA Changes,52,7
+軟部濃度腫瘤,Soft Tissue Density Tumor,52,3
+腫瘍性病変,Tumorous Lesion,52,3
+仮性瘤,Pseudoaneurysm,51,7
+肝硬変の像,Liver Cirrhosis Image,51,4
+高分化HCC,Well-differentiated HCC,51,3
+肝外胆管拡張,Extrahepatic Bile Duct Dilation,51,2
+血栓化,Thrombosis,51,7
+広狭不整,Irregular Narrowing,51,7
+低吸収化,Low Absorption,51,7
+脂肪濃度上昇,Increased Fat Density,51,1
+肝内再発,Intrahepatic Recurrence,50,3
+アーチファクト,Artifact,50,7
+微小石灰化,Microcalcification,50,5
+早期濃染する結節,Early Enhanced Nodule,49,3
+濃度低下,Decreased Density,48,7
+低濃度病変,Low Density Lesion,47,7
+増強効果は不均一,Uneven Enhancement Effect,46,7
+急性胆管炎,Acute Cholangitis,46,7
+結節状濃染,Nodular Enhancement,45,3
+小病変,Small Lesion,45,3
+結節性病変,Nodular Lesion,45,3
+fluid_collection,Fluid Collection,45,7
+壁肥厚像,Wall Thickening Image,44,4
+気腫,Pneumatosis,44,6
+液貯留腔,Fluid Retention Cavity,44,7
+tiny_cyst,Tiny Cyst,44,0
+造影欠損,Contrast Defect,43,7
+残肝再発,Residual Liver Recurrence,43,3
+乏血域,Hypovascular Area,42,7
+脂肪浸潤,Fatty Infiltration,42,1
+Lp集積,Lp Accumulation,42,7
+軟部濃度部分,Soft Tissue Density Part,42,7
+脂肪腫,Lipoma,42,3
+早期造影増強,Early Enhanced Enhancement,42,7
+被膜様構造,Capsule-like Structure,42,7
+lipiodol沈着,Lipiodol Deposition,42,7
+チューブ,Tube,42,7
+肝炎,Hepatitis,41,4
+造影ムラ,Uneven Staining,41,7
+感染合併,Infection Complication,41,7
+腫瘤状,Tumorous,40,3
+肝機能障害,Liver Dysfunction,40,4
+壁在結節,Wall Nodule,40,3
+CCC,CCC,40,3
+肝内コントラスト不良,Poor Intrahepatic Contrast,39,7
+微小血管腫,Micro Hemangioma,39,3
+濃染する領域,Enhanced Area,38,7
+充実部,Solid Part,38,3
+gas,Gas,38,6
+脂肪性結節,Fatty Nodule,38,3
+巨大肝嚢胞,Giant Liver Cyst,38,0
+脂肪含有,Fat Content,37,1
+肉芽腫,Granuloma,37,3
+内部壊死,Internal Necrosis,36,7
+胆管周囲嚢胞,Peribiliary Cyst,36,0
+造影不良結節,Poor Contrast Nodule,35,3
+造影効果不均一,Uneven Contrast Effect,35,7
+残存病変,Residual Lesion,35,7
+線維化,Fibrosis,34,7
+肝拡大,Liver Enlargement,34,4
+軽度肝内胆管拡張,Mild Intrahepatic Bile Duct Dilation,33,2
+結節状構造,Nodular Structure,33,3
+乏血性腫瘍,Hypovascular Tumor,33,3
+門脈血流低下,Portal Blood Flow Decrease,33,7
+complicated_cyst,Complicated Cyst,32,0
+低濃度化,Low Density,32,1
+コイル,Coil,32,7
+小早期濃染像,Small Early Enhanced Image,32,3
+cysts,Cysts,32,0
+血流増加,Increased Blood Flow,32,7
+Lpd集積,Lpd Accumulation,31,7
+境界病変,Boundary Lesion,31,7
+低吸収SOL,Low Absorption SOL,31,3
+peribiliary_cysts,Peribiliary Cysts,31,0
+肝内早期濃染,Intrahepatic Early Enhancement,31,7
+クリップ,Clip,31,7
+膿瘍化,Abscess Formation,31,7
+占拠性病変,Occupying Lesion,30,3
+結節状染まり,Nodular Staining,30,3
+描出不良,Poorly Visible,30,7
+傍胆管嚢胞,Peribiliary Cyst,29,0
+石灰化肉芽腫,Calcified Granuloma,29,5
+ICC,ICC,29,3
+膿瘍腔,Abscess Cavity,28,7
+脂肪成分,Fat Component,28,1
+肝SOL,Liver SOL,28,3
+軟部腫瘤,Soft Tissue Tumor,28,3
+早期増強結節,Early Enhanced Nodule,28,3
+早期濃染病変,Early Enhanced Lesion,27,3
+膨隆,Protrusion,27,4
+出血性嚢胞,Hemorrhagic Cyst,27,0
+ヘモジデローシス,Hemosiderosis,27,7
+造影効果不良,Poor Contrast Effect,27,7
+結節状の早期濃染域,Nodular Early Enhanced Area,26,3
+tube,Tube,26,7
+focal_spared_area,Focal Spared Area,26,7
+腫瘤形成,Mass Formation,26,3
+遠肝性側副路,Distal Liver Collateral Route,26,7
+再発腫瘤,Recurrent Tumor,26,3
+低造影域,Low Contrast Area,26,7
+肝表凹凸不整,Irregular Liver Surface,26,4
+括れ,Constriction,26,4
+肝門部病変,Hilar Lesion,26,7
+乏血性領域,Hypovascular Area,26,7
+鈍化しています,Blunted,26,4
+腫瘤像,Tumor Image,25,3
+結節状の低濃度域,Nodular Low Density Area,25,3
+肝表不整,Irregular Liver Surface,25,4
+tiny_cysts,Tiny Cysts,25,0
+ガス貯留,Gas Retention,25,6
+微小結節,Micro Nodule,25,3
+腫大して,Enlarged,25,4
+RFA後瘢痕,Post-RFA Scar,25,7
+peribiliary_cyst,Peribiliary Cyst,24,0
+門脈閉塞,Portal Vein Occlusion,24,7
+造影効果不良域,Poor Contrast Area,24,7
+造影欠損域,Contrast Defect Area,24,7
+造影腫瘤,Contrast Tumor,24,3
+瘢痕,Scar,23,7
+吸収値低下,Decreased Absorption Value,23,1
+造影剤の血管外漏出像,Extravasation of Contrast Agent,23,7
+lipiodol,Lipiodol,23,7
+肝海綿状血管腫,Liver Cavernous Hemangioma,23,3
+異常造影効果,Abnormal Contrast Effect,23,7
+鬱血,Congestion,22,7
+損傷,Injury,22,7
+Cysts,Cysts,22,0
+リピオドール残存,Lipiodol Residual,21,7
+pseudolipoma,Pseudolipoma,21,7
+微小LDA,Micro LDA,21,3
+lipiodol貯留,Lipiodol Retention,21,7
+還流異常域,Perfusion Abnormal Area,21,7
+ステント閉塞,Stent Occlusion,21,7
+嚢胞性変化,Cystic Change,21,0
+嚢胞状,Cystic,21,0
+屈曲,Curvature,21,4
+増強効果亢進,Increased Enhancement Effect,21,7
+瘤状拡張,Aneurysmal Dilation,21,7
+肝硬変パターンの肝変形,Cirrhotic Liver Pattern Deformation,20,4
+dysfunction_pattern,Dysfunction Pattern,20,7
+Lip集積,Lip Accumulation,20,7
+fluid,Fluid,20,7
+lipiodolの貯留,Lipiodol Retention,20,7
+微小低吸収域,Micro Low Absorption Area,20,7
+早期濃染後,Post-early Enhancement,20,7
+萎縮変形,Atrophic Deformation,20,4
+動脈口径不整,Arterial Diameter Irregularity,20,7
+早期濃染する,Early Enhanced,20,7
+高濃度域,High Density Area,20,7
+遠肝性側副血行路,Distal Liver Collateral Circulation,19,7
+血流低下,Blood Flow Decrease,19,7
+嚢胞様構造,Cystic Structure,19,0
+高信号,High Signal,19,7
+肝小石灰化,Small Liver Calcification,19,5
+被膜状構造,Capsule-like Structure,19,3
+LC,LC,19,4
+脂肪含有腫瘤,Fat-containing Tumor,19,3
+濃染腫瘤,Enhanced Tumor,19,3
+吸収値上昇,Increased Absorption Value,19,7
+壊死巣,Necrotic Focus,19,7
+突出像,Protruding Image,19,4
+被包化液体貯留腔,Encapsulated Fluid Retention Cavity,19,7
+嚢胞状構造,Cystic Structure,19,0
+Lipiodol沈着域,Lipiodol Deposition Area,19,7
+肝内血流,Intrahepatic Blood Flow,19,7
+早期造影,Early Contrast,18,7
+PV-shunt,PV Shunt,18,7
+periportal_collar_sign,Periportal Collar Sign,18,7
+濃染しています,Enhanced,18,7
+斑状濃染,Patchy Enhancement,18,7
+点状早期濃染,Punctate Early Enhancement,18,7
+結節構造,Nodule Structure,18,3
+結節状早期濃染域,Nodular Early Enhanced Area,18,3
+肝硬変の肝形態,Cirrhotic Liver Morphology,18,4
+AP_shunts,AP Shunts,18,7
+低造影結節,Low Contrast Nodule,18,3
+腫瘤状構造,Tumorous Structure,18,3
+胆管結石,Bile Duct Stone,17,5
+lipiodol_deposit,Lipiodol Deposit,17,7
+肝内外胆管拡張,Intrahepatic and Extrahepatic Bile Duct Dilation,17,2
+金属アーチファクト,Metal Artifact,17,7
+腫瘤構造,Tumor Structure,17,3
+低濃度結節,Low Density Nodule,17,3
+索状影,Striated Shadow,17,7
+腫脹,Swelling,17,4
+早期描出,Early Visualization,17,7
+造影不均一,Uneven Enhancement,17,7
+肝硬変パターン,Cirrhotic Pattern,17,4
+偏位,Deviation,17,4
+狭小化ないし閉塞,Narrowing or Occlusion,17,4
+ring_enhancement,Ring Enhancement,17,3
+胆管腫瘍栓,Biliary Tumor Thrombus,17,7
+気泡,Air Bubble,17,6
+変性,Degeneration,17,7
+肝辺縁鈍,Blunted Liver Edge,16,4
+乏血性の結節,Hypovascular Nodule,16,3
+肝濃度低下,Decreased Liver Density,16,1
+造影効果の不良な領域,Poorly Enhanced Area,16,7
+PTCD_tube,PTCD Tube,16,7
+嚢胞壁,Cyst Wall,16,0
+胆管気腫像,Biliary Pneumatosis Image,16,6
+造影欠損像,Contrast Defect Image,16,7
+異常増強,Abnormal Enhancement,16,7
+小結節状の早期濃染,Punctate Nodular Early Enhancement,16,7
+後期相染まり抜け,Late Phase Enhancement Loss,16,3
+早期濃染する領域,Early Enhanced Area,16,7
+HCCs,HCCs,16,3
+狭窄後拡張,Post-stenotic Dilation,16,7
+液体貯留像,Fluid Retention Image,16,7
+巨大嚢胞,Giant Cyst,15,0
+脂肪肝の所見,Fatty Liver Findings,15,1
+LC-pattern,LC Pattern,15,4
+線状高吸収,Linear High Absorption,15,7
+貯留物,Accumulation,15,7
+造影効果低下,Reduced Enhancement Effect,15,7
+楔状早期濃染,Wedge-shaped Early Enhancement,15,7
+小結石,Small Stone,15,5
+軟部濃度病変,Soft Tissue Density Lesion,15,7
+軟部組織像,Soft Tissue Image,15,7
+cyst,Cyst,15,0
+脂肪濃度結節,Fat Density Nodule,15,3
+小膿瘍,Small Abscess,15,7
+出血性肝嚢胞,Hemorrhagic Liver Cyst,15,0
+新出病変,New Lesion,15,7
+結節状の濃染,Nodular Enhancement,15,3
+hypervascular_foci,Hypervascular Foci,14,3
+リピオドールの貯留,Lipiodol Retention,14,7
+腫瘤状病変,Tumorous Lesion,14,3
+造影領域,Contrast Area,14,7
+焼灼後変化,Post-ablation Changes,14,7
+肝内LDA,Intrahepatic LDA,14,3
+肝内低濃度結節,Intrahepatic Low Density Nodule,14,3
+結節状早期濃染像,Nodular Early Enhanced Image,14,3
+吸収値が上昇,Increased Absorption Value,14,7
+肝LDA,Liver LDA,14,3
+肝実質萎縮,Liver Parenchymal Atrophy,14,4
+乏血性の領域,Hypovascular Area,14,7
+はまだら,Patchy,14,7
+造影剤濃度,Contrast Agent Density,14,7
+グリソン浮腫,Glisson Edema,14,7
+楔型の肝動脈血流亢進域,Wedge-shaped Hepatic Arterial Hyperperfusion Area,14,7
+低吸収成分,Low Absorption Component,14,7
+乏血生結節,Hypovascular Nodule,14,3
+染まり抜ける結節,Enhancement Loss Nodule,14,3
+早期相濃染,Early Phase Enhancement,14,7
+小濃染,Small Enhancement,14,7
+浮腫状壁肥厚,Edematous Wall Thickening,14,7
+肝内胆管狭窄,Intrahepatic Bile Duct Stricture,14,7
+肝内低濃度域,Intrahepatic Low Density Area,13,7
+ステントの開存,Stent Patency,13,7
+AV_shunt,AV Shunt,13,7
+cystic_lesion,Cystic Lesion,13,0
+肝内SOL,Intrahepatic SOL,13,3
+小SOL,Small SOL,13,3
+air_density,Air Density,13,6
+造影効果増強,Enhanced Contrast Effect,13,7
+肝門部腫瘤,Hilar Tumor,13,3
+カテーテル,Catheter,13,6
+点状高吸収域,Punctate High Absorption Area,13,7
+PVshunt,PV Shunt,13,7
+硬化性血管腫,Sclerosing Hemangioma,13,3
+後期wash_out,Late Washout,13,3
+脂肪肝の像,Fatty Liver Image,13,1
+造影効果が不均一,Uneven Contrast Effect,13,7
+軟部濃度影,Soft Tissue Density Shadow,13,7
+被膜,Capsule,13,3
+求肝性側副路,Hepatopetal Collateral Route,13,7
+索状の造影不良域,Striated Poorly Enhanced Area,13,7
+Pneuombilia,Pneumobilia,13,6
+被膜下血腫,Subcapsular Hematoma,13,7
+fat_spared_area,Fat Spared Area,13,7
+胆管tube,Bile Duct Tube,13,7
+結節状造影不良域,Nodular Poor Contrast Area,13,3
+吸収値は低く,Low Absorption Value,13,1
+ムラ染まり,Uneven Staining,13,7
+結節様構造,Nodular Structure,13,3
+造影効果はまだら,Patchy Contrast Effect,13,7
+肝結石,Liver Stone,12,5
+早期濃染小領域,Small Early Enhanced Area,12,7
+造影効果の弱い領域,Weakly Enhanced Area,12,7
+小低吸収SOL,Small Low Absorption SOL,12,3
+cavrnous_tranformatio,Cavernous Transformation,12,7
+小濃染域,Small Enhanced Area,12,7
+血流不良,Poor Blood Flow,12,7
+結節様,Nodular,12,3
+表面凹凸,Surface Irregularity,12,4
+結節様病変,Nodular Lesion,12,3
+液状化,Liquefaction,12,7
+異常増強効果,Abnormal Enhancement Effect,12,7
+結節状造影効果,Nodular Contrast Effect,12,3
+肝嚢胞性病変,Liver Cystic Lesion,12,0
+充実成分,Solid Component,12,7
+金属ステント,Metal Stent,12,7
+Wash_out,Washout,12,3
+mass_effect,Mass Effect,12,3
+早期造影結節,Early Contrast Nodule,12,3
+Lip沈着,Lip Retention,12,7
+肝表面凹凸不整,Irregular Liver Surface,12,4
+Lipidool,Lipiodol,12,7
+嚢胞性腫瘤,Cystic Tumor,12,0
+索状の低吸収域,Striated Low Absorption Area,12,7
+肝内腫瘤,Intrahepatic Tumor,12,3
+軽度肝内胆管拡張像,Mild Intrahepatic Bile Duct Dilation Image,12,2
+濃染する,Enhanced,12,7
+血流不均衡,Blood Flow Imbalance,12,7
+染まり抜け結節,Enhancement Loss Nodule,12,3
+肝内低吸収域,Intrahepatic Low Absorption Area,12,1
+嚢胞状拡張,Cystic Dilation,12,0
+末梢胆管拡張,Peripheral Bile Duct Dilation,12,2
+早期増強,Early Enhancement,12,7
+微小結節状の早期濃染,Micro Nodular Early Enhancement,12,3
+濃染する結節,Enhanced Nodule,12,3
+結節状の早期濃染像,Nodular Early Enhanced Image,12,3
+引き続き肝縁鈍化,Continued Blunting of Liver Edge,12,4
+嚢状拡張,Cystic Dilation,12,0
+肝脂肪沈着,Liver Fat Deposition,12,1
+増強腫瘤,Enhanced Tumor,11,3
+Lip貯留,Lip Retention,11,7
+門脈気腫,Portal Vein Pneumatosis,11,6
+濃染領域,Enhanced Area,11,7
+取り込み低下,Decreased Uptake,11,1
+増強効果が不均一,Uneven Enhancement Effect,11,7
+拡張胆管,Dilated Bile Duct,11,2
+低信号域,Low Signal Area,11,1
+早期濃染するHCC,Early Enhanced HCC,11,3
+低吸収領域,Low Absorption Area,11,7
+リング状造影効果,Ring-shaped Contrast Effect,11,3
+増強効果の不均一,Uneven Enhancement Effect,11,7
+造影効果の強い領域,Highly Enhanced Area,11,7
+軟部濃度上昇,Increased Soft Tissue Density,11,7
+充実部分,Solid Part,11,3
+造影増強,Enhanced Contrast,11,7
+メタリックステント,Metallic Stent,11,7
+点状造影効果,Punctate Contrast Effect,11,7
+濃度が低下,Decreased Density,11,1
+吸収値の高い液体貯留,High Absorption Fluid Retention,11,7
+NBCA,NBCA,11,7
+陥凹も,Depression,11,4
+leak,Leak,11,7
+造影病変,Contrast Lesion,11,7
+cystic_lesions,Cystic Lesions,11,0
+高吸収構造,High Absorption Structure,11,7
+門脈内ガス,Portal Vein Gas,11,6
+低吸収値,Low Absorption Value,11,1
+異常血管,Abnormal Vessel,11,7
+中心部低吸収,Central Low Absorption,11,7
+低濃度領域,Low Density Area,10,1
+pneumoblia,Pneumobilia,10,6
+萎縮性変化,Atrophic Changes,10,4
+遊離胆管,Free Bile Duct,10,7
+異常集積,Abnormal Accumulation,10,7
+肝門部膿瘍,Hilar Abscess,10,7
+単純性嚢胞,Simple Cyst,10,0
+濃度不均一,Uneven Density,10,7
+脂肪肝領域,Fatty Liver Area,10,1
+defect,Defect,10,7
+肝内嚢胞,Intrahepatic Cyst,10,0
+肝内門脈ガス,Intrahepatic Portal Vein Gas,10,6
+早期の染まり,Early Staining,10,7
+集積不良,Poor Accumulation,10,7
+腫瘍によってencasement,Encasement by Tumor,10,3
+容積増加,Volume Increase,10,4
+石灰化病変,Calcified Lesion,10,5
+肝嚢胞脾嚢胞腎嚢胞,"Liver Cyst, Spleen Cyst, Kidney Cyst",10,0
+乏血性変化,Hypovascular Change,10,7
+肝縁凹凸不整,Irregular Liver Edge,10,4
+浮腫像,Edema Image,10,7
+低濃度SOL,Low Density SOL,10,3
+血栓閉塞,Thrombotic Occlusion,10,7
+Lipiodol沈着,Lipiodol Deposition,10,7
+enhanced_nodule,Enhanced Nodule,10,3
+肝実質,Liver Parenchyma,10,7
+瘻孔,Fistula,10,7
+高濃度構造,High Density Structure,10,7
+嚢胞構造,Cystic Structure,10,0
+造影むら,Uneven Contrast,10,7
+軟部影わずか,Slight Soft Tissue Shadow,10,7
+濃度は不均一に低下,Unevenly Decreased Density,10,7
+末梢肝内胆管拡張,Peripheral Intrahepatic Bile Duct Dilation,10,2
+tube_stent,Tube Stent,10,7
+線状の低吸収,Linear Low Absorption,10,7
+門脈周囲低吸収,Periportal Low Absorption,10,7
+ドレーンチューブ,Drain Tube,10,7
+金属コイル,Metal Coil,10,7
+乏血化,Hypovascularization,10,7
+染まる結節,Staining Nodule,10,3
+早期造影病変,Early Enhanced Lesion,10,7
+液体が貯留,Fluid Retention,10,7
+斑な増強効果,Patchy Enhanced Effect,9,7
+高信号域,High Signal Area,9,7
+濃度は不均一,Uneven Density,9,7
+動静脈shunt,Arteriovenous Shunt,9,7
+ムラ,Patchy,9,7
+低濃度の領域,Low Density Area,9,7
+小結節状の構造,Small Nodular Structure,9,3
+肝内胆拡張,Intrahepatic Biliary Dilation,9,2
+posterior_parahepatic_cyst,Posterior Parahepatic Cyst,9,0
+脂肪変性,Fatty Degeneration,9,1
+肝内胆道気腫,Intrahepatic Biliary Pneumatosis,9,6
+索状構造,Striated Structure,9,7
+軟部濃度結節,Soft Tissue Density Nodule,9,3
+pneumobillia,Pneumobilia,9,6
+異常軟部組織,Abnormal Soft Tissue,9,7
+口径変化,Diameter Change,9,7
+側副路発達,Developed Collateral Route,9,7
+wash_out像,Washout Image,9,3
+集積亢進,Increased Accumulation,9,7
+造影効果の遷延,Delayed Enhancement,9,7
+被膜形成,Capsule Formation,9,7
+泣き別れ,Irregular Pattern,9,7
+脂肪の含有,Fat Inclusion,9,1
+肝細胞相低信号結節,Low Signal Hepatocyte Nodule,9,3
+網状のモザイクパターン,Reticular Mosaic Pattern,9,7
+早期造影増強結節,Early Enhanced Nodule,9,3
+増強結節,Enhanced Nodule,9,3
+のう胞,Cyst,9,0
+壊死状,Necrosis,9,7
+異物,Foreign Body,9,7
+小濃染結節,Small Enhanced Nodule,9,3
+造影遅延域,Delayed Enhancement Area,9,7
+軽度肝腫大,Mild Liver Enlargement,9,4
+壁在結節様の像,Wall Nodule-like Image,9,3
+被包化液体,Encapsulated Fluid,8,7
+濃度不整,Uneven Density,8,7
+ウォッシュアウトする領域,Washout Area,8,3
+嚢胞成分,Cystic Component,8,0
+巨大肝腫瘤,Giant Liver Tumor,8,3
+早期濃染SOL,Early Enhanced SOL,8,3
+胆管拡張域,Bile Duct Dilation Area,8,2
+壁不整,Irregular Wall,8,7
+早期染,Early Staining,8,7
+胆道通過障害,Biliary Passage Obstruction,8,7
+実質萎縮,Parenchymal Atrophy,8,4
+門脈内血栓,Portal Vein Thrombosis,8,7
+結節状の低吸収域,Nodular Low Absorption Area,8,3
+病変増加,Lesion Increase,8,7
+塞栓物質,Embolic Material,8,7
+高吸収病変,High Absorption Lesion,8,7
+後期washout,Late Washout,8,3
+病変腫瘍,Lesion Tumor,8,3
+内瘻化,Internal Fistula,8,7
+門脈狭窄,Portal Vein Stenosis,8,7
+門脈内air,Portal Vein Air,8,6
+リング状増強結節,Ring-shaped Enhanced Nodule,8,3
+リピオドール欠損部,Lipiodol Defect,8,7
+液体濃度,Fluid Density,8,7
+V-P_shunt,V-P Shunt,8,7
+肝被膜外へ進展,Extension Beyond Liver Capsule,8,7
+早期濃染~洗い出し,Early Enhanced to Washout,8,3
+脂肪肝高度,Severe Fatty Liver,8,1
+染まる病変,Stained Lesion,8,7
+早期濃染する小領域,Early Enhanced Small Area,8,7
+圧排によって内側へ偏位,Medial Displacement by Compression,8,7
+胆管拡張像,Bile Duct Dilation Image,8,2
+低吸収値結節,Low Absorption Value Nodule,8,3
+リング状増強病変,Ring-shaped Enhanced Lesion,8,3
+吸収値が低下,Decreased Absorption Value,8,1
+貯留液,Retained Fluid,8,7
+small_cysts,Small Cysts,8,0
+小石灰化像,Small Calcified Image,8,5
+dull_edge,Dull Edge,8,4
+高吸収化,High Absorption,8,7
+乏血性のLDA,Hypovascular LDA,8,3
+不染域,Non-staining Area,8,7
+wash_outする,Washout,8,3
+Lipiodolの貯留,Lipiodol Retention,8,7
+肝静脈内腫瘍栓,Portal Vein Tumor Thrombus,8,7
+ENBD_tube,ENBD Tube,8,7
+低造影腫瘤,Low Contrast Tumor,8,3
+小低吸収結節,Small Low Absorption Nodule,8,3
+脂肪結節,Fat Nodule,8,3
+肝低吸収結節,Liver Low Absorption Nodule,8,3
+小結節状構造,Small Nodular Structure,8,3
+wash-out,Washout,8,3
+濃度は上昇,Increased Density,7,7
+肝低濃度結節,Liver Low Density Nodule,7,3
+低吸収域結節,Low Absorption Area Nodule,7,3
+嚢胞状病変,Cystic Lesion,7,0
+stent,Stent,7,7
+high-high_lesion,High-high Lesion,7,7
+八つ頭様腫瘤,Yatsugashira-like Tumor,7,3
+微小病変,Micro Lesion,7,7
+まだらに低下,Patchy Decrease,7,1
+肝門脈内ガス,Portal Vein Gas,7,6
+小さな肝細胞相低信号結節,Small Low Signal Hepatocyte Nodule,7,3
+肝萎縮高度,Severe Liver Atrophy,7,4
+複雑嚢胞,Complicated Cyst,7,0
+造影効果の不均一性,Uneven Contrast Effect,7,7
+腫瘍栓充満,Tumor Thrombus Filling,7,7
+拡張増悪,Stenosis Exacerbation,7,7
+造影効果の乏しい病変,Poorly Enhanced Lesion,7,7
+線状の早期濃染域,Linear Early Enhanced Area,7,7
+血流の増加,Increased Blood Flow,7,7
+リング状染まり,Ring-shaped Staining,7,3
+焼灼変化,Ablation Change,7,7
+低濃度域~液体貯留腔,Low Density Area to Fluid Retention Cavity,7,7
+引き続き拡張,Continued Expansion,7,2
+washoutする領域,Washout Area,7,3
+後期相低濃度結節,Late Phase Low Density Nodule,7,3
+早期濃染域のムラ,Patchy Early Enhanced Area,7,7
+嚢胞拡大,Cystic Enlargement,7,0
+結節状の染まり抜け,Nodular Enhancement Loss,7,3
+異常軟部組織の増生,Abnormal Soft Tissue Proliferation,7,7
+乏血性の腫瘍,Hypovascular Tumor,7,3
+静脈内腫瘍栓,Intravenous Tumor Thrombus,7,7
+被包化貯留腔,Encapsulated Retention Cavity,7,7
+造影効果乏しい病変,Poorly Enhanced Lesion,7,7
+低濃度+増強不良,Low Density + Poor Enhancement,7,7
+索状の増強効果,Striated Enhanced Effect,7,7
+肝縁鈍化変形,Blunted Liver Edge Deformation,7,4
+グラフト肝は低濃度,Graft Liver Low Density,7,7
+増強効果のムラ,Uneven Enhancement Effect,7,7
+高濃度結節,High Density Nodule,7,3
+造影効果のある領域,Enhanced Area,7,7
+索状不染域,Striated Poorly Enhanced Area,7,7
+肝内胆管拡張ないし嚢胞,Intrahepatic Bile Duct Dilation or Cyst,7,2
+washout像,Washout Image,7,3
+グラフト肝の胆管拡張,Graft Liver Bile Duct Dilation,7,2
+効果不良な部分,Poorly Enhanced Part,7,7
+結節状の早期の染まり,Nodular Early Staining,7,3
+vascular_lake様の構造,Vascular Lake-like Structure,7,3
+数珠状拡張,Beaded Dilation,7,2
+肝実質類若干低濃度,Slightly Low Parenchymal Density,7,1
+異常濃染,Abnormal Enhancement,7,7
+小血栓,Small Thrombus,7,7
+くぼみ,Depression,7,7
+高信号結節,High Signal Nodule,7,3
+lipiodol沈着部,Lipiodol Deposition Area,7,7
+早期濃染・洗い出し,Early Enhanced and Washout,7,3
+楔状域,Wedge-shaped Area,7,7
+血管外漏出像,Extravasation Image,7,7
+環境凹凸不整,Irregular Surface,7,4
+腫瘍増大,Tumor Growth,7,3
+あわい低吸収,Faint Low Absorption,7,1
+AVshunt,AV Shunt,7,7
+引き続き肝萎縮,Continued Liver Atrophy,7,4
+拡張±腫瘍栓,Dilation ± Tumor Thrombus,7,7
+右側肝円索,Right Liver Round Ligament,7,7
+CT値上昇,Increased CT Value,7,7
+低吸収な領域,Low Absorption Area,7,7
+まだらな染まり,Patchy Staining,7,7
+血腫貯留,Hematoma Retention,7,7
+楔状早期濃染域,Wedge-shaped early enhanced area,7,7
+EOB取り込み不良結節,EOB uptake deficient nodule,7,3
+低エコー域,Low echo area,7,7
+梗塞領域,Infarct area,7,7
+小結節状増強効果,Small nodular enhancement effect,7,3
+spared_lesion,Spared lesion,7,7
+海綿状肝血管腫,Cavernous liver hemangioma,7,3
+グラフト肝,Graft liver,7,7
+乏血性な領域,Hypovascular area,7,7
+液体充満,Fluid-filled,7,7
+ホモグラフト,Homograft,7,7
+血腫瘤,Hematoma mass,7,3
+地図状の低濃度,Map-like low density,7,7
+高濃度嚢胞,High-density cyst,7,0
+嚢胞様,Cystic,7,0
+圧排性変化,Compression change,7,7
+後瘢痕,Post-scar,7,7
+門脈ガス,Portal vein gas,7,6
+Lipiodol,Lipiodol,7,7
+高吸収像,High absorption image,7,7
+motion_artifact,Motion artifact,7,7
+うっ血域,Congested area,7,7
+Lipiodol残存,Residual lipiodol,7,7
+軟部濃度陰影,Soft tissue density shadow,7,7
+表面凹凸不整,Irregular surface,7,4
+浮腫性肥厚,Edematous thickening,7,7
+増強不良,Poor enhancement,7,7
+動脈性肝実質増強効果,Arterial liver parenchymal enhancement effect,7,7
+点状濃染,Punctate enhancement,7,3
+脂肪性腫瘤,Fatty tumor,7,3
+脂肪沈着）,Fat deposition,7,1
+腫瘤内部,Inside tumor,7,3
+prolonged_enhancement,Prolonged enhancement,7,7
+肝内濃度は低下,Decreased intrahepatic density,7,1
+胆管内気腫,Biliary pneumatosis,6,6
+後期の洗い出し,Late washout,6,3
+多血化,Hypervascularization,6,7
+造影遅延,Enhanced delay,6,7
+肝腫,Liver tumor,6,4
+肝細胞相低信号部,Low signal hepatocyte area,6,7
+早期濃染部位,Early enhanced area,6,7
+濃度は低下,Decreased density,6,7
+口径の不整,Irregular diameter,6,7
+焼灼瘢痕,Ablation scar,6,7
+小早期濃染,Small early enhancement,6,7
+動脈相にて低吸収,Low absorption in arterial phase,6,7
+リピオドール沈着域,Lipiodol deposition area,6,7
+小結節状領域,Small nodular area,6,3
+血栓形成,Thrombus formation,6,7
+液体貯留像減少,Decreased fluid retention image,6,0
+門脈ガス像,Portal vein gas image,6,6
+脈管腫瘍栓,Vascular tumor thrombus,6,7
+病変部,Lesion area,6,7
+嚢胞状の低吸収域,Cystic low absorption area,6,0
+fill-in_enhancement,Fill-in enhancement,6,3
+造影効果乏しく,Poorly enhanced,6,7
+海綿状血管腫の像,Cavernous hemangioma image,6,3
+隔壁構造,Septal structure,6,7
+早期濃染まり,Early staining,6,7
+肝細胞相低信号域,Low signal hepatocyte area,6,7
+地図状脂肪肝,Map-like fatty liver,6,1
+早期濃染み,Early staining,6,7
+瘍壊死,Abscess necrosis,6,7
+金属,Metal,6,7
+吸収値の低下,Decreased absorption value,6,1
+小早期濃染域,Small early enhancement area,6,7
+腫瘍内仮性瘤,Pseudoaneurysm inside tumor,6,7
+RFA痕,RFA scar,6,7
+肝門部胆管肥厚,Hilar bile duct thickening,6,7
+Lipidol集積,Lipiodol accumulation,6,7
+ごく淡く低吸収域,Very faint low absorption area,6,1
+肝門部液貯留,Hilar fluid retention,6,7
+乏血性脂肪性結節,Hypovascular fatty nodule,6,3
+濃度も不均一,Uneven density,6,7
+ERBD_tube,ERBD tube,6,7
+線状の低吸収域,Linear low absorption area,6,7
+肝低吸収域,Low absorption area,6,7
+早期濃染ムラ,Early staining unevenness,6,7
+結節状陰影,Nodular shadow,6,3
+早期濃染洗い出し,Early staining washout,6,3
+肝管拡張,Bile duct dilation,6,2
+金属濃度,Metal density,6,7
+肝縁の鈍化,Blunted liver edge,6,4
+目立つ領域,Prominent area,6,7
+肝表面凹凸,Irregular liver surface,6,4
+それぞれ胆管tube,Each bile duct tube,6,4
+リング状早期造影効果,Ring-shaped early enhancement effect,6,3
+早期濃染+洗い出し,Early staining + washout,6,3
+腫大した,Enlarged,6,7
+肝嚢胞腎嚢胞,"Liver cyst, kidney cyst",6,0
+まだら状脂肪肝,Patchy fatty liver,6,1
+造影効果は低下,Decreased enhancement effect,6,7
+肝AML,Liver AML,6,3
+high-low_patternの結節,High-low pattern nodule,6,3
+肝内shunt,Intrahepatic shunt,6,7
+vascular_nodules,Vascular nodules,6,3
+高吸収域病変,High absorption area lesion,6,7
+造影剤の血管外漏出,Contrast agent extravasation,6,7
+早期相濃染結節,Early phase enhanced nodule,6,7
+小さい肝嚢胞,Small liver cyst,6,0
+広がる低濃度域,Spreading low-density area,6,7
+Lipiodol貯留病変,Lipiodol retention lesion,6,7
+空洞,Cavity,6,7
+ドーム下病変,Subphrenic lesion,6,7
+右肝内胆管拡張,Right intrahepatic bile duct dilation,5,2
+focal_fat_spared_area,Focal fat spared area,5,1
+微小低吸収結節,Micro low absorption nodule,5,3
+造影効果も低下~遅延,Decreased ~ delayed enhancement effect,5,7
+肝実質濃度低下,Decreased parenchymal density,5,1
+実質低濃度化,Low parenchymal density,5,1
+脂肪肝のspared_lesions,Fatty liver spared lesions,5,1
+早期増強効果が不均一,Uneven early enhancement effect,5,7
+high-iso_lesion,High-iso lesion,5,7
+早期相にて濃染する結節,Early phase enhanced nodule,5,3
+鬱血像,Congested image,5,7
+肝縁変形,Deformed liver edge,5,4
+肝内小結節状の領域,Intrahepatic small nodular area,5,3
+viableな成分,Viable component,5,7
+リピオドール貯留,Lipiodol retention,5,7
+AP_shuntないし血管腫,AP shunt or hemangioma,5,3
+脂肪性の結節,Fatty nodule,5,3
+高吸収な縁取り,High absorption border,5,7
+薄い壁肥厚,Thin wall thickening,5,7
+異常信号,Abnormal signal,5,7
+肝内血腫,Intrahepatic hematoma,5,7
+低濃度な領域,Low-density area,5,7
+軟部組織濃度域,Soft tissue density area,5,7
+低吸収期,Low absorption period,5,1
+胆管狭小化,Bile duct stenosis,5,7
+動脈相において濃染,Enhanced in arterial phase,5,7
+_shunt,Shunt,5,7
+リピオドール沈着部,Lipiodol deposition area,5,7
+左肝管狭窄,Left bile duct stenosis,5,7
+結節状早期,Nodular early,5,3
+早期膿染結節,Early staining nodule,5,3
+病変内低吸収域,Low absorption area within the lesion,5,7
+嚢胞腫瘤,Cystic tumor,5,0
+胆管胆管気腫,Bile duct pneumatosis,5,6
+石灰化像,Calcification image,5,5
+地図状脂肪肝）,Map-like fatty liver,5,1
+肝AP_shunt,Liver AP shunt,5,7
+eHCC,E-HCC,5,3
+まだらな吸収域,Patchy absorption area,5,1
+小さな病変,Small lesion,5,7
+胆管内ガス,Bile duct gas,5,6
+小結節状,Small nodular,5,3
+nodule_in_noduleの構造,Nodule-in-nodule structure,5,3
+早期へ濃染域,Early enhanced area,5,7
+高集積,High accumulation,5,7
+後期washout病変,Late washout lesion,5,3
+充実性病変,Solid lesion,5,3
+hypovascular_lesion,Hypovascular lesion,5,7
+実質濃度が低下,Decreased parenchymal density,5,1
+wash_out状,Washout,5,3
+染まり混み,Staining mixed,5,7
+HDA,HDA,5,7
+隔壁様構造,Septum-like structure,5,7
+早期濃染部,Early enhanced area,5,7
+脂肪肝増悪,Worsening fatty liver,5,1
+瘢痕像,Scar image,5,7
+軟部構造,Soft structure,5,7
+被膜陥凹,Capsule depression,5,7
+高吸収液貯留,High absorption fluid retention,5,7
+早期濃染ん,Early enhanced,5,7
+低吸収域腫瘤,Low absorption area tumor,5,3
+グラフト肝の肝内胆管拡張,Graft liver intrahepatic bile duct dilation,5,2
+萎縮ぎみ,Atrophic tendency,5,4
+viableな腫瘍,Viable tumor,5,3
+浮腫状変化,Edematous change,5,7
+造影前低濃度,Low density before contrast,5,1
+効果不均一,Uneven effect,5,7
+嚢胞状の液体貯留腔,Cystic fluid retention cavity,5,7
+血流の違い,Blood flow difference,5,7
+肝内門脈内ガス,Intrahepatic portal vein gas,5,6
+肝鉄沈着,Liver iron deposition,5,7
+内部脈管構造の貫通,Penetration of internal vascular structure,5,7
+表面不整,Irregular surface,5,4
+金属クリップ,Metal clip,5,7
+早期濃染数カ所,Several early enhancements,5,7
+腫瘤状乏血域,Tumorous hypovascular area,5,3
+腫瘤状の早期濃染,Tumorous early enhancement,5,3
+造影効果は一部不均一,Partially uneven enhancement effect,5,7
+低吸収）,Low absorption,5,7
+capsule_like_enhancement,Capsule-like enhancement,5,3
+肝実質増強不良,Poor liver parenchymal enhancement,5,7
+造影効果がまだら,Patchy enhancement effect,5,7
+periportal_color,Periportal collar,5,7
+肝嚢胞膵,"Liver cyst, pancreas",5,0
+肝形態変化,Liver morphology change,5,4
+肝NET,Liver NET,5,3
+造影効果も不均一に上昇,Uneven increased enhancement effect,5,7
+ウォッシュアウト,Washout,5,3
+小結節様構造,Small nodule-like structure,5,3
+結節状濃染域,Nodular enhanced area,5,3
+多結節,Multinodular,5,3
+造影異常,Abnormal enhancement,5,7
+脂肪肝・結腸憩室,"Fatty liver, colon diverticulum",5,1
+内外瘻チューブ,Internal-external fistula tube,5,7
+線状の高吸収域,Linear high absorption area,5,7
+膿瘍不明瞭化,Abscess obscuration,5,7
+肝実質低吸収域,Liver parenchymal low absorption area,5,1
+内外瘻化,Internal-external fistula formation,5,7
+軟部組織の増生,Soft tissue proliferation,5,7
+病変肝,Lesion liver,5,7
+pnuemobilia,Pneumobilia,5,6
+濃染する帯状の領域,Enhanced band-like area,5,7
+線状石灰化,Linear calcification,5,5
+HGS_stent,HGS stent,5,7
+小結節影,Small nodule shadow,5,3
+washout継続,Continued washout,5,3
+微小早期濃染域,Micro early enhanced area,5,7
+リピドールの沈着,Lipiodol deposition,5,7
+あらたな沈着,New deposition,5,7
+肝内結節,Intrahepatic nodule,5,3
+結節状の集積,Nodular accumulation,5,3
+高吸収部分,High absorption part,5,7
+造影後早期濃染,Post-contrast early enhancement,5,7
+低信号結節,Low signal nodule,5,3
+弱い染まり,Weak staining,5,7
+嚢胞性小病変,Cystic small lesion,5,0
+mass形成,Mass formation,5,3
+濃染部位,Enhanced part,5,7
+求肝性の側副血行路形成,Hepatopetal collateral circulation formation,5,7
+cavernous_transformation）,Cavernous transformation,5,7
+嚢胞ないし血管腫,Cyst or hemangioma,5,3
+染まる領域,Enhanced area,5,7
+門脈内gas,Portal vein gas,5,6
+染まり抜けています,Enhancement loss,5,3
+脂肪の吸収値,Fat absorption value,5,1
+極めて凹凸,Extremely irregular,5,4
+lipidol,Lipiodol,5,7
+点状早期増強効果,Punctate early enhanced effect,5,7
+像早期濃染域,Early enhanced area,5,7
+胆汁貯留,Bile retention,4,7
+拡張不良,Poor dilation,4,7
+造影効果亢進,Enhanced contrast effect,4,7
+造影亢進,Enhanced contrast,4,7
+早期濃染変化,Early enhanced change,4,7
+脂肪肝のfocal_spared_area,Fatty liver focal spared area,4,1
+脂肪肝のarea,Fatty liver area,4,1
+軟部英,Soft shadow,4,7
+コントラストは低下,Decreased contrast,4,7
+石灰,Lime,4,5
+肝内periportal_color,Intrahepatic periportal collar,4,7
+造影効果部分,Contrast part,4,7
+むら染まり,Patchy staining,4,7
+嚢胞様の病変,Cystic lesion,4,0
+軟部腫瘍,Soft tissue tumor,4,3
+脂肪沈着増強,Fat deposition enhancement,4,1
+ring_enhance,Ring enhance,4,3
+肝APシャント,Liver AP shunt,4,7
+高濃度陰影,High-density shadow,4,7
+胆管stent_tube,Bile duct stent tube,4,7
+依然として閉塞,Still occluded,4,7
+内部air,Internal air,4,6
+造影効果の乏しい領域,Poorly enhanced area,4,7
+厚い液体貯留,Thick fluid retention,4,7
+肝内血流改変,Intrahepatic blood flow modification,4,7
+嚢胞化,Cystification,4,0
+造影剤のextravasation,Contrast agent extravasation,4,7
+主肝嚢胞,Main liver cyst,4,0
+造影不均一でした,Uneven contrast,4,7
+造影効果強く,Strongly enhanced,4,7
+嚢胞状の拡張,Cystic dilation,4,0
+ムラぞまり,Uneven staining,4,7
+腫瘤様所見,Tumor-like finding,4,3
+嚢胞状~,Cystic,4,0
+早期造影不均一,Early uneven contrast,4,7
+嚢胞性結節,Cystic nodule,4,0
+壁周囲淡染,Weakly stained wall surrounding,4,7
+肝部分脂肪肝,Partial liver fatty liver,4,1
+肝内低吸収結節影,Intrahepatic low absorption nodule shadow,4,3
+washout）,Washout,4,3
+低吸収量域,Low absorption amount area,4,7
+Lipiodole集積,Lipiodol accumulation,4,7
+pigtail_catheter,Pigtail catheter,4,7
+早期濃染-wash_outする結節,Early enhanced washout nodule,4,3
+濃染遷延域,Delayed enhanced area,4,7
+血流改変巣,Blood flow modification focus,4,7
+shunt様の早期濃染,Shunt-like early enhancement,4,7
+楔型の領域,Wedge-shaped area,4,7
+wash_outする結節性病変,Washout nodular lesion,4,3
+途絶像,Interruption image,4,7
+動脈相にて早期濃染,Early enhanced in arterial phase,4,7
+移植肝内早期濃染病変,Early enhanced lesion in transplanted liver,4,7
+遠肝性シャント,Distal liver shunt,4,7
+periportal_collarの肥厚,Periportal collar thickening,4,7
+嚢胞状腫瘤,Cystic tumor,4,3
+低吸収の病変,Low absorption lesion,4,7
+PTBD_tube,PTBD tube,4,7
+嚢胞状の低濃度結節,Cystic low-density nodule,4,0
+梢性索状影,Peripheral striated shadow,4,7
+肝内結節影,Intrahepatic nodule shadow,4,3
+小膿疱,Small pustule,4,0
+不均一増強効果,Uneven enhancement effect,4,7
+すこし被包化,Slightly encapsulated,4,7
+腫瘍部,Tumor part,4,3
+enhancing_lesion,Enhancing lesion,4,7
+早期濃染する帯状の領域,Enhanced band-like area,4,7
+肝実質早期濃染,Liver parenchyma early enhancement,4,7
+腫瘤上縁,Tumor upper edge,4,3
+濃度低下域,Decreased density area,4,7
+造影剤貯留,Contrast agent retention,4,7
+索状の染まり,Striated staining,4,7
+lipiodol集積辺縁,Lipiodol deposition edge,4,7
+cavenous_transformation,Cavernous transformation,4,7
+厚い被膜,Thick capsule,4,7
+濃度はやや不均一,Slightly uneven density,4,7
+後期不明瞭化領域,Late blurred area,4,7
+lipidol集積,Lipiodol deposition,4,7
+増強効果の亢進,Enhanced effect increase,4,7
+引き続き肝嚢胞,Continued liver cyst,4,0
+異常拡張,Abnormal dilation,4,7
+遠肝性側副路増生,Distal liver collateral route proliferation,4,7
+粗大病変,Coarse lesion,4,7
+早期濃染する病変,Early enhanced lesion,4,7
+軽度胆管拡張像,Mild bile duct dilation image,4,2
+淡く低吸収な領域,Faint low absorption area,4,7
+炎症像,Inflammatory image,4,7
+索状低吸収域,Striated low absorption area,4,7
+小石灰,Small calcification,4,5
+small_cyst,Small cyst,4,0
+肝嚢胞脾,"Liver cyst, spleen",4,0
+引き続き小さな嚢胞,Continued small cyst,4,0
+高吸収継続,Continued high absorption,4,7
+またがる低吸収結節,Overlapping low absorption nodule,4,3
+vascular_lesion,Vascular lesion,4,7
+lipiodolの集積,Lipiodol accumulation,4,7
+造影効果が不均質化,Uneven contrast effect,4,7
+不染領域,Non-staining area,4,7
+造影低下領域,Decreased contrast area,4,7
+濃染部,Enhanced part,4,7
+拡張性変化,Expansive change,4,7
+実質性変化,Parenchymal change,4,7
+来たす腫瘍,Tumor-causing,4,3
+異所性還流域,Ectopic reflux area,4,7
+金属濃度像,Metal density image,4,7
+ERBDチューブ,ERBD tube,4,7
+washoutする,Washout,4,3
+肝縁不整,Irregular liver edge,4,4
+高吸収な領域,High absorption area,4,7
+門脈拡張,Portal vein dilation,4,7
+肝濃度不均一,Uneven liver density,4,7
+肝円索描出,Liver round ligament visualization,4,7
+求肝性側副血行路発達,Hepatopetal collateral circulation development,4,7
+血流低下域,Blood flow decrease area,4,7
+早期濃染濃染域,Early enhanced enhanced area,4,7
+早期濃染-wash_out,Early enhanced washout,4,3
+造影効果まだら,Patchy contrast effect,4,7
+焼灼域内,Intra-ablation area,4,7
+wash_out腫瘤,Washout tumor,4,3
+嚢胞変性,Cystic degeneration,4,0
+濃染するパターン,Enhanced pattern,4,7
+造影CT早期相にて濃染,Early enhanced on contrast CT,4,7
+造影効果明瞭化,Clear contrast effect,4,7
+形態変化,Morphology change,4,4
+脂肪肝不変,Unchanged fatty liver,4,1
+異常軟部濃度,Abnormal soft tissue density,4,7
+早期濃染（疑）,Early enhanced (suspicion),4,7
+早期濃染不明瞭,Early enhanced unclear,4,7
+吸収値高く,High absorption value,4,7
+肝実質増強効果不均一,Uneven liver parenchyma enhancement,4,7
+血管腫不変,Unchanged hemangioma,4,3
+濃染域の広がり,Spreading enhanced area,4,7
+脂肪非沈着域,Fat non-deposition area,4,1
+FDG集積,FDG accumulation,4,7
+淡く低吸収,Faint low absorption,4,7
+Lp貯留,Lp retention,4,7
+早期相にて濃染,Enhanced in early phase,4,7
+遅延造影,Delayed contrast,4,7
+動脈支配化,Arterial control,4,7
+増強病変,Enhanced lesion,4,7
+増強効果不均一,Uneven enhancement effect,4,7
+Cluster_sign,Cluster sign,4,7
+小結節状の早期濃染域,Small nodular early enhanced area,4,3
+くさび状早期濃染,Wedge-shaped early enhancement,4,7
+液体貯留嚢胞,Fluid retention cyst,4,0
+高吸収の領域,High absorption area,4,7
+早期濃染巣,Early enhanced focus,4,7
+CT値低下,Decreased CT value,4,7
+低濃度な病変,Low-density lesion,4,7
+puenmobilia,Pneumobilia,4,6
+RFA変化,Post-RFA changes,4,7
+萎縮気味,Atrophic tendency,4,4
+low-iso,Low-iso,4,7
+PTCDtube,PTCD tube,4,7
+早期灌流,Early perfusion,4,7
+Cavernous_transformation,Cavernous transformation,4,7
+のまだら濃染,Patchy enhancement,4,7
+肝内石灰化病変,Intrahepatic calcified lesion,4,5
+実質濃度は低く,Low parenchymal density,4,1
+血管腫病変,Hemangioma lesion,4,3
+肝内胆肝拡張,Intrahepatic bile duct dilation,4,2
+high_pattern,High pattern,4,7
+内部densityは低下,Decreased internal density,4,1
+造影効果はやや不均一,Slightly uneven contrast effect,4,7
+それぞれ胆管ステント,Respective bile duct stent,4,7
+濃染する病変,Enhanced lesion,4,7
+圧迫変形,Compression deformation,4,4
+泣き別れ状拡張,Bead-like dilation,4,7
+は不均一低吸収,Uneven low absorption,4,7
+シャント（PV_shunt,Shunt (PV shunt),4,7
+ring状,Ring-shaped,4,3
+高蛋白成分,High protein component,3,7
+出血成分,Hemorrhagic component,3,7
+肝実質萎縮後,Post-parenchymal atrophy,3,4
+後期相低吸収域,Late phase low absorption area,3,7
+粗大石灰化,Coarse calcification,3,5
+結節所見,Nodular finding,3,3
+早期濃染部分,Early enhanced part,3,7
+肝実質濃度は低下,Decreased liver parenchymal density,3,7
+乏血性の病変,Hypovascular lesion,3,7
+リピオド-ル沈着,Lipiodol deposition,3,7
+造影ムラぞまり,Patchy enhancement,3,7
+胆道気腫症,Biliary pneumatosis,3,6
+造影不良腫瘤,Poorly enhanced tumor,3,3
+hemangioma,Hemangioma,3,3
+肝ドーム下病変,Subphrenic liver lesion,3,7
+肝内小石灰化,Intrahepatic microcalcification,3,5
+少し萎縮,Slightly atrophic,3,4
+軟部病変,Soft tissue lesion,3,7
+線状高吸収体,Linear high absorption body,3,7
+脂肪肝所見,Fatty liver findings,3,1
+結節状領域,Nodular area,3,3
+低吸収~濃染,Low absorption to enhancement,3,7
+染まる低濃度結節,Staining low-density nodule,3,3
+小嚢胞状のSOL,Small cystic SOL,3,0
+結節像,Nodule image,3,3
+腫瘤様病変,Tumorous lesion,3,3
+左肝内胆管拡張,Left intrahepatic bile duct dilation,3,2
+結節状な早期濃染域,Nodular early enhanced area,3,3
+pneumobila,Pneumobilia,3,6
+結節状の構造,Nodular structure,3,3
+造影増強効果のパターン,Enhanced contrast effect pattern,3,7
+Pnuemobilia,Pneumobilia,3,6
+被膜下液貯留,Subcapsular fluid retention,3,7
+腫腫性壁肥厚,Tumorous wall thickening,3,3
+被膜構造,Capsule structure,3,7
+短絡路,Shunt route,3,7
+washoutする結節,Washout nodule,3,3
+突出状構造,Protruding structure,3,7
+索状変化,Striated change,3,7
+造影効果の弱い部分,Weakly enhanced part,3,7
+遠肝性の側副路,Distal liver collateral route,3,7
+隔壁形成,Septum formation,3,7
+低吸収な腫瘍,Low absorption tumor,3,3
+脂肪肝の悪化,Worsening fatty liver,3,1
+リング状早期濃染,Ring-shaped early enhancement,3,3
+壁肥厚病変,Wall thickening lesion,3,7
+遠肝性の側副路増生,Distal liver collateral route proliferation,3,7
+focal_fat_deposit,Focal fat deposit,3,1
+求肝性側副路発達,Hepatopetal collateral route development,3,7
+NBCAが貯留,NBCA retention,3,7
+肝実質早期造影増強,Liver parenchyma early contrast enhancement,3,7
+点状高吸収,Punctate high absorption,3,7
+陥凹（scalloping,Scalloping,3,4
+微小石灰化陰影,Microcalcification shadow,3,5
+結節様陰影,Nodule-like shadow,3,3
+濃染ムラ,Patchy enhancement,3,7
+肝萎縮部分,Atrophic liver part,3,4
+遅延期淡染領域,Delayed phase faint staining area,3,7
+低吸収値域,Low absorption value area,3,7
+肝内門脈破格,Intrahepatic portal vein variation,3,7
+早期濃染効果,Early enhancement effect,3,7
+管状構造,Tubular structure,3,7
+造影不均一領域,Uneven contrast area,3,7
+脈管拡張,Vascular expansion,3,7
+肝periportal_collar,Periportal collar,3,7
+肝嚢胞傍十二指腸乳頭憩室腎嚢胞,"Liver cyst, pancreas",3,0
+門脈周囲浮腫,Periportal edema,3,7
+Apshunt,Apshunt,3,7
+肝ヘモジデローシス,Hemosiderosis,3,7
+内部低吸収,Internal low absorption,3,7
+脂肪含有結節,Fat-containing nodule,3,3
+門脈血流の低下,Decreased portal blood flow,3,7
+肝脾萎縮,Liver-spleen atrophy,3,4
+濃度も不均一化,Density unevenness,3,7
+fatty,Fatty,3,1
+Lip-NBCAキャスト,Lip-NBCA cast,3,7
+wedge状早期濃染域,Wedge-shaped early enhancement,3,7
+腫瘤状高吸収構造,Tumorous high absorption structure,3,3
+濃度が不均一,Density unevenness,3,7
+乏血性の低吸収域,Hypovascular low absorption area,3,7
+早期濃染のある領域,Early enhanced area,3,7
+点状石灰化,Punctate calcification,3,5
+うすい被膜,Thin capsule,3,7
+cavernous_formation,Cavernous formation,3,7
+腫瘤状造影不良域,Tumorous poorly enhanced area,3,3
+pseudo_lipoma,Pseudolipoma,3,3
+標的病変,Target lesion,3,7
+血管腫orA-P_shunt,Hemangioma or A-P shunt,3,3
+肝周囲索状影,Perihepatic striated shadow,3,7
+小石灰化結節,Small calcified nodule,3,5
+肝低濃度腫瘤,Low-density liver tumor,3,3
+結節状の早期濃染域複数,Multiple early enhanced nodules,3,3
+グリソン域の低濃度変化,Low-density change in Glisson area,3,7
+肝実質早期造影,Early parenchymal enhancement,3,7
+fill_in_pattern,Fill-in pattern,3,3
+肝脾腫大,Hepatosplenomegaly,3,4
+高濃度病変,High-density lesion,3,7
+吸収値は不均一,Uneven absorption value,3,7
+微細低吸収域,Microlow absorption area,3,7
+吸収値は低下,Decreased absorption value,3,7
+乏血結節,Hypovascular nodule,3,3
+肝嚢,Hepatic cyst,3,0
+高吸収の成分,High absorption component,3,7
+濃染パターン,Enhanced pattern,3,7
+増強効果は不均一に低下,Uneven enhancement effect reduction,3,7
+造影増強結節,Enhanced contrast nodule,3,3
+肝濃度の不均一,Liver density unevenness,3,7
+嚢胞肝,Cystic liver,3,0
+側副血行路,Collateral circulation,3,7
+小さな低濃度,Small low-density,3,7
+線状低吸収域,Linear low absorption area,3,7
+リピオドールの沈着領域,Lipiodol deposition area,3,7
+まだら早期濃染,Patchy early enhancement,3,7
+肝SOLs,Liver SOLs,2,3
+線状の造影効果,Linear enhancement,2,7
+血管腫）,Hemangioma,2,3
+高吸収陰影,High absorption shadow,2,7
+軟部濃度がら,Soft tissue density,2,7
+肝内pneumobilia,Intrahepatic pneumobilia,2,6
+グラフト肝周囲液体貯留,Perigraft fluid collection,2,7
+air貯留,Air retention,2,6
+造影効果にムラ,Patchy enhancement,2,7
+pnumobillia,Pneumobilia,2,6
+periportal_coller_sign,Periportal collar sign,2,7
+嚢胞２つ,Two cysts,2,0
+低濃度（periportal_collar）,Low density (periportal collar),2,7
+Lipodol集積,Lipiodol accumulation,2,7
+液状物,Fluid,2,7
+のdensityが低下,Decreased density,2,1
+肝pneumobilia,Liver pneumobilia,2,6
+索状に低吸収域,Striated low absorption area,2,7
+肝管ステント,Bile duct stent,2,7
+肝内胆管拡張軽度,Mild intrahepatic bile duct dilation,2,2
+造影効果の変化,Contrast effect change,2,7
+腫瘤様構造,Tumorous structure,2,3
+air-fluid_level,Air-fluid level,2,7
+shuntらしき早期,Early shunt,2,7
+被包液体貯留,Encapsulated fluid retention,2,7
+脂肪沈着域,Fat deposition area,2,1
+濃度変化,Density change,2,7
+嚢胞性陰影,Cystic shadow,2,0
+腫瘤状の病変,Tumorous lesion,2,3
+輝度上昇,Increased brightness,2,7
+nodule,Nodule,2,3
+リング状構造,Ring-shaped structure,2,3
+腫瘤状の構造,Tumorous structure,2,3
+実質濃度の低下,Decreased parenchymal density,2,7
+肝門部結節,Hilar nodule,2,3
+生体部分肝移植,Living donor liver transplant,2,7
+吸収低下,Decreased absorption,2,7
+carvenous_transformation,Cavernous transformation,2,7
+腫瘍内部,Tumor interior,2,3
+低脂肪化巣,Low-fat area,2,1
+金属density,Metal density,2,7
+肝内門脈閉塞,Intrahepatic portal vein occlusion,2,7
+造影剤残存,Contrast agent residue,2,7
+artifact,Artifact,2,7
+densityは低下,Decreased density,2,7
+実質濃度は低下,Decreased parenchymal density,2,7
+内部濃度,Internal density,2,7
+結節状の硬化像,Nodular sclerosis image,2,3
+脂肪肝化,Fatty liver change,2,1
+効果の悪い領域,Poor effect area,2,7
+結節状病変,Nodular lesion,2,3
+central_scar様の構造,Central scar-like structure,2,7
+凹凸変形,Irregular surface,2,4
+肝PVシャント,Liver PV shunt,2,7
+線状の高濃度,Linear high density,2,7
+lipiodol残存,Lipiodol retention,2,7
+肝内血管腫,Intrahepatic hemangioma,2,3
+石灰化嚢胞,Calcified cyst,2,5
+high-iso_lesions,High-iso lesions,2,7
+vascular_nodule,Vascular nodule,2,3
+小cysts,Small cysts,2,0
+高吸収な部分,High absorption part,2,7
+内部吸収値の上昇,Increased internal absorption value,2,7
+結節状低吸収域,Nodular low absorption area,2,3
+血肝管腫,Hemangioma,2,3
+結節不変,Unchanged nodule,2,3
+lipiodol_retention,Lipiodol retention,2,7
+造影効果の低下および亢進,Increased and decreased enhancement effect,2,7
+点状構造,Punctate structure,2,7
+コントラストが上昇,Increased contrast,2,7
+肝吸収値低下,Decreased liver absorption value,2,7
+軟部組織吸収域,Soft tissue absorption area,2,7
+肝後区域嚢胞,Posterior segment cyst,2,0
+ring_enchancement,Ring enhancement,2,3
+LC変化,LC change,2,4
+肝嚢胞肝,Cystic liver,2,0
+PV_shuntい,PV shunt,2,6
+肝実質濃度の低下,Decreased parenchymal density,2,1
+小結節状の描出,Small nodular depiction,2,3
+残肝腫大,Remaining liver enlargement,2,4
+造影後低濃度域,Post-contrast low-density area,2,7
+液体貯留域,Fluid retention area,2,7
+造影やや不良,Slightly poor contrast,2,7
+造影効果の不均一,Uneven contrast effect,2,7
+外側区腫大,Lateral segment enlargement,2,4
+いわゆるperiportal_colar,So-called periportal collar,2,7
+リング状増強効果,Ring-shaped enhancement effect,2,3
+嚢胞様腫瘤,Cystic tumor,2,0
+結節状部分,Nodular part,2,3
+肝内低吸収病変,Intrahepatic low absorption lesion,2,7
+小濃度結節,Small low-density nodule,2,3
+periportal_collarの拡大,Periportal collar enlargement,2,7
+肝グリソン鞘浮腫,Glisson sheath edema,2,7
+実質濃染,Parenchymal enhancement,2,7
+辺縁低吸収,Marginal low absorption,2,7
+左右肝管壁肥厚,Thickened left and right bile ducts,2,7
+造影効果の低下,Decreased contrast effect,2,7
+PCTD_tube,PCTD tube,2,7
+軟部濃度の領域,Soft tissue density area,2,7
+リピオドール沈着領域,Lipiodol deposition area,2,7
+脂肪肝様,Fatty liver-like,2,1
+横隔膜下低吸収域,Subphrenic low absorption area,2,7
+lipiodolの分布,Lipiodol distribution,2,7
+吸収値の不均一,Uneven absorption value,2,7
+Epitheloid_hemangioendothelioma,Epithelioid hemangioendothelioma,2,3
+総肝管拡張,Common bile duct dilation,2,2
+肝脂肪性結節,Hepatic fatty nodule,2,3
+脂肪濃度）結節,Fat density nodule,2,3
+脂肪肝の急激な進行,Rapid progression of fatty liver,2,1
+微少嚢胞,Microcyst,2,0
+液面形成,Fluid level formation,2,7
+高吸収腫瘤,High absorption tumor,2,3
+腫瘤陰影,Tumor shadow,2,3
+腎~肝腫瘤,Kidney to liver tumor,2,3
+線状高吸収域,Linear high absorption area,2,7
+肝表面不整,Irregular liver surface,2,4
+造影効果は不均一でした,Uneven contrast effect,2,7
+肝外側区嚢胞,Lateral segment cyst,2,0
+空洞性病変,Cavitary lesion,2,7
+早期濃染する低吸収域,Early enhanced low absorption area,2,7
+肝円索上,On round ligament,2,7
+造影効果不良の結節,Poorly enhanced nodule,2,3
+periportal_collar_edema,Periportal collar edema,2,7
+肝微小嚢胞,Liver microcyst,2,0
+LDA領域,LDA area,2,7
+肝表凹凸,Irregular liver surface,1,4
+結節状の陰影,Nodular shadow,1,3
+fill-inパターン,Fill-in pattern,1,3
+胆管チューブ,Bile duct tube,1,7
+ピッグテールドレーン,Pigtail drain,1,7
+索状濃染像,Striated enhancement image,1,7
+脂肪肝つよい,Strong fatty liver,1,1
+実質濃度は不均一に低下,Unevenly decreased parenchymal density,1,7
+吸収値が高くヘモジデローシス,High absorption value hemosiderosis,1,7
+門脈侵襲,Portal invasion,1,7
+肝内コントラスト不良肝嚢胞,Poor intrahepatic contrast liver cyst,1,0
+肝PV_shunt,Liver PV shunt,1,7
+小結節病変,Small nodular lesion,1,3
+小低吸収,Small low absorption,1,7
+吸収値は不均一に低下,Unevenly decreased absorption value,1,1
+造影増強効果は不均一,Uneven enhancement effect,1,7
+脂肪肝の進行,Progression of fatty liver,1,1
+肝石灰化嚢胞,Liver calcified cyst,1,5
+陰影欠損,Shadow defect,1,7
+肝吸収値上昇,Increased liver absorption value,1,7
+高吸収なcomplicated_cyst,High absorption complicated cyst,1,0
+索状、抜去影,"Striated, retraction shadow",1,7
+ひとまわり増大,Slightly enlarged,1,7
+肝造影効果は不均一,Uneven liver contrast effect,1,7
+SOL様,SOL-like,1,3
+Lipiodol集積の欠損,Lipiodol accumulation defect,1,7
+液体濃度腫瘤,Fluid density tumor,1,3
+被膜様の低吸収域,Capsule-like low absorption area,1,7
+造影剤の遺残,Contrast agent residue,1,7
+瘢痕化,Scar formation,1,7
+ごく小さな嚢胞,Very small cyst,1,0
+小さなcyst,Small cyst,1,0
+多血結節,Hypervascular nodule,1,3
+遠肝性の側副血行路発達,Distal collateral circulation development,1,7
+嚢胞様病変,Cystic lesion,1,0
+complication_cyst,Complicated cyst,1,0
+軟部陰影増生,Soft tissue shadow increase,1,7
+低吸収混在域,Mixed low absorption area,1,7
+fat_lesion,Fat lesion,1,1
+肝実質早期増強効果亢進,Increased early enhancement effect,1,7
+瘤様拡張,Aneurysmal dilation,1,7
+stentのcollapse,Stent collapse,1,7
+造影後不明瞭,Blurred post-contrast,1,7
+効果の不均一性,Uneven effect,1,7
+肝辺縁の鈍化,Blunted liver edge,1,4
+早期増強効果は不均一,Uneven early enhancement effect,1,7
+lipiodolが貯留,Lipiodol retention,1,7
+VP_shunt,VP shunt,1,7
+早期相濃染域,Early phase enhanced area,1,7
+占拠物,Occupying lesion,1,7
+引き続き早期濃染,Continued early enhancement,1,7
+肝実質内石灰化,Intraparenchymal calcification,1,5
+コントラスト差,Contrast difference,1,7
+グラフトの肝内胆管拡張,Graft intrahepatic bile duct dilation,1,2
+線状のair,Linear air,1,7
+造影効果低下域,Decreased contrast effect area,1,7
+血管腫様病変,Hemangioma-like lesion,1,3
+肝内変形,Intrahepatic deformation,1,4
+肝A-P_shunt,Liver A-P shunt,1,7
+結節状増強,Nodular enhancement,1,3
+濃度はまだらに低下,Patchy decreased density,1,1
+ring状増強効果,Ring-shaped enhancement effect,1,3
+低吸収の領域,Low absorption area,1,7
+線状に染まる領域,Linear stained area,1,7
+肝辺縁不整,Irregular liver edge,1,4
+陥凹変形,Concave deformation,1,4
+結節陰影,Nodular shadow,1,3
+瘢痕ないし嚢胞,Scar or cyst,1,0
+チューブのたわみ,Tube deflection,1,7
+濃度が上昇,Increased density,1,7
+遠肝性の側副路発達,Distal collateral route development,1,7
+腫瘍部分,Tumor part,1,3
+低吸収軟部影,Low absorption soft tissue shadow,1,7
+肝石灰化巣,Liver calcified lesion,1,5
+肝実質高吸収,High absorption parenchyma,1,7
+層状血腫,Layered hematoma,1,7
+RTBD_tube,RTBD tube,1,7
+嚢胞状の構造,Cystic structure,1,0
+引き続き肝内胆管拡張,Continued intrahepatic bile duct dilation,1,2
+高濃度液貯留,High-density fluid retention,1,7
+微小嚢胞性病変,Microcystic lesion,1,0
+線状のガス,Linear gas,1,6
+lipiodolの沈着,Lipiodol deposition,1,7
+石灰化陰影,Calcified shadow,1,5
+圧排する腫瘤,Compressing tumor,1,3
+嚢胞領域,Cystic area,1,0
+造影効果は不均一に低下,Decreased uneven enhancement effect,1,7
+門脈gas像,Portal gas image,1,6
+壊死領域,Necrotic area,1,7
+吸収値の上昇,Increased absorption value,1,7
+変性の混合像,Mixed degenerative image,1,7
+peumobilia,Pneumobilia,1,6
+結節状軟部影,Nodular soft tissue shadow,1,3
+delayed_enhancement）,Delayed enhancement,1,7
+微小低濃度域,Micro low-density area,1,7
+Lipiodol分布,Lipiodol distribution,1,7
+楔状低吸収,Wedge-shaped low absorption,1,7
+線状のmetal_density,Linear metal density,1,7
+厚い嚢胞,Thick cyst,1,0
+新出肝腫瘤,New liver tumor,1,3
+metal_denity,Metal density,1,7
+微小嚢胞複数,Multiple microcysts,1,0
+高濃度と低濃度,High and low density,1,7
+造影濃染域,Enhanced contrast area,1,7
+結節状の低吸収,Nodular low absorption,1,3
+肝低吸収腫瘤,Low absorption liver tumor,1,3
+造影効果のムラ,Patchy contrast effect,1,7
+内部不均一,Internal unevenness,1,7
+VPシャントチューブ,VP shunt tube,1,7
+吸収値は上昇,Increased absorption value,1,7
+微小結節状,Micro nodular,1,3
+内部濃度が上昇,Increased internal density,1,7
+嚢胞不変,Unchanged cyst,1,0
+肝石灰化濃度域,Calcified liver density area,1,5
+小早期濃染結節,Small early enhanced nodule,1,3
+脂肪肝±うっ血,Fatty liver ± congestion,1,1
+結節状軟部濃度域,Nodular soft tissue density area,1,3
+早期濃染の顕在化,Manifested early enhancement,1,7
+肝実質濃度上昇,Increased liver parenchymal density,1,7
+低吸収域外,Outside low absorption area,1,7
+結節状の早期増強効果,Early enhancement effect of nodular,1,3
+グラフト肝がまだらな低濃度,Patchy low-density graft liver,1,7
+思しき索状影,Presumed striated shadow,1,7
+腫瘍濃染,Enhanced tumor,1,3
+mass_lesion,Mass lesion,1,3
+periportal_collar）,Periportal collar,1,7
+complicated_cysts,Complicated cysts,1,0
+高吸収嚢胞,High absorption cyst,1,0
+微細嚢胞,Microcysts,1,0
+リング状陰影,Ring-shaped shadow,1,3
+脂肪肝肝嚢胞,Fatty liver and liver cyst,1,1
+石灰化巣,Calcified lesion,1,5
+肝低濃度域,Low-density liver area,1,7
+濃度はやや低下,Slightly decreased density,1,7
+結節状腫瘤,Nodular tumor,1,3
+中肝内胆管拡張,Mid intrahepatic bile duct dilation,1,2
+リピオドール集積低下,Decreased Lipiodol accumulation,1,7
+っとperiportal_collar,Periportal collar,1,7
+小結節状変化,Nodular change,1,3
+造影効果減弱域,Decreased enhanced contrast area,1,7
+peripotal_collar,Periportal collar,1,7
+造影増強効果が低下,Decreased enhanced effect,1,6
+ring_enhacement,Ring enhancement,1,3
+病変進展,Lesion progression,1,7
+肝内胆石,Intrahepatic bile stone,1,5
+それぞれ低濃度結節,Respective low-density nodule,1,3
+肝内肝外胆管拡張,Intrahepatic and extrahepatic bile duct dilation,1,2
+小さい低濃度域,Small low-density area,1,7
+脂肪肝左卵巣嚢胞,Fatty liver and left ovarian cyst,1,1
+瘢痕様構造,Scar-like structure,1,7
+造影濃度むら,Uneven contrast density,1,7
+periportal_collar所見,Periportal collar finding,1,7
+索状の低吸収,Striated low absorption,1,7
+造影効果不良結節,Poorly enhanced nodule,1,3
+高濃度領域,High-density area,1,7
+腫瘤状の低濃度域,Low-density tumorous area,1,3
+高吸収成分,High-density component,1,7

@@ -1,0 +1,601 @@
+keyword,,frequency,category
+腎嚢胞,Kidney Cyst,190196,0
+腎結石,Kidney Stone,45700,5
+n．p．,No problem,18543,7
+嚢胞,Cyst,18244,0
+腎萎縮,Kidney Atrophy,9449,3
+水腎症,Hydronephrosis,9018,2
+萎縮,Atrophy,8395,3
+小嚢胞,Small Cyst,5813,0
+結石,Stone,4732,5
+腫瘤,Tumor,4701,1
+石灰化,Calcification,3692,5
+腎癌,Kidney Cancer,3614,1
+腎盂腎炎,Pyelonephritis,2792,6
+変形,Deformation,2778,4
+結節,Nodule,2501,1
+腫大,Enlargement,2156,2
+complicated_cyst,Complicated Cyst,1959,1
+造影不良域,Contrast Deficient Area,1858,6
+血管筋脂肪腫,Angiomyolipoma,1828,1
+出血性嚢胞,Hemorrhagic Cyst,1644,1
+腎細胞癌,Renal Cell Carcinoma,1532,1
+水腎,Hydronephrosis,1470,2
+小結石,Small Stone,1400,5
+腎のう胞,Kidney Cyst,1393,0
+腎小嚢胞,Small Kidney Cyst,1332,0
+AML,AML,1158,1
+腎小結石,Small Kidney Stone,1149,5
+低吸収域,Low Absorption Area,942,0
+軟部影,Soft Tissue Shadow,931,6
+腎瘢痕,Kidney Scar,922,6
+腎腫大,Kidney Enlargement,861,2
+腫瘍,Tumor,859,1
+n．p,No problem,834,7
+早期濃染,Early Enhancement,822,6
+転移,Metastasis,783,1
+馬蹄腎,Horseshoe Kidney,765,4
+血腫,Hematoma,730,6
+RCC,RCC,716,1
+炎症,Inflammation,715,6
+術後変化,Postoperative Changes,694,6
+炎症後変化,Post-inflammatory Changes,643,6
+瘢痕,Scar,618,6
+washout,Washout,592,1
+腎石灰化,Renal Calcification,589,5
+移植腎,Transplanted Kidney,558,6
+梗塞,Infarction,535,6
+造影不領域,Contrast Deficient Area,533,6
+尿路感染,Urinary Tract Infection,532,6
+小結節,Small Nodule,496,1
+微小結石,Micro Stone,484,5
+腎梗塞,Renal Infarction,478,6
+腎変形,Renal Deformation,472,4
+微小嚢胞,Micro Cyst,454,0
+腎腫瘤,Renal Tumor,440,1
+腎腫瘍,Renal Tumor,435,1
+腎complicated_cyst,Renal Complicated Cyst,412,1
+腎杯結石,Renal Calyceal Stone,396,5
+小石灰化,Small Calcification,389,5
+炎症性変化,Inflammatory Changes,373,6
+嚢胞性病変,Cystic Lesion,364,0
+脂肪腫,Lipoma,361,1
+傍腎盂嚢胞,Parapelvic Cyst,339,0
+腎転移,Renal Metastasis,338,1
+腎微小結石,Micro Kidney Stone,320,5
+嚢胞腎,Polycystic Kidney,318,0
+造影不良,Contrast Deficient,315,6
+LDA,LDA,310,6
+腎AML,Renal AML,297,1
+wash_out,Wash Out,295,1
+腎癌病変,Renal Cancer Lesion,291,1
+感染,Infection,283,6
+腫瘤影,Tumor Shadow,280,1
+腎盂嚢胞,Renal Pelvic Cyst,278,0
+腫瘤性病変,Tumorous Lesion,270,1
+梗塞後変化,Post-infarction Changes,261,6
+水腎水尿管,Hydronephrosis,249,2
+脂肪成分,Fat Component,247,6
+陳旧性梗塞,Old Infarction,242,6
+明細胞型腎細胞癌,Clear Cell Renal Cell Carcinoma,240,1
+乳頭状腎癌,Papillary Renal Cell Carcinoma,236,1
+低吸収,Low Absorption,230,6
+高吸収嚢胞,High Absorption Cyst,217,0
+高吸収結節,High Absorption Nodule,214,1
+左腎癌,Left Renal Cancer,213,1
+腎盂腎炎後,Post-pyelonephritis,207,6
+右水腎症,Right Hydronephrosis,201,2
+複雑性嚢胞,Complex Cyst,199,1
+SOL,SOL,192,1
+腎複雑嚢胞,Renal Complex Cyst,185,1
+左水腎症,Left Hydronephrosis,182,2
+腎梗塞後,Post-renal Infarction,182,6
+腎血管筋脂肪腫,Renal Angiomyolipoma,181,1
+腎部分萎縮,Partial Renal Atrophy,176,3
+低吸収結節,Low Absorption Nodule,169,1
+腎出血性嚢胞,Hemorrhagic Renal Cyst,168,1
+複雑嚢胞,Complicated Cyst,167,1
+非定型嚢胞,Atypical Cyst,163,1
+微小石灰化,Micro Calcification,163,5
+陳旧性変化,Old Changes,154,6
+嚢胞性腎癌,Cystic Renal Cancer,148,1
+原発巣,Primary Lesion,142,1
+尿路感染症,Urinary Tract Infection,139,6
+梗塞後,Post-infarction,137,6
+結節影,Nodular Shadow,136,1
+虚血,Ischemia,133,6
+再発,Recurrence,127,1
+脂肪濃度結節,Fat Density Nodule,127,1
+腎結節,Renal Nodule,119,1
+腎小石灰化,Small Renal Calcification,117,5
+右腎癌,Right Renal Cancer,117,1
+腎高度萎縮,Severe Renal Atrophy,116,3
+透析腎,Dialysis Kidney,116,3
+洗い出し,Washout,115,1
+腎炎,Nephritis,115,6
+mass,Mass,112,1
+炎症後,Post-inflammatory,111,6
+部分萎縮,Partial Atrophy,110,3
+明細胞癌,Clear Cell Cancer,109,1
+clear_cell_RCC,Clear Cell RCC,108,1
+水腎水尿管症,Hydronephrosis,107,2
+嚢胞性腫瘤,Cystic Tumor,104,0
+炎症波及,Inflammatory Spread,101,6
+治療後病変,Post-treatment Lesion,100,6
+腎複雑性嚢胞,Renal Complex Cyst,100,1
+腎障害,Renal Impairment,98,6
+萎縮性変化,Atrophic Changes,98,3
+淡明細胞癌,Clear Cell Cancer,94,1
+出血性腎嚢胞,Hemorrhagic Renal Cyst,90,1
+嚢胞変性,Cystic Degeneration,89,0
+Complicated_cyst,Complicated Cyst,88,1
+np,No problem,86,7
+小さな嚢胞,Small Cyst,86,0
+simple_cysts,Simple Cysts,84,0
+RT後変化,Post-RT Changes,81,6
+サンゴ状結石,Staghorn Calculus,80,5
+脂肪濃度腫瘤,Fat Density Tumor,80,1
+腎癌原発巣,Primary Renal Cancer,79,1
+腎高吸収嚢胞,Hyperdense Renal Cyst,78,1
+慢性腎盂腎炎,Chronic Pyelonephritis,78,6
+凍結後病変,Post-freeze Lesion,78,1
+腎原発巣,Primary Renal Lesion,77,1
+小腎嚢胞,Small Renal Cyst,76,0
+急性腎障害,Acute Renal Impairment,74,6
+瘢痕性変化,Scar Changes,74,6
+高濃度嚢胞,High-density Cyst,70,1
+cysts,Cysts,70,0
+治療後変化,Post-treatment Changes,70,6
+血流障害,Blood Flow Impairment,69,6
+悪性リンパ腫,Malignant Lymphoma,69,1
+凍結後変化,Post-freeze Changes,68,6
+低濃度域,Low Density Area,67,0
+慢性腎不全,Chronic Renal Failure,66,3
+腫瘍性病変,Tumorous Lesion,64,1
+珊瑚状結石,Staghorn Calculus,63,5
+嫌色素性腎癌,Chromophobe Renal Cell Carcinoma,63,1
+腎微小嚢胞,Micro Renal Cyst,62,0
+慢性腎障害,Chronic Renal Impairment,62,6
+complicated_cysts,Complicated Cysts,62,1
+AML病変,AML Lesion,62,1
+治療後病変部,Post-treatment Lesion,60,6
+再発病変,Recurrent Lesion,60,1
+嚢胞成分,Cystic Component,58,0
+多血性腫瘍,Hypervascular Tumor,58,1
+充実成分,Solid Component,58,1
+小腎結石,Small Renal Stone,58,5
+ACDK,ACDK,57,0
+軟部濃度腫瘤,Soft Tissue Density Tumor,57,1
+腎癌再発病変,Recurrent Renal Cancer Lesion,57,1
+出血嚢胞,Hemorrhagic Cyst,54,1
+瘢痕変形,Scar Deformation,54,4
+腫瘍浸潤,Tumor Infiltration,54,1
+fat_poor_AML,Fat-poor AML,54,1
+萎縮瘢痕像,Atrophic Scar Image,54,3
+サンゴ状石灰化,Staghorn Calcification,52,5
+水腎・水尿管,Hydronephrosis,52,2
+急性腎盂腎炎,Acute Pyelonephritis,52,6
+残存腫瘍,Residual Tumor,50,1
+瘢痕化,Scar Formation,50,6
+腎梗塞後変化,Post-renal Infarction Changes,50,6
+腎機能障害,Renal Dysfunction,49,6
+腎代償性肥大,Compensatory Hypertrophy,49,2
+左腎癌治療後病変,Post-left Renal Cancer Treatment Lesion,48,1
+右腎癌治療後病変,Post-right Renal Cancer Treatment Lesion,48,1
+水腎尿管,Hydronephrosis,48,2
+乳頭状腎細胞癌,Papillary Renal Cell Carcinoma,48,1
+陳旧性変形,Old Deformation,48,6
+腎炎後変化,Post-nephritis Changes,46,6
+良性病変,Benign Lesion,45,6
+高吸収腫瘤,Hyperdense Tumor,45,1
+腎complicated_cysts,Renal Complicated Cysts,45,1
+小腫瘤,Small Tumor,44,1
+梗塞後の変化,Post-infarction Changes,44,6
+腫大して,Enlarged,44,2
+右嚢胞性腎癌,Right Cystic Renal Cancer,44,1
+虚血後変化,Post-ischemic Changes,44,6
+腎高濃度嚢胞,Hyperdense Renal Cyst,44,1
+腎癌転移,Renal Cancer Metastasis,43,1
+軟部腫瘤,Soft Tissue Tumor,43,1
+感染合併,Complicated Infection,42,6
+明細胞型腎癌,Clear Cell Renal Cancer,40,1
+両側水腎症,Bilateral Hydronephrosis,40,2
+多嚢胞腎,Polycystic Kidney,40,0
+cyst,Cyst,40,0
+微小腎結石,Micro Renal Stone,40,5
+腎実質萎縮,Renal Parenchymal Atrophy,40,3
+腎非定形嚢胞,Atypical Renal Cyst,38,1
+腎結石症,Nephrolithiasis,38,5
+炎症後の変化,Post-inflammatory Changes,38,6
+Wash_out型,Wash-out Type,38,1
+塞栓後,Post-embolization,37,6
+水腎水,Hydronephrosis,37,2
+凹凸,Contour Irregularity,36,4
+腎嚢胞性病変,Renal Cystic Lesion,36,0
+梗塞後の瘢痕,Post-infarction Scar,36,6
+Bosniak分類II,Bosniak Category II,36,1
+washoutパターン,Washout Pattern,36,1
+瘢痕萎縮,Scar Atrophy,36,3
+脂肪性腫瘤,Fatty Tumor,35,1
+腫瘤様病変,Tumor-like Lesion,34,1
+増強結節,Enhanced Nodule,34,1
+陳旧性陥凹,Old Depression,34,6
+clear_cell_typeの腎細胞癌,Clear Cell Type Renal Cell Carcinoma,33,1
+微小腎嚢胞,Micro Renal Cyst,33,0
+腎出血,Renal Hemorrhage,32,1
+腎AVM,Renal AVM,32,1
+残存腎癌病変,Residual Renal Cancer Lesion,32,1
+AFBN,AFBN,32,6
+透析,Dialysis,32,3
+充実性腫瘍,Solid Tumor,31,1
+血管脂肪腫,Angiomyolipoma,31,1
+うっ血性変化,Congestive Changes,31,2
+clear_cell_typeのRCC,Clear Cell Type RCC,30,1
+濃染結節,Enhanced Nodule,30,1
+梗塞後の慢性期変化,Post-infarction Chronic Changes,30,6
+気腫性腎盂腎炎,Emphysematous Pyelonephritis,29,6
+両側腎癌,Bilateral Renal Cancer,29,1
+術後性変化,Postoperative Changes,28,6
+線状の造影不良域,Linear Contrast Deficient Area,28,6
+腎損傷,Renal Injury,28,6
+腎癌再発巣,Recurrent Renal Cancer Lesion,28,1
+腎非定型嚢胞,Atypical Renal Cyst,28,1
+充実結節,Solid Nodule,28,1
+リンパ腫,Lymphoma,27,1
+腎?胞,Renal Cyst,27,0
+厚い嚢胞,Thick Cyst,27,0
+腎珊瑚状結石,Renal Staghorn Stone,26,5
+陳旧性炎症,Old Inflammation,26,6
+萎縮変形,Atrophic Deformation,26,3
+陳旧性炎症性変化,Old Inflammatory Changes,26,6
+炎症後の瘢痕,Post-inflammatory Scar,26,6
+乏血性結節,Hypovascular Nodule,26,1
+腎盂腎炎後の変化,Post-pyelonephritis Changes,26,6
+急性巣状細菌性腎炎,Acute Focal Bacterial Nephritis,26,6
+小腎癌,Small Renal Cancer,26,1
+腎癌の原発巣,Primary Site of Renal Cancer,26,1
+炎症後瘢痕,Post-inflammatory Scar,26,6
+clear_cell_carcinoma,Clear Cell Carcinoma,26,1
+腎RCC,Renal RCC,25,1
+腎結核,Renal Tuberculosis,25,1
+腎癌再発,Recurrent Renal Cancer,25,1
+嚢胞構造,Cystic Structure,24,0
+実質萎縮,Parenchymal Atrophy,24,3
+腎浸潤,Renal Infiltration,24,1
+Bosniak分類IIF,Bosniak Category IIF,24,1
+腎癌凍結域,Renal Cancer Freeze Zone,24,1
+ADPKD,ADPKD,24,0
+萎縮像,Atrophy Image,24,3
+造影不良・萎縮,"Contrast Deficient, Atrophy",24,3
+瘢痕萎縮像,Scar Atrophy Image,24,3
+ごく小さな嚢胞,Very Small Cyst,24,0
+水腎尿管症,Hydronephrosis,24,2
+非定形嚢胞,Atypical Cyst,24,1
+高濃度結節,High-density Nodule,23,1
+軟部濃度結節,Soft Tissue Density Nodule,23,1
+papillary_RCC,Papillary RCC,22,1
+脂肪肉腫,Liposarcoma,22,1
+転移巣,Metastatic Focus,22,1
+濃染~洗い出し,Enhanced Washout,22,1
+腫瘤様構造,Tumor-like Structure,22,1
+腫瘤状構造,Tumor-like Structure,22,1
+腎盂のう胞,Renal Pelvic Cyst,22,0
+後期染まり抜け,Late Enhancement Loss,22,1
+石灰化結石,Calcified Stone,22,5
+clear_cell_type）,Clear Cell Type,22,1
+萎縮気味,Atrophic Tendency,22,3
+早期濃染する残存腫瘍,Early Enhanced Residual Tumor,22,1
+水腎・水,Hydronephrosis,21,2
+嚢胞様構造,Cystic Structure,21,0
+炎症合併,Inflammatory Complication,21,6
+重粒子線治療後変化,Post-carbon Ion Radiotherapy Changes,20,6
+肝嚢胞脾嚢胞腎嚢胞,"Hepatic, Splenic, and Renal Cysts",20,0
+嚢胞状腎癌,Cystic Renal Cancer,20,1
+極AML,Extreme AML,20,1
+腎癌再々再発病変,Re-recurrent Renal Cancer Lesion,20,1
+腎梗塞後の変化,Post-renal Infarction Changes,20,6
+脂肪濃度小結節,Fat Density Small Nodule,20,1
+非定型腎嚢胞,Atypical Renal Cyst,20,1
+早期濃染し洗い出し,Early Enhanced Washout,20,1
+凍結治療後部,Post-cryotherapy Area,20,1
+梗塞像,Infarction Image,20,6
+嚢胞部分,Cystic Part,20,0
+充実性腫瘤,Solid Tumor,20,1
+cysticな成分,Cystic Component,20,0
+再発腫瘤,Recurrent Tumor,20,1
+嫌色素性腎細胞癌,Chromophobe Renal Cell Carcinoma,20,1
+腎傍腎盂嚢胞,Renal Parapelvic Cyst,20,0
+水腎・腎萎縮,"Hydronephrosis, Renal Atrophy",19,3
+陳旧性病変,Old Lesion,19,6
+梗塞後瘢痕,Post-infarction Scar,19,6
+腎再発,Renal Recurrence,19,1
+動静脈奇形,Arteriovenous Malformation,18,1
+脂肪濃度の結節,Fat Density Nodule,18,1
+乳頭状腫瘍,Papillary Tumor,18,1
+結節性病変,Nodular Lesion,18,1
+腎盂結石,Renal Pelvic Stone,18,5
+炎症性瘢痕,Inflammatory Scar,18,6
+慢性期変化,Chronic Changes,18,6
+urinoma,Urinoma,18,1
+ベリニ腎癌,Bellini Renal Cancer,18,1
+浸潤性腎盂腫瘍,Invasive Renal Pelvic Tumor,18,1
+出血性嚢胞後の変化,Post-hemorrhagic Cyst Changes,18,1
+陳旧性の梗塞,Old Infarction,18,6
+放射線照射後変化,Post-radiotherapy Changes,18,6
+良性変化,Benign Changes,18,6
+炎症像,Inflammatory Image,18,6
+乏血性の腫瘍,Hypovascular Tumor,18,1
+angiomyolipoma,Angiomyolipoma,18,1
+Clear_cell_RCC,Clear Cell RCC,17,1
+複雑性腎嚢胞,Complicated Renal Cyst,17,1
+炎症所見,Inflammatory Findings,17,6
+感染後変化,Post-infectious Changes,16,6
+転移性腎腫瘍,Metastatic Renal Tumor,16,1
+造影欠損像,Contrast Defect Image,16,6
+腎低形成,Renal Hypoplasia,16,3
+所々萎縮,Localized Atrophy,16,3
+リンパ腫病変,Lymphoma Lesion,16,1
+腎淡明細胞癌,Clear Cell Renal Carcinoma,16,1
+Wash_out,Washout,16,1
+早期濃染-washout,Early Enhanced-Washout,16,1
+萎縮し嚢胞,Atrophic Cyst,16,3
+放射線治療後の変化,Post-radiotherapy Changes,16,6
+瘢痕状萎縮,Scarred Atrophy,16,3
+cystic_RCC,Cystic RCC,16,1
+転座型腎癌,Translocation Renal Cancer,16,1
+放射線治療後変化,Post-radiotherapy Changes,16,6
+萎縮様,Atrophic Appearance,16,3
+淡明型腎細胞癌,Clear Cell Renal Carcinoma,16,1
+腎盂腎炎合併,Complicated Pyelonephritis,16,6
+高吸収の嚢胞,High Absorption Cyst,15,1
+慢性炎症,Chronic Inflammation,15,6
+腎血管脂肪腫,Renal Angiomyolipoma,15,1
+clear_cell_type,Clear Cell Type,14,1
+残存病変,Residual Lesion,14,1
+感染性嚢胞,Infectious Cyst,14,1
+性嚢胞,Atypical Cyst,14,0
+軟部結節,Soft Tissue Nodule,14,1
+古い梗塞,Old Infarction,14,6
+脾腫腎嚢胞,"Splenomegaly, Renal Cyst",14,0
+小径腎癌,Small Renal Cancer,14,1
+高吸収嚢胞性病変,High Absorption Cystic Lesion,14,1
+腎のう胞出血,Renal Cyst Hemorrhage,14,1
+腎mass,Renal Mass,14,1
+巨大嚢胞,Large Cyst,14,0
+膵萎縮腎嚢胞,Pancreatic Atrophy Renal Cyst,14,0
+早期濃染腫瘤,Early Enhanced Tumor,14,1
+透析腎癌,Dialysis Renal Cancer,14,1
+腫瘤状病変,Tumorous Lesion,14,1
+乏血性腎癌,Hypovascular Renal Cancer,14,1
+代償性変化,Compensatory Changes,14,6
+嚢胞性結節,Cystic Nodule,14,0
+のう胞,Cyst,14,0
+腫大様,Enlarged,14,2
+微小膿瘍,Micro Abscess,14,1
+粗大結石,Coarse Stone,14,5
+尿路感染再燃,Recurrent Urinary Tract Infection,14,6
+結節状軟部影,Nodular Soft Tissue Shadow,14,1
+単純性嚢胞,Simple Cyst,14,0
+腎盂腎炎後変化,Post-pyelonephritis Changes,13,6
+凍結療法後変化,Post-cryotherapy Changes,13,6
+腎内石灰化,Renal Calcification,13,5
+転移性腫瘍,Metastatic tumor,13,1
+仮性嚢胞,Pseudocyst,13,0
+処置後変化,Post-procedural Changes,13,6
+悪性病変,Malignant Lesion,13,1
+腎芽腫,Nephroblastoma,12,1
+陳旧性梗塞瘢痕,Old Infarction Scar,12,6
+骨髄脂肪腫,Myelolipoma,12,1
+Bellini管癌,Bellini Duct Cancer,12,1
+集合管癌,Collecting Duct Cancer,12,1
+水尿管水腎症,Hydronephrosis,12,2
+実質浸潤,Parenchymal Infiltration,12,1
+吸収値の高い嚢胞,Hyperattenuating Cyst,12,1
+定型嚢胞,Typical Cyst,12,0
+単発嚢胞,Single Cyst,12,0
+有結石性,Calculous,12,5
+細菌性腎炎,Bacterial Nephritis,12,6
+梗塞巣,Infarct Focus,12,6
+Fat_poor_AML,Fat-poor AML,12,1
+移植後の腎,Post-transplant Kidney,12,6
+嚢胞状構造,Cystic Structure,12,0
+脂肪含有結節,Fat-containing Nodule,12,1
+mass形成,Mass Formation,12,1
+腎動静脈奇形,Renal Arteriovenous Malformation,12,1
+腎癌再発病変部,Recurrent Renal Cancer Lesion,12,1
+微小結節,Micro Nodule,12,1
+Bosniak分類II相当,Bosniak Category II,12,1
+良性腫瘍,Benign Tumor,12,1
+黄色肉芽腫性腎盂腎炎,Xanthogranulomatous Pyelonephritis,12,6
+wash_out像,Washout Image,12,1
+小梗塞後変化,Small Post-infarction Changes,12,6
+腫瘤状陰影,Tumor-like Shadow,12,1
+腎原発軟部,Primary Renal Soft Tissue,12,1
+まずはAML,First AML,12,1
+Bosniak分類カテゴリーIII,Bosniak Category III,12,1
+淡明細胞型のRCC,Clear Cell Type RCC,12,1
+萎縮域,Atrophy Area,12,3
+関連腎疾患,Related Renal Disease,12,6
+chromophobe_RCC,Chromophobe RCC,12,1
+左嚢胞性腎癌,Left Cystic Renal Cancer,12,1
+腎癌RFA後部,Renal Cancer Post-RFA,12,6
+嚢胞内出血,Cystic Hemorrhage,11,1
+膿腎症,Pyonephrosis,11,1
+索状の造影不良域,Striated Contrast Deficient Area,10,6
+水腎症水尿管症,Hydronephrosis,10,2
+早期濃染から洗い出し,Early Enhancement to Washout,10,1
+明細胞型のRCC,Clear Cell Type RCC,10,1
+AMLs,AMLs,10,1
+腎嚢胞結腸憩室,"Renal Cyst, Colon Diverticulum",10,0
+結石ないし石灰化,Stone or Calcification,10,5
+小石灰化嚢胞,Small Calcified Cyst,10,0
+腎委縮,Renal Atrophy,10,3
+急性腎機能障害,Acute Renal Dysfunction,10,6
+凍結病変,Cryo-lesion,10,1
+高吸収な嚢胞,Hyperattenuating Cyst,10,1
+complciated_cyst,Complicated Cyst,10,1
+移植腎腫大,Transplanted Kidney Enlargement,10,6
+腎アミロイドーシス,Renal Amyloidosis,10,6
+腎hyperdense_cyst,Hyperdense Renal Cyst,10,1
+異常腫瘤,Abnormal Tumor,10,1
+高吸収な非定型嚢胞,Hyperattenuating Atypical Cyst,10,1
+陳旧性腎盂腎炎,Old Pyelonephritis,10,6
+水腎症後,Post-hydronephrosis,10,2
+腎clear_cell_RCC,Renal Clear Cell RCC,10,1
+嚢胞性陰影,Cystic Shadow,10,0
+Bosniak分類IIF相当,Bosniak Category IIF,10,1
+papillaryRCC,Papillary RCC,10,1
+嫌色素細胞癌,Chromophobe Cell Carcinoma,10,1
+腎AVF塞栓,Renal AVF Embolization,10,6
+hyperattenuating_AML,Hyperattenuating AML,10,1
+複雑のう胞,Complicated Cyst,10,1
+Bosniak分類カテゴリーIV相当,Bosniak Category IV,10,1
+Bosniak分類CategoryIII,Bosniak Category III,10,1
+乏血性腫瘍,Hypovascular Tumor,10,1
+小梗塞後,Small Post-infarction,10,6
+腎fat_poor_AML,Renal Fat-poor AML,10,1
+後腎性腺腫,Renal Adenoma,10,1
+合わせAML,Combined AML,10,1
+血管筋脂肪腫（AML,Angiomyolipoma (AML,10,1
+達する腎損傷,Reaching Renal Injury,10,6
+転座型腎細胞癌,Translocation Renal Cell Carcinoma,10,1
+転移性腎癌,Metastatic Renal Cancer,10,1
+clearcell_typeのRCC,Clear Cell Type RCC,10,1
+Bosniak分類カテゴリーII相当,Bosniak Category II,10,1
+嚢胞性構造,Cystic Structure,9,0
+肝嚢胞腎嚢胞,"Hepatic, Renal Cysts",9,0
+腎脂肪性結節,Renal Fatty Nodule,8,1
+腎parapelvic_cyst,Renal Parapelvic Cyst,8,1
+染まり抜ける,Enhancement Loss,8,1
+楔状増強不良域,Wedge-shaped Non-enhancing Area,8,6
+腎低濃度結節,Renal Low-density Nodule,8,1
+腎水腎症,Hydronephrosis,8,2
+polycystic_kidney,Polycystic Kidney,8,0
+萎縮腎,Atrophic Kidney,8,3
+水腎症~腎盂内gas,Hydronephrosis with Renal Pelvic Gas,8,6
+楔状増強効果不良域,Wedge-shaped Non-enhancing Area,8,6
+傍腎嚢胞,Parapelvic Cyst,8,0
+充実性結節,Solid Nodule,8,1
+腎脂肪性腫瘤,Renal Fatty Tumor,8,1
+腎angiomyolipoma,Renal Angiomyolipoma,8,1
+吸収値の高い結節,Hyperattenuating Nodule,8,1
+濃染来す肥厚,Enhanced Thickening,8,6
+腎嚢胞像,Renal Cyst Image,8,0
+多嚢胞,Multicystic,8,0
+膨隆するAML,Protruding AML,8,1
+嚢胞形成,Cyst Formation,8,0
+腎平滑筋肉腫,Renal Leiomyosarcoma,8,1
+腫瘤形成,Mass Formation,8,1
+結節状病変,Nodular Lesion,7,1
+のう胞腎,Polycystic Kidney,7,0
+隔壁有する嚢胞,Cyst with Septa,7,1
+腎内結石,Intra-renal Stone,7,5
+脂肪含有腫瘤,Fat-containing Tumor,7,1
+高濃度病変,High-density Lesion,7,0
+脂肪性の結節,Fatty Nodule,6,1
+solid_lesion,Solid Lesion,6,1
+複数嚢胞,Multiple Cysts,6,0
+小AML,Small AML,6,1
+腎萎縮瘢痕,Renal Atrophic Scar,6,3
+腎盂腎嚢胞,Renal Pelvic Cyst,6,0
+腫脹,Swelling,6,2
+腎compicated_cyst,Renal Complicated Cyst,6,1
+結節状の早期濃染,Nodular Early Enhancement,6,1
+腎腎結石,Renal Stone,6,5
+Gerota筋膜肥厚,Gerota’s Fascia Thickening,6,6
+右傍腎盂嚢胞,Right Parapelvic Cyst,6,0
+水腎・水尿管症,Hydronephrosis,6,2
+小SOL,Small SOL,6,1
+造影効果乏しい領域,Poorly Enhancing Area,6,6
+腎術後腎のう胞,Postoperative Renal Cyst,5,0
+腎皮質部分萎縮,Renal Cortical Partial Atrophy,5,3
+結節状構造,Nodular Structure,5,1
+変形萎縮,Deformation Atrophy,5,3
+嚢胞病変,Cystic Lesion,4,1
+腎LDA,Renal LDA,4,6
+腎小結節,Small Renal Nodule,4,1
+肥厚腎嚢胞,Thickened Renal Cyst,4,0
+腎高度腎萎縮,Severe Renal Atrophy,4,3
+小AML病変,Small AML Lesion,4,1
+腎腎嚢胞,Renal Cyst,4,0
+腎水腎,Hydronephrosis,4,2
+腎腫大+腎周囲脂肪織濃度上昇,Renal Enlargement + Perirenal Fat Density Increase,4,2
+もともと萎縮,Initially Atrophic,4,3
+腎サンゴ状結石,Renal Staghorn Stone,4,5
+固有腎萎縮,Intrinsic Renal Atrophy,4,3
+結節像,Nodular Image,4,1
+腎低吸収域,Renal Low Absorption Area,4,6
+HDA,HDA,4,1
+嚢胞腎同様,Similar to Polycystic Kidney,4,0
+腎小のう胞,Small Renal Cyst,4,0
+腎腫瘤２つ,Two Renal Tumors,4,1
+腎complicate_cyst,Renal Complicated Cyst,4,1
+リング状結節,Ring-shaped Nodule,4,1
+巨大腎嚢胞,Giant Renal Cyst,4,0
+ともに萎縮,Both Atrophic,4,3
+小石灰化結石,Small Calcified Stone,4,5
+lipomyoma,Lipomyoma,4,1
+腎・傍腎盂嚢胞,"Renal, Parapelvic Cyst",4,0
+腎石灰化結石,Renal Calcified Stone,4,5
+萎縮部分,Atrophic Area,4,3
+萎縮~変形,Atrophy ~ Deformation,4,3
+楔状萎縮,Wedge-shaped Atrophy,4,3
+粗大石灰化,Coarse Calcification,4,5
+高度萎縮,Severe Atrophy,3,3
+ご状結石,Clustered Stone,3,5
+移植腎結石,Transplanted Kidney Stone,3,5
+脂肪濃度SOL,Fat Density SOL,2,1
+早期濃染洗い出し,Early Enhanced Washout,2,1
+吸収値の高いcomplicated_cyst,Hyperattenuating Complicated Cyst,2,1
+cystic_lesions,Cystic Lesions,2,0
+嚢胞）,Cyst,2,0
+多房状嚢胞,Multilocular Cyst,2,0
+complicated_cyst（疑）,Suspected Complicated Cyst,2,1
+ウォッシュアウト,Washout,2,1
+ないしは萎縮,Atrophy or Not,2,3
+腎実質変形,Renal Parenchymal Deformation,2,4
+１つ腎結石,One Renal Stone,2,5
+腎上極非定型嚢胞,Upper Pole Atypical Cyst,2,1
+増強不領域,Poorly Enhancing Area,2,6
+腎高濃度腫瘤,Hyperdense Renal Tumor,2,1
+腎萎縮腎嚢胞,"Renal Atrophy, Renal Cyst",2,0
+結節状の構造,Nodular Structure,2,1
+腎単純嚢胞,Simple Renal Cyst,2,0
+移植腎嚢胞,Transplanted Renal Cyst,2,6
+小さいcomplicated_cyst,Small Complicated Cyst,2,1
+腎嚢嚢胞,Renal Parapelvic Cyst,2,0
+腎瘢痕変形,Renal Scar Deformation,2,4
+腎結石and,Renal Stone and,2,5
+小さいAML,Small AML,2,1
+皮質萎縮,Cortical Atrophy,2,3
+腎萎縮左水腎症,Renal Atrophy Left Hydronephrosis,2,3
+overflowing_beer_sign,Overflowing Beer Sign,2,1
+萎縮性,Atrophic,2,3
+著しく萎縮,Significantly Atrophic,2,3
+腫瘤様,Tumor-like,2,1
+局所的萎縮,Localized Atrophy,2,3
+腎腫瘤性病変,Renal Tumorous Lesion,2,1
+腎高吸収結節,Hyperdense Renal Nodule,2,1
+充実部分,Solid Part,2,1
+後期wash_outする腫瘍,Late Washout Tumor,2,1
+出血小嚢胞,Hemorrhagic Small Cyst,2,1
+腫瘤状の病変,Tumorous Lesion,2,1
+腎局所萎縮,Localized Renal Atrophy,2,3
+萎縮高度,Severe Atrophy,2,3
+complicatec_cyst,Complicated Cyst,2,1
+腎萎縮腎嚢胞腎,"Renal Atrophy, Renal Cyst, Renal",2,0
+充実性病変,Solid Lesion,2,1
+腎結石腎嚢胞,"Renal Stone, Renal Cyst",2,5
+腎complecated_cyst,Renal Complicated Cyst,2,1
+嚢胞状病変,Cystic Lesion,2,0
+多発嚢胞,Multiple Cysts,2,0
+萎縮領域,Atrophic Area,2,3
+複雑）嚢胞,Complex Cyst,2,1
+腎上極嚢胞,Upper Pole Cyst,2,0
+石灰化嚢胞,Calcified Cyst,2,5
+水腎症h,Hydronephrosis,2,2
+肝変形,Liver Deformation,2,4
+高吸収の非定型嚢胞,Hyperdense Atypical Cyst,1,1
+腎高吸収域嚢胞,Hyperdense Renal Cyst,1,1
+腎AML内血腫,Renal AML with Hematoma,1,1
+高濃度含む嚢胞,High-density Cyst,1,1

@@ -1,0 +1,591 @@
+keyword,keyword_en,frequency,category
+n．p．,no problem,17724,7
+嚢胞性病変,Cystic lesion,9779,0
+主膵管拡張,Main pancreatic duct dilation,6953,5
+腫瘤,Tumor,5048,1
+嚢胞,Cyst,4929,0
+萎縮,Atrophy,4386,3
+膵癌,Pancreatic cancer,3971,1
+小嚢胞,Small cyst,3400,0
+IPMN,IPMN,2761,0
+分枝型IPMN,Branch-duct IPMN,2712,0
+石灰化,Calcification,2415,4
+腫大,Enlargement,2185,2
+慢性膵炎,Chronic pancreatitis,1880,4
+膵石,Pancreatic stone,1838,4
+膵萎縮,Pancreatic atrophy,1713,3
+膵炎,Pancreatitis,1365,2
+分枝膵管型IPMN,Branch duct type IPMN,1289,0
+膵頭部癌,Head of pancreas cancer,1105,1
+原発巣,Primary site,1095,6
+腫瘍,Tumor,1075,1
+低吸収域,Low-density area,985,6
+癌,Cancer,982,1
+膵嚢胞性病変,Pancreatic cystic lesion,960,0
+結節,Nodule,919,1
+軟部影,Soft tissue shadow,851,6
+膵液瘻,Pancreatic fistula,822,6
+n．p,no problem,798,7
+急性膵炎,Acute pancreatitis,796,2
+脂肪織濃度上昇,Increased fat density,685,6
+脂肪浸潤,Fat infiltration,667,7
+仮性嚢胞,Pseudocyst,664,0
+膵嚢胞,Pancreatic cyst,653,0
+転移,Metastasis,620,1
+膵管拡張,Pancreatic duct dilation,611,5
+膵腫大,Pancreatic enlargement,608,2
+小石灰化,Small calcification,586,4
+脂肪織混濁,Fatty tissue opacity,496,6
+NET,NET,494,1
+小嚢胞性病変,Small cystic lesion,463,0
+膵転移,Pancreatic metastasis,449,1
+膵脂肪浸潤,Pancreatic fat infiltration,429,7
+嚢胞性腫瘤,Cystic tumor,400,1
+術後変化,Postoperative change,386,6
+貯留嚢胞,Retention cyst,373,0
+自己免疫性膵炎,Autoimmune pancreatitis,305,2
+閉塞性膵炎,Obstructive pancreatitis,286,2
+混合型IPMN,Mixed type IPMN,285,0
+膵癌原発巣,Primary site of pancreatic cancer,271,1
+造影不良域,Poorly enhanced area,267,6
+LDA,LDA,255,6
+腫瘤性病変,Tumorous lesion,246,1
+膵管tube,Pancreatic duct tube,241,6
+炎症,Inflammation,229,6
+膵IPMN,Pancreatic IPMN,223,0
+分枝膵管拡張,Branch pancreatic duct dilation,212,0
+低吸収,Low absorption,211,6
+嚢胞性結節,Cystic nodule,199,0
+微小嚢胞,Microcyst,199,0
+充実成分,Solid component,198,6
+早期濃染結節,Early enhanced nodule,193,1
+結石,Stone,191,4
+SCN,SCN,184,1
+腫瘤影,Tumor shadow,173,1
+多房性嚢胞性病変,Multilocular cystic lesion,170,0
+膵管チューブ,Pancreatic duct tube,162,6
+乏血性腫瘍,Hypovascular tumor,146,1
+再発,Recurrence,146,1
+神経内分泌腫瘍,Neuroendocrine tumor,146,1
+嚢胞構造,Cyst structure,144,0
+微小石灰化,Microcalcification,142,4
+IPMC,IPMC,132,1
+膵石灰化,Pancreatic calcification,130,4
+充実部,Solid part,128,0
+膵腫瘍,Pancreatic tumor,127,1
+膵癌病変,Pancreatic cancer lesion,124,1
+後方浸潤,Posterior invasion,122,6
+主膵管拡張像,Main pancreatic duct dilation,119,5
+浸潤性膵管癌,Invasive pancreatic ductal carcinoma,117,1
+腫瘤形成性膵炎,Tumor-forming pancreatitis,115,1
+早期濃染,Early enhancement,114,6
+嚢胞病変,Cystic lesion,111,0
+癌原発巣,Primary cancer site,106,1
+膵実質萎縮,Pancreatic parenchymal atrophy,106,3
+膵内分泌腫瘍,Pancreatic neuroendocrine tumor,106,1
+tube,Tube,104,6
+脂肪濃度上昇,Increased fat density,103,6
+膵炎後,Post-pancreatitis,102,6
+膵頭部癌原発巣,Primary site of head of pancreas cancer,100,1
+WON,WON,99,6
+脂肪壊死,Fat necrosis,97,6
+膵NET,Pancreatic NET,90,1
+np,no problem,90,7
+cystic_lesion,Cystic lesion,87,0
+小結節,Small nodule,87,1
+造影不領域,Poorly enhanced area,86,6
+mass,Mass,86,1
+膵管ステント,Pancreatic duct stent,85,6
+ステント,Stent,85,6
+多血性腫瘍,Hypervascular tumor,85,1
+被包化液体貯留,Encapsulated fluid collection,84,6
+膵原発巣,Primary pancreatic site,82,1
+主膵管型IPMN,Main duct type IPMN,81,0
+膿瘍,Abscess,80,6
+被包化液貯留,Encapsulated fluid retention,80,6
+膵頭部癌病変,Head of pancreas cancer lesion,77,1
+膵胆管合流異常,Pancreaticobiliary maljunction,75,6
+膵分枝型IPMN,Branch-duct type IPMN,74,0
+濃染結節,Enhanced nodule,73,1
+ERCP後膵炎,Post-ERCP pancreatitis,72,2
+嚢胞変性,Cystic degeneration,70,0
+チューブ,Tube,70,6
+膵炎後変化,Post-pancreatitis change,69,6
+前方浸潤,Anterior invasion,69,6
+脂肪沈着,Fat deposition,69,6
+嚢胞性変化,Cystic change,68,0
+膵頭部嚢胞,Head of pancreas cyst,68,0
+炎症波及,Inflammatory spread,67,6
+膵仮性嚢胞,Pancreatic pseudocyst,66,0
+低吸収結節,Low absorption nodule,66,1
+通常型膵癌,Typical pancreatic cancer,66,1
+癌病変,Cancer lesion,64,1
+毛羽立ち,Fraying,63,6
+脂肪織濃度の上昇,Increased fat density,62,6
+腫大して,Enlarged,61,2
+SPN,SPN,61,1
+膵炎後の仮性嚢胞,Post-pancreatitis pseudocyst,61,0
+膵液漏,Pancreatic fluid leak,60,1
+脂肪膵,Fatty pancreas,60,7
+浮腫性変化,Edematous change,60,6
+仮性膵嚢胞,Pseudopancreatic cyst,59,0
+膵浸潤,Pancreatic infiltration,58,1
+炎症性変化,Inflammatory change,58,6
+被包化液体貯留腔,Encapsulated fluid-filled cavity,56,6
+壊死性膵炎,Necrotizing pancreatitis,56,2
+内分泌腫瘍,Endocrine tumor,55,1
+変性,Degeneration,54,6
+多房性嚢胞,Multilocular cyst,51,0
+感染,Infection,50,6
+残膵萎縮,Remaining pancreatic atrophy,49,3
+実質萎縮,Parenchymal atrophy,49,3
+MCN,MCN,49,1
+膵管内乳頭粘液性腺癌,Pancreatic intraductal papillary mucinous carcinoma,49,0
+膵腺房細胞癌,Pancreatic acinar cell carcinoma,48,1
+分岐型IPMN,Branch type IPMN,48,0
+嚢胞様構造,Cyst-like structure,48,0
+SOL,SOL,46,1
+結節影,Nodular shadow,46,1
+膵のう胞,Pancreatic cyst,44,0
+膵内石灰化,Intraparenchymal calcification,43,4
+腫瘤状,Tumorous,42,1
+乏血性結節,Hypovascular nodule,42,1
+腫瘍性病変,Neoplastic lesion,41,1
+腫瘍浸潤,Tumor infiltration,40,1
+主膵管チューブ,Main pancreatic duct tube,40,6
+脂肪化,Fatty change,39,7
+retention_cyst,Retention cyst,38,0
+膵頭部IPMN,Head of pancreas IPMN,38,0
+膵IPMC,Pancreatic IPMC,37,1
+結節状構造,Nodular structure,37,1
+転移巣,Metastatic site,36,1
+膵小嚢胞,Pancreatic microcyst,36,0
+残膵再発,Remaining pancreatic recurrence,36,1
+pNET,pNET,36,6
+腫脹,Swelling,36,2
+まずは分枝型IPMN,First branch type IPMN,35,0
+膵内胆管浸潤,Intraparenchymal bile duct invasion,35,1
+膵神経内分泌腫瘍,Pancreatic neuroendocrine tumor,35,1
+NET病変,NET lesion,34,1
+膵外浸潤,Extra-pancreatic invasion,33,1
+被膜様構造,Capsule-like structure,33,6
+原発病変,Primary lesion,33,1
+腺房細胞癌,Acinar cell carcinoma,32,1
+膵管内乳頭状粘液性腫瘍,Pancreatic intraductal papillary mucinous tumor,32,1
+膵癌の浸潤,Pancreatic cancer invasion,31,1
+嚢胞壁,Cyst wall,30,0
+膵管癌,Pancreatic duct carcinoma,29,1
+急性膵炎後,Post-acute pancreatitis,29,6
+インスリノーマ,Insulinoma,29,1
+膵管内乳頭粘液性腫瘍,Pancreatic intraductal papillary mucinous tumor,28,0
+膵頭部嚢胞性病変,Head of pancreas cystic lesion,28,0
+嚢胞成分,Cystic component,28,0
+萎縮気味,Slightly atrophic,28,3
+主膵管狭窄,Main pancreatic duct stricture,28,5
+膵原発,Primary pancreatic lesion,28,1
+重症膵炎,Severe pancreatitis,28,2
+膿瘍形成,Abscess formation,27,1
+被包化壊死,Encapsulated necrosis,27,6
+主膵管途絶,Main pancreatic duct disruption,27,5
+単房性嚢胞性病変,Unilocular cystic lesion,27,0
+低濃度病変,Low-density lesion,27,6
+groove膵癌,Groove pancreatic cancer,27,1
+残膵癌,Residual pancreatic cancer,26,1
+良性,Benign,26,7
+neuroendocrine_tumor,Neuroendocrine tumor,26,1
+分枝型IPMNs,Branch type IPMNs,26,0
+嚢胞内,Intra-cystic,25,0
+膵癌再発,Pancreatic cancer recurrence,25,1
+膵管狭窄,Pancreatic duct stricture,25,5
+solid_pseudopapillary_neoplasm,Solid pseudopapillary neoplasm,25,1
+膿瘍腔,Abscess cavity,25,6
+IPMN）,IPMN,24,0
+低吸収病変,Low-density lesion,24,6
+嚢胞状構造,Cystic structure,24,0
+血管腫,Hemangioma,24,1
+乏血性の領域,Hypovascular area,24,1
+変形,Deformation,24,6
+術後性変化,Postoperative change,24,6
+膵嚢胞性腫瘤,Pancreatic cystic tumor,23,0
+fluid_collection,Fluid collection,23,6
+膵後方浸潤,Posterior pancreatic invasion,22,6
+膵前方浸潤,Anterior pancreatic invasion,22,6
+分岐膵管型IPMN,Branch duct type IPMN,22,0
+PNEN,PNEN,22,1
+脂肪組織混濁,Fatty tissue opacity,22,6
+膵充実性腫瘤,Solid pancreatic tumor,21,1
+膵腫瘤,Pancreatic mass,21,1
+多血性結節,Hypervascular nodule,21,1
+早期濃染腫瘤,Early enhanced tumor,20,1
+炎症後変化,Post-inflammatory change,20,6
+嚢胞形成,Cyst formation,20,0
+膵炎後の変化,Post-pancreatitis change,20,6
+腺房細胞癌原発巣,Primary site of acinar cell carcinoma,20,1
+嚢胞性構造,Cystic structure,19,0
+膵尾部癌,Tail of pancreas cancer,19,1
+脂肪織混濁像,Fatty tissue opacity,19,6
+膵癌浸潤,Pancreatic cancer infiltration,19,1
+腫瘤状病変,Tumorous lesion,19,1
+点状石灰化,Punctate calcification,19,4
+慢性膵炎像,Chronic pancreatitis image,19,4
+小さな嚢胞,Small cyst,18,0
+急性膵炎再燃,Recurrent acute pancreatitis,18,2
+endocrine_tumor,Endocrine tumor,18,1
+capsule-like_rim,Capsule-like rim,18,6
+分枝型,Branch type,18,0
+嚢胞部分,Cystic part,17,0
+小結石,Small stone,17,4
+結節様構造,Nodule-like structure,17,1
+AIP,AIP,17,2
+膵SPN,Pancreatic SPN,17,1
+小嚢胞構造,Small cystic structure,17,0
+膵混合型IPMN,Mixed type IPMN,16,0
+進行膵癌,Advanced pancreatic cancer,16,1
+胆石性膵炎,Gallstone pancreatitis,16,2
+脂肪変性／浸潤,Fatty degeneration/infiltration,16,7
+膵過誤腫,Pancreatic hamartoma,16,1
+IPMN由来,Derived from IPMN,16,0
+膵炎再燃,Recurrent pancreatitis,16,2
+微小嚢胞性病変,Microcystic lesion,16,0
+実質腫大,Parenchymal enlargement,16,2
+多房状嚢胞,Multilocular cyst,16,0
+膵炎像,Pancreatitis image,16,2
+GIST,GIST,16,1
+肺癌膵転移,Lung cancer metastasis to pancreas,16,1
+分枝膵管型,Branch duct type,15,0
+ドレナージチューブ,Drainage tube,15,6
+乏血性の結節,Hypovascular nodule,15,1
+膵癌病変浸潤,Invasive pancreatic cancer lesion,15,1
+膵小嚢胞性病変,Pancreatic microcystic lesion,15,0
+分枝膵管型のIPMN,Branch duct type IPMN,15,0
+膵炎所見,Pancreatitis findings,15,2
+分枝型膵管内乳頭粘液性腫瘍,Branch duct intraductal papillary mucinous tumor,15,0
+急性膵炎像,Acute pancreatitis image,15,2
+再発腫瘤,Recurrent tumor,15,1
+cystic_lesions,Cystic lesions,15,0
+膿瘍化,Abscess formation,15,1
+被包化液体貯留像,Encapsulated fluid retention image,15,6
+嚢胞状病変,Cystic lesion,15,0
+炎症波及像,Inflammatory spread image,15,6
+濃染腫瘤,Enhanced tumor,15,1
+残膵脂肪浸潤,Residual pancreatic fat infiltration,15,7
+リンパ管腫,Lymphangioma,14,0
+IPMA,IPMA,14,1
+早期膵癌,Early pancreatic cancer,14,1
+嚢胞状,Cystic,14,0
+結節状の構造,Nodular structure,14,1
+微小腫瘍,Microtumor,14,1
+主膵管内膵石,Pancreatic stone in main duct,14,4
+通常型膵管癌,Typical pancreatic duct carcinoma,14,1
+膵頭部嚢胞性結節,Head of pancreas cystic nodule,14,0
+術後,Postoperative,14,6
+旧い仮性嚢胞,Old pseudocyst,14,0
+重症急性膵炎,Severe acute pancreatitis,14,2
+微小膵癌,Micro pancreatic cancer,13,1
+膵炎合併,Complicated pancreatitis,13,2
+PNET,PNET,13,1
+膵頭部腫瘍,Head of pancreas tumor,13,1
+嚢胞部,Cystic part,13,0
+残存病変,Residual lesion,13,6
+高吸収結節,High absorption nodule,13,1
+小LDA,Small LDA,13,6
+主膵管型ないし混合型のIPMN,Main duct or mixed type IPMN,13,0
+walled-off_necrosis,Walled-off necrosis,13,6
+漿液性嚢胞腺腫,Serous cystadenoma,13,1
+膵癌合併,Complicated with pancreatic cancer,13,1
+膵炎増悪,Exacerbated pancreatitis,12,2
+局所進行膵癌,Locally advanced pancreatic cancer,12,1
+十二指腸乳頭部癌,Duodenal papilla cancer,12,1
+脂肪織の混濁,Fatty tissue opacity,12,6
+high-risk_stigmata,High-risk stigmata,12,6
+充実性成分,Solid component,12,1
+後膵炎,Post-pancreatitis,12,2
+腎癌膵転移,Renal cell carcinoma metastasis to pancreas,12,1
+転移病変,Metastatic lesion,12,1
+治療後病変,Post-treatment lesion,12,6
+dirty_fat_sign,Dirty fat sign,12,6
+のう胞,Cyst,12,0
+単房性嚢胞,Unilocular cyst,12,0
+原発性膵癌,Primary pancreatic cancer,12,1
+再発腫瘍,Recurrent tumor,12,1
+膵頭部癌の原発巣,Primary site of head of pancreas cancer,12,1
+膵粘液癌,Pancreatic mucinous cancer,12,1
+粗大病変,Coarse lesion,12,6
+肉芽組織,Granulation tissue,12,6
+慢性膵炎急性,Acute on chronic pancreatitis,11,4
+慢性膵炎後変化,Post-chronic pancreatitis change,11,4
+随伴性膵炎,Associated pancreatitis,11,2
+混合型のIPMN,Mixed type IPMN,11,0
+早期濃染する結節,Early enhanced nodule,11,1
+炎症所見,Inflammatory findings,11,6
+染まる領域,Stained area,11,6
+膵脂肪置換,Pancreatic fat replacement,11,6
+腫瘤状領域,Tumorous area,11,1
+腺腫,Adenoma,11,1
+膵癌の再発,Pancreatic cancer recurrence,11,1
+膵NETs,Pancreatic NETs,11,1
+IPMN病変,IPMN lesion,11,0
+groove膵炎,Groove pancreatitis,11,2
+間質性浮腫性膵炎,Interstitial edematous pancreatitis,11,2
+厚い被膜様構造,Thick capsule-like structure,11,6
+浸潤癌,Invasive carcinoma,11,1
+のう胞性病変,Cystic lesion,10,0
+転移性膵尾部腫瘍,Metastatic tail of pancreas tumor,10,1
+脂肪濃度腫瘤,Fatty density tumor,10,1
+直接浸潤,Direct invasion,10,6
+BD-IPMN,BD-IPMN,10,0
+Groove膵癌,Groove pancreatic cancer,10,1
+薬剤性膵炎,Drug-induced pancreatitis,10,2
+嚢胞様病変,Cystic lesion,10,0
+脂肪組織濃度上昇,Increased fat density,10,6
+軟部組織影,Soft tissue shadow,10,6
+分枝型或いは混合型,Branch type or mixed type,10,0
+術後膵液瘻,Postoperative pancreatic fistula,10,6
+拡張膵管,Dilated pancreatic duct,10,5
+膵管stent,Pancreatic duct stent,10,6
+遺残したチューブ,Remaining tube,10,6
+低濃度陰影,Low-density shadow,10,6
+脂肪濃度域,Fat density area,10,6
+小嚢胞病変,Small cystic lesion,9,0
+脂肪織濃度は上昇,Increased fat density,9,6
+萎縮性変化,Atrophic change,9,3
+造影不良腫瘤,Poorly enhanced tumor,9,1
+MPD拡張,MPD dilation,9,5
+膵実質腫大,Pancreatic parenchymal enlargement,9,2
+膵内胆管拡張,Intra-pancreatic bile duct dilation,9,5
+腫瘤構造,Tumor structure,9,1
+drainage_tube,Drainage tube,8,6
+膵小石灰化,Pancreatic microcalcification,8,4
+主膵管腫脹,Main pancreatic duct swelling,8,5
+高吸収腫瘤,High absorption tumor,8,1
+stent_tube,Stent tube,8,6
+膵腫脹,Pancreatic swelling,8,2
+結節様陰影,Nodule-like shadow,8,1
+嚢胞状拡張,Cystic dilation,8,0
+capsular-like_rim,Capsule-like rim,8,6
+cystic_mass,Cystic mass,8,0
+腫瘤形成,Tumor formation,8,1
+脂肪織毛羽立ち,Fat tissue fraying,8,6
+広がる被包化液貯留,Spreading encapsulated fluid retention,8,6
+腫瘤状腫大,Tumorous enlargement,8,1
+早期増強結節,Early enhanced nodule,8,1
+結節様病変,Nodule-like lesion,8,1
+腫瘍増大,Tumor enlargement,8,1
+嚢胞性腫瘍,Cystic tumor,8,0
+軟部濃度腫瘤,Soft tissue density tumor,8,1
+主膵管閉塞,Main pancreatic duct obstruction,8,5
+厚い被膜,Thick capsule,8,6
+壊死結節,Necrotic nodule,8,1
+被膜,Capsule,8,6
+脾腫瘍,Splenic tumor,8,1
+被包化液貯留腔,Encapsulated fluid-filled cavity,7,6
+膵脂肪化,Pancreatic fat replacement,7,6
+胆膵管合流異常,Pancreaticobiliary maljunction,7,6
+膵萎縮腎嚢胞,Pancreatic atrophy and renal cyst,7,3
+cyst,Cyst,7,0
+被包化膵壊死,Encapsulated pancreatic necrosis,7,6
+APFC,APFC,7,6
+膵がん,Pancreatic cancer,7,1
+stent,Stent,7,6
+capsule_like_rim,Capsule-like rim,7,6
+膵内小石灰化,Pancreatic microcalcification,7,4
+腫大様,Enlarged,6,2
+膵内胆管結石,Intra-pancreatic bile duct stone,6,4
+嚢胞状の主膵管拡張,Cystic main pancreatic duct dilation,6,5
+膵管ステント留置,Pancreatic duct stent placement,6,6
+嚢胞状の構造,Cystic structure,6,0
+結節病変,Nodular lesion,6,1
+膵脂肪沈着,Pancreatic fat deposition,6,6
+石灰化病変,Calcified lesion,6,4
+膵頭部低吸収,Head of pancreas low absorption,6,6
+拡張分枝膵管様の構造,Dilated branch pancreatic duct-like structure,6,5
+膵頚部萎縮,Neck of pancreas atrophy,6,3
+膵管内結石,Intraductal pancreatic stone,6,4
+膵頭部病変,Head of pancreas lesion,6,6
+副膵管拡張,Accessory pancreatic duct dilation,6,5
+萎縮ぎみ,Slightly atrophic,5,3
+傍大動脈リンパ節腫大,Paraaortic lymph node enlargement,5,6
+結節状の領域,Nodular area,5,1
+微小低吸収域,Micro low absorption area,5,6
+主膵管ステント,Main pancreatic duct stent,5,6
+胆管膵管拡張,Biliary and pancreatic duct dilation,5,5
+狭窄前拡張,Pre-stenotic dilation,5,5
+主膵管拡張不変,Unchanged main pancreatic duct dilation,5,5
+萎縮変化,Atrophic change,5,3
+脂肪の混濁,Fat opacity,5,6
+mass形成,Mass formation,5,1
+脂肪濃度の結節,Fat density nodule,5,1
+引き続き萎縮,Continued atrophy,5,3
+腫瘤増大,Tumor enlargement,5,1
+嚢胞状の分枝膵管拡張,Cystic branch pancreatic duct dilation,5,5
+嚢胞様の像,Cystic image,5,0
+主膵管tube,Main pancreatic duct tube,5,6
+腫瘤様構造,Tumor-like structure,5,1
+ENPD,ENPD,5,6
+結節部分,Nodule part,5,1
+充実結節,Solid nodule,5,1
+膵低吸収,Low absorption pancreas,5,6
+結節状病変,Nodular lesion,5,1
+目立つ膵管拡張,Prominent pancreatic duct dilation,5,5
+低濃度SOL,Low-density SOL,5,1
+膵石~膵石灰化,Pancreatic stone to pancreatic calcification,5,4
+主膵管狭窄部,Main pancreatic duct stricture,5,5
+腫瘤部,Tumor part,5,1
+膵管壁肥厚,Thickened pancreatic duct wall,5,5
+嚢胞内結石,Intra-cystic stone,5,4
+引き続き膵石,Continued pancreatic stone,5,4
+結節状の病変,Nodular lesion,5,1
+充実性陰影,Solid shadow,5,1
+小嚢胞性結節,Small cystic nodule,4,0
+膵実質内結石,Intraparenchymal pancreatic stone,4,4
+主膵管内腫瘍,Intraductal tumor,4,1
+膵管内air,Intraductal air,4,6
+粗大膵石,Coarse pancreatic stone,4,4
+向けた毛羽立ち,Fraying,4,6
+脂肪識の不明瞭化,Fat tissue obscuration,4,6
+嚢胞性病変主膵管拡張,Cystic lesion main pancreatic duct dilation,4,5
+P_tube,P-tube,4,6
+膵管口径不整,Pancreatic duct irregular caliber,4,5
+小石灰,Small calcification,4,4
+腫瘍部,Tumor part,4,1
+低吸収の領域,Low absorption area,4,6
+被包化進行,Encapsulated progression,4,6
+結節状濃染,Nodular enhancement,4,1
+膵石増大,Enlarged pancreatic stone,4,4
+膵損傷,Pancreatic injury,4,6
+ENPD_tube,ENPD tube,4,6
+乏血性結節様所見,Hypovascular nodule-like finding,4,1
+膵管狭窄部,Pancreatic duct stricture,4,5
+嚢胞整病変,Cystic lesion,4,0
+主膵管拡張無く,No main pancreatic duct dilation,4,5
+膵壊死部,Pancreatic necrosis,4,6
+主膵管拡張といった,Main pancreatic duct dilation etc.,4,5
+膵結節,Pancreatic nodule,4,1
+膵胆道合流異常,Pancreaticobiliary maljunction,4,6
+被膜様低吸収域,Capsule-like low absorption area,4,6
+結節状脂肪濃度,Nodular fat density,4,1
+石灰化構造,Calcified structure,4,4
+cytsic_lesions,Cystic lesions,4,0
+多房状嚢胞性病変,Multilocular cystic lesion,4,0
+small_cyst,Small cyst,4,0
+嚢胞間,Intra-cystic,4,0
+小結節影,Small nodular shadow,4,1
+嚢胞らしい貯留,Cyst-like retention,4,0
+萎縮性,Atrophic,4,3
+造影腫瘤,Enhanced tumor,4,1
+索状の脂肪織濃度上昇,Striated increased fat density,4,6
+膵管狭小化,Pancreatic duct narrowing,4,5
+like_rim,Capsule-like rim,4,6
+枝膵管拡張,Branch pancreatic duct dilation,4,5
+残膵膵管拡張,Remaining pancreatic duct dilation,4,5
+結節状濃染域,Nodular enhancement area,4,1
+充実性成分新出,Newly appeared solid component,4,1
+circumportal_pancreas,Circumportal pancreas,3,6
+低吸収の腫瘍影,Low absorption tumor shadow,3,1
+脂肪脂肪組織濃度上昇,Increased fat tissue density,3,6
+脂肪織吸収値の上昇,Increased fat absorption value,3,6
+脂肪識濃度上昇,Increased fat tissue density,3,6
+多房性病変,Multilocular lesion,3,6
+微小結節,Micro nodule,3,1
+主膵管口径変化,Main pancreatic duct caliber change,3,5
+濃染性結節,Enhanced nodule,3,1
+内部低吸収,Internal low absorption,3,6
+脂肪織濃度混濁域,Fat tissue opacity,3,6
+腫大様所見,Enlarged finding,3,2
+至る仮性嚢胞,Leading to pseudocyst,3,0
+tiny_cystic_lesion,Tiny cystic lesion,3,0
+多血結節,Hypervascular nodule,3,1
+ERPD,ERPD,3,6
+被包化しかけた液体貯留,Encapsulating fluid collection,3,6
+腫瘤状陰影,Tumor shadow,3,1
+cystic_nodule,Cystic nodule,3,0
+結節様の像,Nodule-like image,3,1
+分枝膵管拡張様構造,Branch pancreatic duct dilation-like structure,3,5
+腫瘤状軟部影,Tumorous soft tissue shadow,3,1
+嚢胞状結節,Cystic nodule,3,0
+腫瘤形成性病変,Tumor-forming lesion,3,1
+被包化嚢胞,Encapsulated cyst,3,0
+低吸収領域,Low absorption area,2,6
+結節状構造物,Nodular structure,2,1
+石灰化影,Calcified shadow,2,4
+嚢胞性陰影,Cystic shadow,2,0
+粒状石灰化,Granular calcification,2,4
+benign_cystic_lesion,Benign cystic lesion,2,0
+移植膵腫大,Transplant pancreas enlargement,2,2
+脂肪織置換,Fat tissue replacement,2,6
+結節状造影効果,Nodular enhancement effect,2,1
+小嚢胞状構造,Small cystic structure,2,0
+低吸収結節状領域,Low absorption nodular area,2,1
+萎縮不変,Unchanged atrophy,2,3
+膵頭部腫脹,Head of pancreas swelling,2,2
+膵実質萎縮高度,Marked pancreatic parenchymal atrophy,2,3
+腫瘤状構造,Tumorous structure,2,1
+腫瘤様病変,Tumor-like lesion,2,1
+粗大石灰化,Coarse calcification,2,4
+脂肪識混濁,Fat tissue obscuration,2,6
+膵点状石灰化,Pancreatic punctate calcification,2,4
+微小膵石,Micro pancreatic stone,2,4
+嚢胞様腫瘤,Cystic tumor,2,0
+嚢胞性分,Cystic part,2,0
+膵管気腫,Pancreatic duct pneumatosis,2,6
+膵管閉塞の病変,Pancreatic duct obstruction lesion,2,5
+ひきつづき膵石,Continued pancreatic stone,2,4
+微細石灰化,Microcalcification,2,4
+低吸収軟部陰影,Low absorption soft tissue shadow,2,6
+部分枝膵管拡張,Partial branch pancreatic duct dilation,2,5
+膵実質菲薄化,Parenchymal thinning,2,3
+膵脂肪変性,Pancreatic fatty degeneration,2,6
+膵頭部嚢胞病変,Head of pancreas cystic lesion,2,0
+膵管結石,Pancreatic duct stone,2,4
+膵結石,Pancreatic stone,2,4
+膵頭部腫瘤,Head of pancreas tumor,2,1
+嚢胞性病枝,Cystic branch,2,0
+腫瘍部分,Tumor part,2,1
+腫瘤様構造物,Tumor-like structure,2,1
+嚢胞結節,Cystic nodule,2,0
+脂肪織が上昇,Increased fat tissue,2,6
+脂肪識濃度の上昇,Increased fat tissue density,2,6
+主膵管拡大,Main pancreatic duct dilation,1,5
+膵腎萎縮,Pancreatic and renal atrophy,1,3
+膵萎縮高度,Marked pancreatic atrophy,1,3
+ないしは萎縮,Atrophic or atrophic,1,3
+膵萎縮部,Pancreatic atrophic part,1,3
+嚢胞状腫瘤,Cystic tumor,1,0
+小膵石,Small pancreatic stone,1,4
+脂肪織混濁液貯留,Fat tissue opacity fluid retention,1,6
+ないし膵石,Or pancreatic stone,1,4
+膵管stent_tube,Pancreatic duct stent tube,1,6
+ENPD留置,ENPD placement,1,6
+脂肪濃度陰影,Fat density shadow,1,6
+cystic_nodules,Cystic nodules,1,0
+嚢胞性の病変,Cystic lesion,1,0
+腫瘤様腫大,Tumor-like enlargement,1,1
+膵主膵管拡張,Main pancreatic duct dilation,1,5
+小腫瘤構造,Small tumor structure,1,1
+脂肪濃度の低吸収域,Low absorption area of fat density,1,6
+小嚢胞ないし分枝膵管拡張,Small cyst or branch pancreatic duct dilation,1,0
+脂肪織濃度も上昇,Increased fat tissue density,1,6
+結節性病変,Nodular lesion,1,1
+膵管血腫,Pancreatic duct hematoma,1,6
+微小膵嚢胞,Micro pancreatic cyst,1,0
+膵内結石,Intraparenchymal stone,1,4
+脂肪織吸収値上昇,Increased fat absorption value,1,6
+膵管tube先端位置,Pancreatic duct tube tip position,1,6
+膵高度萎縮,Marked pancreatic atrophy,1,3
+腫瘤状の構造,Tumorous structure,1,1
+PanIN+貯留嚢胞,PanIN+ retention cyst,1,6
+P-tube,P-tube,1,6
+棍棒状石灰化,Club-like calcification,1,4
+萎縮ないし低,Atrophic or low,1,3
+脂肪織濃度上昇／浸出液貯留,Increased fat tissue density/effusion,1,6
+チューブステント,Tube stent,1,6
+短い膵管チューブ,Short pancreatic duct tube,1,6
+結節状脂肪浸潤,Nodular fat infiltration,1,1
+引き続き膵萎縮,Continued pancreatic atrophy,1,3
+主膵管内気腫,Intraductal pneumatosis,1,5
+主膵管内結石,Intraductal stone,1,4
+胆石膵萎縮,Gallstone pancreatic atrophy,1,3
+complicated_cyst,Complicated cyst,1,0
+嚢胞性病変増大,Enlarging cystic lesion,1,0
+結節膵,Nodular pancreas,1,1
+脂肪混濁,Fatty opacity,1,6
