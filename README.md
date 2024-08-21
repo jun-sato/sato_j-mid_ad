@@ -30,7 +30,7 @@ conda env create -f=environment.yml
 
 
 ## model weights
-The pretrained weights used in this study (Organ segmentation, anomaly detection, dataset size experiment) are available from [google drive](https://drive.google.com/drive/folders/17DgUVCo1We4EHM6PSeJ4ChtNZU5zhAJV?usp=sharing)
+The pretrained weights used in this study (Organ segmentation, anomaly detection, dataset size experiment) are available from [pcloud](https://u.pcloud.link/publink/show?code=kZ5mOE0ZdDEWs7v2gUh3rbgdShWBc7K2pNik)
 
 
 
